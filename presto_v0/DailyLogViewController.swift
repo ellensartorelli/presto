@@ -29,6 +29,11 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         loadSampleTasks()
         loadSampleEvents()
         loadSampleReflections()
+        
+        
+        // Use the edit button item provided by the table view controller.
+        navigationItem.leftBarButtonItem = editButtonItem
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -73,6 +78,33 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
+    // Override to support editing the table view.
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        print("index path:")
+        print(indexPath.row)
+        print("")
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            if indexPath.row < tasks.count{
+                tasks.remove(at: indexPath.row)
+            } else if indexPath.row >= tasks.count && indexPath.row < tasks.count + events.count {
+                events.remove(at: indexPath.row - tasks.count)
+            } else{
+                reflections.remove(at: indexPath.row - (events.count + tasks.count))
+            }
+
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
+    }
+    
+    // Override to support conditional editing of the table view.
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the specified item to be editable.
+        return true
+    }
+    
     
     @IBAction func showAlert() {
         
@@ -104,6 +136,27 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+    }
+    
+    //MARK: Actions
+    @IBAction func unwindToTaskList(sender: UIStoryboardSegue) {
+        
+        if let sourceViewController = sender.source as? DailyTaskTableViewController, let task = sourceViewController.task {
+        
+            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                // Update an existing meal.
+                tasks[selectedIndexPath.row] = task
+                tableView.reloadRows(at: [selectedIndexPath], with: .none)
+            }
+            else{
+                let newIndexPath = IndexPath(row: tasks.count, section: 0)
+                
+                tasks.append(task)
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
+                
+            }
+        }
+    
     }
  
     

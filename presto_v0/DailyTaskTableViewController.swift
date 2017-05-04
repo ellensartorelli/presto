@@ -7,28 +7,40 @@
 //
 
 import UIKit
+import os.log
 
-class DailyTaskTableViewController: UITableViewController {
+class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, UINavigationControllerDelegate, UIPickerViewDelegate {
     
     
     @IBOutlet weak var toggle: UISwitch!
+    @IBOutlet weak var taskTextField: UITextField!
     @IBOutlet weak var timePicker: UIDatePicker!
     var pickerVisible = false
     
+    var task:DailyLogTask?
     
-
+    
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    
+    //set min date
+    
+    @IBAction func pickAlertTime(_ sender: UIDatePicker) {
+        setMinDate()
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setMinDate()
+        
+        taskTextField.delegate = self
+        timePicker.minimumDate = Date.init()
+    
+        
         tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0)
         tableView.tableFooterView = UIView(frame: .zero)
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-    }
+        }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -39,7 +51,16 @@ class DailyTaskTableViewController: UITableViewController {
     //MARK: Actions
     
     @IBAction func cancel(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
+        // Depending on style of presentation (modal or push presentation), this view controller needs to be dismissed in two different ways.
+        let isPresentingInAddTaskMode = presentingViewController is UINavigationController
+        
+        if isPresentingInAddTaskMode {
+            dismiss(animated: true, completion: nil)
+        } else if let owningNavigationController = navigationController{
+            owningNavigationController.popViewController(animated: true)
+        } else {
+            fatalError("The TaskViewController is not inside a navigation controller.")
+        }
     }
     
     @IBAction func toggleValueChanged(_ sender: UISwitch) {
@@ -51,6 +72,19 @@ class DailyTaskTableViewController: UITableViewController {
     }
     
     //MARK:- Date and time
+    
+    func setMinDate(){
+        //for picker (interval of 5)
+        let calendar = Calendar.current
+        let minCurrent = (Float(calendar.component(.minute, from: Date.init())))
+        let minFuture = (Float(Float(calendar.component(.minute, from: Date.init()))/Float(5))).rounded(.up) * 5
+        print(Float(Float(calendar.component(.minute, from: Date.init()))/Float(5)).rounded(.up))
+        
+        
+        let newDate = Date(timeIntervalSinceNow: TimeInterval(Int((minFuture - minCurrent)*60)))
+        print(newDate)
+        timePicker.minimumDate = newDate
+    }
 
     
     func setTime() {
@@ -148,14 +182,50 @@ class DailyTaskTableViewController: UITableViewController {
     }
     */
 
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+   
+        super.prepare(for: segue, sender: sender)
+        // Configure the destination view controller only when the save button is pressed.
+        guard let button = sender as? UIBarButtonItem, button === saveButton else {
+            os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
+            return
+        }
+        let taskText = taskTextField.text ?? ""
+        let time = timePicker.date
+        let isAlertOn = pickerVisible
+        
+        print("save button has been clicked - preparing")
+        
+        task = DailyLogTask(title: taskText, alert: isAlertOn, alertTime: time)
+        
     }
-    */
+ 
+    
+    //TextField delegate functions
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        saveButton.isEnabled = false
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        updateSaveButtonState()
+        navigationItem.title = textField.text
+    }
+    
+    private func updateSaveButtonState(){
+        let text = taskTextField.text ?? ""
+        saveButton.isEnabled = !text.isEmpty
+    }
+    
+
 
 }
