@@ -1,0 +1,513 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		073F6AAB1EB0FD4400116DC5 /* DailyLogEventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F6AAA1EB0FD4400116DC5 /* DailyLogEventTableViewController.swift */; };
+		073F6AAD1EB166E400116DC5 /* DailyLogReflectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F6AAC1EB166E400116DC5 /* DailyLogReflectionViewController.swift */; };
+		073F6AAF1EB16BAC00116DC5 /* DailyLogTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F6AAE1EB16BAC00116DC5 /* DailyLogTableViewController.swift */; };
+		073F6AB31EB1733000116DC5 /* DailyLogReflection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F6AB21EB1733000116DC5 /* DailyLogReflection.swift */; };
+		073F6AB51EB173B500116DC5 /* DailyLogEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F6AB41EB173B500116DC5 /* DailyLogEvent.swift */; };
+		073F6AB71EB173DF00116DC5 /* DailyLogTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F6AB61EB173DF00116DC5 /* DailyLogTask.swift */; };
+		073F6AB91EB174F500116DC5 /* DailyLogReflectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F6AB81EB174F500116DC5 /* DailyLogReflectionTableViewCell.swift */; };
+		073F6ABD1EB1828100116DC5 /* DailyLogEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F6ABC1EB1828100116DC5 /* DailyLogEventTableViewCell.swift */; };
+		073F6ABF1EB1828F00116DC5 /* DailyLogTaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F6ABE1EB1828F00116DC5 /* DailyLogTaskTableViewCell.swift */; };
+		073F6AC21EB1891800116DC5 /* DailyLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F6AC01EB184EF00116DC5 /* DailyLogViewController.swift */; };
+		0754F22F1EB017D900A291C9 /* DailyTaskTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0754F22E1EB017D800A291C9 /* DailyTaskTableViewController.swift */; };
+		075CAF7A1EBAA6FF0057E2A4 /* ReflectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075CAF791EBAA6FF0057E2A4 /* ReflectionTableViewController.swift */; };
+		07801AEB1EAE7F87007FEB0B /* FutureLogTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07801AEA1EAE7F87007FEB0B /* FutureLogTableViewCell.swift */; };
+		07801AED1EAE8189007FEB0B /* FutureLogEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07801AEC1EAE8189007FEB0B /* FutureLogEvent.swift */; };
+		07801AEF1EAE855D007FEB0B /* FutureLogTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07801AEE1EAE855D007FEB0B /* FutureLogTableViewController.swift */; };
+		07A395B71EAE74ED003C6E64 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A395B61EAE74ED003C6E64 /* AppDelegate.swift */; };
+		07A395B91EAE74ED003C6E64 /* FutureLogEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A395B81EAE74ED003C6E64 /* FutureLogEventViewController.swift */; };
+		07A395BC1EAE74ED003C6E64 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07A395BA1EAE74ED003C6E64 /* Main.storyboard */; };
+		07A395BF1EAE74ED003C6E64 /* presto_v0.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 07A395BD1EAE74ED003C6E64 /* presto_v0.xcdatamodeld */; };
+		07A395C11EAE74ED003C6E64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A395C01EAE74ED003C6E64 /* Assets.xcassets */; };
+		07A395C41EAE74ED003C6E64 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07A395C21EAE74ED003C6E64 /* LaunchScreen.storyboard */; };
+		94BBC65C331E4EF9FEBF0923 /* Pods_presto_v0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 700729FE8C512C54E3B17704 /* Pods_presto_v0.framework */; };
+		A8E463F31EB1C6C300B45B10 /* HabitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E463F21EB1C6C300B45B10 /* HabitViewController.swift */; };
+		A8E463F51EB1C6E600B45B10 /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E463F41EB1C6E600B45B10 /* Habit.swift */; };
+		A8E463F71EB1C72A00B45B10 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E463F61EB1C72A00B45B10 /* CustomCell.swift */; };
+		A8E463F91EB1C80600B45B10 /* HabitTrackerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E463F81EB1C80600B45B10 /* HabitTrackerTableViewController.swift */; };
+		A8E463FB1EB1C83100B45B10 /* HabitTrackerHabitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E463FA1EB1C83100B45B10 /* HabitTrackerHabitTableViewCell.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		073F6AAA1EB0FD4400116DC5 /* DailyLogEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyLogEventTableViewController.swift; sourceTree = "<group>"; };
+		073F6AAC1EB166E400116DC5 /* DailyLogReflectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyLogReflectionViewController.swift; sourceTree = "<group>"; };
+		073F6AAE1EB16BAC00116DC5 /* DailyLogTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyLogTableViewController.swift; sourceTree = "<group>"; };
+		073F6AB21EB1733000116DC5 /* DailyLogReflection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyLogReflection.swift; sourceTree = "<group>"; };
+		073F6AB41EB173B500116DC5 /* DailyLogEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyLogEvent.swift; sourceTree = "<group>"; };
+		073F6AB61EB173DF00116DC5 /* DailyLogTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyLogTask.swift; sourceTree = "<group>"; };
+		073F6AB81EB174F500116DC5 /* DailyLogReflectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyLogReflectionTableViewCell.swift; sourceTree = "<group>"; };
+		073F6ABC1EB1828100116DC5 /* DailyLogEventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DailyLogEventTableViewCell.swift; path = ../DailyLogEventTableViewCell.swift; sourceTree = "<group>"; };
+		073F6ABE1EB1828F00116DC5 /* DailyLogTaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DailyLogTaskTableViewCell.swift; path = ../DailyLogTaskTableViewCell.swift; sourceTree = "<group>"; };
+		073F6AC01EB184EF00116DC5 /* DailyLogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyLogViewController.swift; sourceTree = "<group>"; };
+		0754F22E1EB017D800A291C9 /* DailyTaskTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyTaskTableViewController.swift; sourceTree = "<group>"; };
+		075CAF791EBAA6FF0057E2A4 /* ReflectionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReflectionTableViewController.swift; sourceTree = "<group>"; };
+		07801AEA1EAE7F87007FEB0B /* FutureLogTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureLogTableViewCell.swift; sourceTree = "<group>"; };
+		07801AEC1EAE8189007FEB0B /* FutureLogEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureLogEvent.swift; sourceTree = "<group>"; };
+		07801AEE1EAE855D007FEB0B /* FutureLogTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureLogTableViewController.swift; sourceTree = "<group>"; };
+		07A395B31EAE74ED003C6E64 /* presto_v0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = presto_v0.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		07A395B61EAE74ED003C6E64 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		07A395B81EAE74ED003C6E64 /* FutureLogEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureLogEventViewController.swift; sourceTree = "<group>"; };
+		07A395BB1EAE74ED003C6E64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		07A395BE1EAE74ED003C6E64 /* presto_v0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = presto_v0.xcdatamodel; sourceTree = "<group>"; };
+		07A395C01EAE74ED003C6E64 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		07A395C31EAE74ED003C6E64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		07A395C51EAE74ED003C6E64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		54E6C8FB1ED58BF35B826AC3 /* Pods-presto_v0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-presto_v0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-presto_v0/Pods-presto_v0.debug.xcconfig"; sourceTree = "<group>"; };
+		700729FE8C512C54E3B17704 /* Pods_presto_v0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_presto_v0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7396B9FC5F8EFB54F6E9E21C /* Pods-presto_v0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-presto_v0.release.xcconfig"; path = "Pods/Target Support Files/Pods-presto_v0/Pods-presto_v0.release.xcconfig"; sourceTree = "<group>"; };
+		A8E463F21EB1C6C300B45B10 /* HabitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HabitViewController.swift; sourceTree = "<group>"; };
+		A8E463F41EB1C6E600B45B10 /* Habit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; };
+		A8E463F61EB1C72A00B45B10 /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		A8E463F81EB1C80600B45B10 /* HabitTrackerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HabitTrackerTableViewController.swift; sourceTree = "<group>"; };
+		A8E463FA1EB1C83100B45B10 /* HabitTrackerHabitTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HabitTrackerHabitTableViewCell.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		07A395B01EAE74EC003C6E64 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				94BBC65C331E4EF9FEBF0923 /* Pods_presto_v0.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		073F6AB01EB1715D00116DC5 /* Daily Log */ = {
+			isa = PBXGroup;
+			children = (
+				073F6ABB1EB1825800116DC5 /* Table View Cells */,
+				073F6AAE1EB16BAC00116DC5 /* DailyLogTableViewController.swift */,
+				073F6AAC1EB166E400116DC5 /* DailyLogReflectionViewController.swift */,
+				073F6AAA1EB0FD4400116DC5 /* DailyLogEventTableViewController.swift */,
+				0754F22E1EB017D800A291C9 /* DailyTaskTableViewController.swift */,
+				073F6AC01EB184EF00116DC5 /* DailyLogViewController.swift */,
+				073F6ABA1EB1824C00116DC5 /* Daily Log Data */,
+			);
+			name = "Daily Log";
+			sourceTree = "<group>";
+		};
+		073F6AB11EB1716700116DC5 /* Future Log */ = {
+			isa = PBXGroup;
+			children = (
+				07A395B81EAE74ED003C6E64 /* FutureLogEventViewController.swift */,
+				07801AEA1EAE7F87007FEB0B /* FutureLogTableViewCell.swift */,
+				07801AEC1EAE8189007FEB0B /* FutureLogEvent.swift */,
+				07801AEE1EAE855D007FEB0B /* FutureLogTableViewController.swift */,
+			);
+			name = "Future Log";
+			sourceTree = "<group>";
+		};
+		073F6ABA1EB1824C00116DC5 /* Daily Log Data */ = {
+			isa = PBXGroup;
+			children = (
+				073F6AB21EB1733000116DC5 /* DailyLogReflection.swift */,
+				073F6AB41EB173B500116DC5 /* DailyLogEvent.swift */,
+				073F6AB61EB173DF00116DC5 /* DailyLogTask.swift */,
+			);
+			name = "Daily Log Data";
+			sourceTree = "<group>";
+		};
+		073F6ABB1EB1825800116DC5 /* Table View Cells */ = {
+			isa = PBXGroup;
+			children = (
+				073F6ABE1EB1828F00116DC5 /* DailyLogTaskTableViewCell.swift */,
+				073F6ABC1EB1828100116DC5 /* DailyLogEventTableViewCell.swift */,
+				073F6AB81EB174F500116DC5 /* DailyLogReflectionTableViewCell.swift */,
+			);
+			name = "Table View Cells";
+			sourceTree = "<group>";
+		};
+		07A395AA1EAE74EC003C6E64 = {
+			isa = PBXGroup;
+			children = (
+				07A395B51EAE74ED003C6E64 /* presto_v0 */,
+				07A395B41EAE74ED003C6E64 /* Products */,
+				FD6D677C9BE7E995D1CBF15B /* Pods */,
+				4C410B0B5BFB7B4CD3D345B1 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		07A395B41EAE74ED003C6E64 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				07A395B31EAE74ED003C6E64 /* presto_v0.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		07A395B51EAE74ED003C6E64 /* presto_v0 */ = {
+			isa = PBXGroup;
+			children = (
+				07A395B61EAE74ED003C6E64 /* AppDelegate.swift */,
+				073F6AB11EB1716700116DC5 /* Future Log */,
+				07A395BA1EAE74ED003C6E64 /* Main.storyboard */,
+				075CAF791EBAA6FF0057E2A4 /* ReflectionTableViewController.swift */,
+				A8E463F81EB1C80600B45B10 /* HabitTrackerTableViewController.swift */,
+				A8E463FA1EB1C83100B45B10 /* HabitTrackerHabitTableViewCell.swift */,
+				A8E463F21EB1C6C300B45B10 /* HabitViewController.swift */,
+				A8E463F61EB1C72A00B45B10 /* CustomCell.swift */,
+				A8E463F41EB1C6E600B45B10 /* Habit.swift */,
+				073F6AB01EB1715D00116DC5 /* Daily Log */,
+				07A395C01EAE74ED003C6E64 /* Assets.xcassets */,
+				07A395C21EAE74ED003C6E64 /* LaunchScreen.storyboard */,
+				07A395C51EAE74ED003C6E64 /* Info.plist */,
+				07A395BD1EAE74ED003C6E64 /* presto_v0.xcdatamodeld */,
+			);
+			path = presto_v0;
+			sourceTree = "<group>";
+		};
+		4C410B0B5BFB7B4CD3D345B1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				700729FE8C512C54E3B17704 /* Pods_presto_v0.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FD6D677C9BE7E995D1CBF15B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				54E6C8FB1ED58BF35B826AC3 /* Pods-presto_v0.debug.xcconfig */,
+				7396B9FC5F8EFB54F6E9E21C /* Pods-presto_v0.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		07A395B21EAE74EC003C6E64 /* presto_v0 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 07A395C81EAE74ED003C6E64 /* Build configuration list for PBXNativeTarget "presto_v0" */;
+			buildPhases = (
+				3AE0E21F4B806895DE5EC5E4 /* [CP] Check Pods Manifest.lock */,
+				07A395AF1EAE74EC003C6E64 /* Sources */,
+				07A395B01EAE74EC003C6E64 /* Frameworks */,
+				07A395B11EAE74EC003C6E64 /* Resources */,
+				CE7C5FFEA8F828217DC9EBD8 /* [CP] Embed Pods Frameworks */,
+				CCE43BD1B5EA7F9AD4AFA4D3 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = presto_v0;
+			productName = presto_v0;
+			productReference = 07A395B31EAE74ED003C6E64 /* presto_v0.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		07A395AB1EAE74EC003C6E64 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "Ellen Sartorelli";
+				TargetAttributes = {
+					07A395B21EAE74EC003C6E64 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 07A395AE1EAE74EC003C6E64 /* Build configuration list for PBXProject "presto_v0" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 07A395AA1EAE74EC003C6E64;
+			productRefGroup = 07A395B41EAE74ED003C6E64 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				07A395B21EAE74EC003C6E64 /* presto_v0 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		07A395B11EAE74EC003C6E64 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07A395C41EAE74ED003C6E64 /* LaunchScreen.storyboard in Resources */,
+				07A395C11EAE74ED003C6E64 /* Assets.xcassets in Resources */,
+				07A395BC1EAE74ED003C6E64 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3AE0E21F4B806895DE5EC5E4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CCE43BD1B5EA7F9AD4AFA4D3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-presto_v0/Pods-presto_v0-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE7C5FFEA8F828217DC9EBD8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-presto_v0/Pods-presto_v0-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		07A395AF1EAE74EC003C6E64 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				073F6AB91EB174F500116DC5 /* DailyLogReflectionTableViewCell.swift in Sources */,
+				073F6ABD1EB1828100116DC5 /* DailyLogEventTableViewCell.swift in Sources */,
+				07801AED1EAE8189007FEB0B /* FutureLogEvent.swift in Sources */,
+				073F6AAB1EB0FD4400116DC5 /* DailyLogEventTableViewController.swift in Sources */,
+				07801AEF1EAE855D007FEB0B /* FutureLogTableViewController.swift in Sources */,
+				073F6ABF1EB1828F00116DC5 /* DailyLogTaskTableViewCell.swift in Sources */,
+				A8E463FB1EB1C83100B45B10 /* HabitTrackerHabitTableViewCell.swift in Sources */,
+				A8E463F31EB1C6C300B45B10 /* HabitViewController.swift in Sources */,
+				A8E463F51EB1C6E600B45B10 /* Habit.swift in Sources */,
+				07A395B91EAE74ED003C6E64 /* FutureLogEventViewController.swift in Sources */,
+				073F6AAD1EB166E400116DC5 /* DailyLogReflectionViewController.swift in Sources */,
+				073F6AB51EB173B500116DC5 /* DailyLogEvent.swift in Sources */,
+				07A395B71EAE74ED003C6E64 /* AppDelegate.swift in Sources */,
+				A8E463F91EB1C80600B45B10 /* HabitTrackerTableViewController.swift in Sources */,
+				073F6AAF1EB16BAC00116DC5 /* DailyLogTableViewController.swift in Sources */,
+				073F6AC21EB1891800116DC5 /* DailyLogViewController.swift in Sources */,
+				0754F22F1EB017D900A291C9 /* DailyTaskTableViewController.swift in Sources */,
+				07A395BF1EAE74ED003C6E64 /* presto_v0.xcdatamodeld in Sources */,
+				07801AEB1EAE7F87007FEB0B /* FutureLogTableViewCell.swift in Sources */,
+				073F6AB31EB1733000116DC5 /* DailyLogReflection.swift in Sources */,
+				A8E463F71EB1C72A00B45B10 /* CustomCell.swift in Sources */,
+				075CAF7A1EBAA6FF0057E2A4 /* ReflectionTableViewController.swift in Sources */,
+				073F6AB71EB173DF00116DC5 /* DailyLogTask.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		07A395BA1EAE74ED003C6E64 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				07A395BB1EAE74ED003C6E64 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		07A395C21EAE74ED003C6E64 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				07A395C31EAE74ED003C6E64 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		07A395C61EAE74ED003C6E64 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		07A395C71EAE74ED003C6E64 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		07A395C91EAE74ED003C6E64 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 54E6C8FB1ED58BF35B826AC3 /* Pods-presto_v0.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = presto_v0/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.middlebury.cs466.presto-v0";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		07A395CA1EAE74ED003C6E64 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7396B9FC5F8EFB54F6E9E21C /* Pods-presto_v0.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = presto_v0/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.middlebury.cs466.presto-v0";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		07A395AE1EAE74EC003C6E64 /* Build configuration list for PBXProject "presto_v0" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07A395C61EAE74ED003C6E64 /* Debug */,
+				07A395C71EAE74ED003C6E64 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		07A395C81EAE74ED003C6E64 /* Build configuration list for PBXNativeTarget "presto_v0" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07A395C91EAE74ED003C6E64 /* Debug */,
+				07A395CA1EAE74ED003C6E64 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		07A395BD1EAE74ED003C6E64 /* presto_v0.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				07A395BE1EAE74ED003C6E64 /* presto_v0.xcdatamodel */,
+			);
+			currentVersion = 07A395BE1EAE74ED003C6E64 /* presto_v0.xcdatamodel */;
+			path = presto_v0.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 07A395AB1EAE74EC003C6E64 /* Project object */;
+}

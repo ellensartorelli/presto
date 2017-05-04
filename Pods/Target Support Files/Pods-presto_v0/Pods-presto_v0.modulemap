@@ -1,0 +1,6 @@
+framework module Pods_presto_v0 {
+  umbrella header "Pods-presto_v0-umbrella.h"
+
+  export *
+  module * { export * }
+}
