@@ -16,13 +16,29 @@ class HabitTrackerTableViewController: UITableViewController {
     //MARK: Private Methods
     
     private func loadSampleHabits() {
-        guard let habit1 = Habit(name: "Running", startDate: Date()) else {
+        ///TESTING
+        let minute:TimeInterval = 60.0
+        let hour:TimeInterval = 60.0 * minute
+        let day:TimeInterval = 24 * hour
+        let month:TimeInterval = 31 * day
+        var startHabit1 = Date(timeInterval: -month, since: Date())
+        ///TESTING
+
+        
+        guard let habit1 = Habit(name: "Running", startDate: startHabit1) else {
             fatalError("Unable to instantiate habit1")
         }
         
         guard let habit2 = Habit(name: "Drinking", startDate: Date()) else {
             fatalError("Unable to instantiate habit2")
         }
+        
+        
+        ///TESTING
+        habit1.selectedDates.append(Date())
+        habit1.selectedDates.append(Date(timeInterval: -day, since: Date()))
+        ///TESTING
+
         
         habits += [habit1, habit2]
     }
@@ -34,7 +50,6 @@ class HabitTrackerTableViewController: UITableViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: - Table view data source
@@ -111,7 +126,7 @@ class HabitTrackerTableViewController: UITableViewController {
         
         switch(segue.identifier ?? "") {
             
-        case "AddItem":
+        case "Add Item":
             print("adding a habit")
         case "SequeToHabitView":
             guard let habitDetailViewController = segue.destination as? HabitViewController else {
@@ -134,4 +149,14 @@ class HabitTrackerTableViewController: UITableViewController {
         }
     }
     
+    @IBAction func unwindToHabitList(sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.source as? HabitTrackerDetailViewController, let habit = sourceViewController.habit {
+            
+            // Add a new meal.
+            let newIndexPath = IndexPath(row: habits.count, section: 0)
+            
+            habits.append(habit)
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+        }
+    }
 }

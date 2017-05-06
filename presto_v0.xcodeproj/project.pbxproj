@@ -30,6 +30,7 @@
 		07A395C11EAE74ED003C6E64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A395C01EAE74ED003C6E64 /* Assets.xcassets */; };
 		07A395C41EAE74ED003C6E64 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07A395C21EAE74ED003C6E64 /* LaunchScreen.storyboard */; };
 		94BBC65C331E4EF9FEBF0923 /* Pods_presto_v0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 700729FE8C512C54E3B17704 /* Pods_presto_v0.framework */; };
+		A839C7051EBE65DB004A71B1 /* HabitTrackerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A839C7041EBE65DB004A71B1 /* HabitTrackerDetailViewController.swift */; };
 		A8E463F31EB1C6C300B45B10 /* HabitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E463F21EB1C6C300B45B10 /* HabitViewController.swift */; };
 		A8E463F51EB1C6E600B45B10 /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E463F41EB1C6E600B45B10 /* Habit.swift */; };
 		A8E463F71EB1C72A00B45B10 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E463F61EB1C72A00B45B10 /* CustomCell.swift */; };
@@ -65,6 +66,7 @@
 		54E6C8FB1ED58BF35B826AC3 /* Pods-presto_v0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-presto_v0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-presto_v0/Pods-presto_v0.debug.xcconfig"; sourceTree = "<group>"; };
 		700729FE8C512C54E3B17704 /* Pods_presto_v0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_presto_v0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7396B9FC5F8EFB54F6E9E21C /* Pods-presto_v0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-presto_v0.release.xcconfig"; path = "Pods/Target Support Files/Pods-presto_v0/Pods-presto_v0.release.xcconfig"; sourceTree = "<group>"; };
+		A839C7041EBE65DB004A71B1 /* HabitTrackerDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HabitTrackerDetailViewController.swift; sourceTree = "<group>"; };
 		A8E463F21EB1C6C300B45B10 /* HabitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HabitViewController.swift; sourceTree = "<group>"; };
 		A8E463F41EB1C6E600B45B10 /* Habit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; };
 		A8E463F61EB1C72A00B45B10 /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
@@ -151,15 +153,11 @@
 			isa = PBXGroup;
 			children = (
 				07A395B61EAE74ED003C6E64 /* AppDelegate.swift */,
-				073F6AB11EB1716700116DC5 /* Future Log */,
 				07A395BA1EAE74ED003C6E64 /* Main.storyboard */,
 				0739B5791EBC1FD500DE6328 /* LaunchScreen.storyboard */,
 				075CAF791EBAA6FF0057E2A4 /* ReflectionTableViewController.swift */,
-				A8E463F81EB1C80600B45B10 /* HabitTrackerTableViewController.swift */,
-				A8E463FA1EB1C83100B45B10 /* HabitTrackerHabitTableViewCell.swift */,
-				A8E463F21EB1C6C300B45B10 /* HabitViewController.swift */,
-				A8E463F61EB1C72A00B45B10 /* CustomCell.swift */,
-				A8E463F41EB1C6E600B45B10 /* Habit.swift */,
+				073F6AB11EB1716700116DC5 /* Future Log */,
+				A839C7031EBE53ED004A71B1 /* Habit Tracker */,
 				073F6AB01EB1715D00116DC5 /* Daily Log */,
 				07A395C01EAE74ED003C6E64 /* Assets.xcassets */,
 				07A395C21EAE74ED003C6E64 /* LaunchScreen.storyboard */,
@@ -175,6 +173,27 @@
 				700729FE8C512C54E3B17704 /* Pods_presto_v0.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A839C7031EBE53ED004A71B1 /* Habit Tracker */ = {
+			isa = PBXGroup;
+			children = (
+				A8E463F81EB1C80600B45B10 /* HabitTrackerTableViewController.swift */,
+				A8E463FA1EB1C83100B45B10 /* HabitTrackerHabitTableViewCell.swift */,
+				A8E463F21EB1C6C300B45B10 /* HabitViewController.swift */,
+				A839C7041EBE65DB004A71B1 /* HabitTrackerDetailViewController.swift */,
+				A8E463F61EB1C72A00B45B10 /* CustomCell.swift */,
+				A839C7061EBE6BE5004A71B1 /* Habit Tracker Data */,
+			);
+			name = "Habit Tracker";
+			sourceTree = "<group>";
+		};
+		A839C7061EBE6BE5004A71B1 /* Habit Tracker Data */ = {
+			isa = PBXGroup;
+			children = (
+				A8E463F41EB1C6E600B45B10 /* Habit.swift */,
+			);
+			name = "Habit Tracker Data";
 			sourceTree = "<group>";
 		};
 		FD6D677C9BE7E995D1CBF15B /* Pods */ = {
@@ -334,6 +353,7 @@
 				A8E463F71EB1C72A00B45B10 /* CustomCell.swift in Sources */,
 				075CAF7A1EBAA6FF0057E2A4 /* ReflectionTableViewController.swift in Sources */,
 				073F6AB71EB173DF00116DC5 /* DailyLogTask.swift in Sources */,
+				A839C7051EBE65DB004A71B1 /* HabitTrackerDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
