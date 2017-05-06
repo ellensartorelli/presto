@@ -31,6 +31,8 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        toggle.setOn(false, animated: true)
+        updateSaveButtonState()
         
         setMinDate()
         
@@ -221,7 +223,7 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
         navigationItem.title = textField.text
     }
     
-    private func updateSaveButtonState(){
+    func updateSaveButtonState(){
         let text = taskTextField.text ?? ""
         saveButton.isEnabled = !text.isEmpty
     }

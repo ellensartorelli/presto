@@ -443,11 +443,12 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="sIQ-By-OiJ">
                             <connections>
                                 <action selector="cancel:" destination="r2m-Ue-kKP" id="Bqh-r3-TSm"/>
+                                <segue destination="cFT-Wf-3vx" kind="unwind" unwindAction="unwindToReflectionListWithSender:" id="O6y-Z0-IIF"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="zSq-ZA-oSJ">
                             <connections>
-                                <segue destination="cFT-Wf-3vx" kind="unwind" identifier="unwindFromDailyLogReflectionViewController" unwindAction="unwindToReflectionWithSender:" id="pdw-zo-5tc"/>
+                                <segue destination="cFT-Wf-3vx" kind="unwind" unwindAction="unwindToReflectionListWithSender:" id="7TU-NT-4GW"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

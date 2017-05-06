@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0739B57A1EBC1FD500DE6328 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0739B5791EBC1FD500DE6328 /* LaunchScreen.storyboard */; };
 		073F6AAB1EB0FD4400116DC5 /* DailyLogEventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F6AAA1EB0FD4400116DC5 /* DailyLogEventTableViewController.swift */; };
 		073F6AAD1EB166E400116DC5 /* DailyLogReflectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F6AAC1EB166E400116DC5 /* DailyLogReflectionViewController.swift */; };
 		073F6AAF1EB16BAC00116DC5 /* DailyLogTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F6AAE1EB16BAC00116DC5 /* DailyLogTableViewController.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0739B5791EBC1FD500DE6328 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		073F6AAA1EB0FD4400116DC5 /* DailyLogEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyLogEventTableViewController.swift; sourceTree = "<group>"; };
 		073F6AAC1EB166E400116DC5 /* DailyLogReflectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyLogReflectionViewController.swift; sourceTree = "<group>"; };
 		073F6AAE1EB16BAC00116DC5 /* DailyLogTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyLogTableViewController.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				07A395B61EAE74ED003C6E64 /* AppDelegate.swift */,
 				073F6AB11EB1716700116DC5 /* Future Log */,
 				07A395BA1EAE74ED003C6E64 /* Main.storyboard */,
+				0739B5791EBC1FD500DE6328 /* LaunchScreen.storyboard */,
 				075CAF791EBAA6FF0057E2A4 /* ReflectionTableViewController.swift */,
 				A8E463F81EB1C80600B45B10 /* HabitTrackerTableViewController.swift */,
 				A8E463FA1EB1C83100B45B10 /* HabitTrackerHabitTableViewCell.swift */,
@@ -246,6 +249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				07A395C41EAE74ED003C6E64 /* LaunchScreen.storyboard in Resources */,
+				0739B57A1EBC1FD500DE6328 /* LaunchScreen.storyboard in Resources */,
 				07A395C11EAE74ED003C6E64 /* Assets.xcassets in Resources */,
 				07A395BC1EAE74ED003C6E64 /* Main.storyboard in Resources */,
 			);

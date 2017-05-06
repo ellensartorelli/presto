@@ -158,6 +158,25 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         }
     
     }
+    
+    @IBAction func unwindToReflectionList(sender: UIStoryboardSegue) {
+        
+        if let sourceViewController = sender.source as? DailyLogReflectionViewController, let reflection = sourceViewController.reflection {
+            
+            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                reflections[selectedIndexPath.row] = reflection
+                tableView.reloadRows(at: [selectedIndexPath], with: .none)
+            }
+            else{
+                let newIndexPath = IndexPath(row: tasks.count+events.count, section: 0)
+                
+                reflections.append(reflection)
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
+                
+            }
+        }
+        
+    }
  
     
     
@@ -220,7 +239,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
                 tableView.reloadRows(at: [selectedIndexPath], with: .none)
             }
             else{
-                let newIndexPath = IndexPath(row: events.count, section: 0)
+                let newIndexPath = IndexPath(row: events.count+tasks.count, section: 0)
                 
                 events.append(event)
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
@@ -228,17 +247,17 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    @IBAction func unwindToReflection(sender: UIStoryboardSegue) {
-        print("clicked save from daily log")
-        if let sourceViewController = sender.source as? DailyLogReflectionViewController, let reflection = sourceViewController.reflection {
-            
-            // Add a new meal.
-            let newIndexPath = IndexPath(row: reflections.count, section: 0)
-            
-            reflections.append(reflection)
-            tableView.insertRows(at: [newIndexPath], with: .automatic)
-        }
-//        self.performSegue(withIdentifier: "unwindFromDailyLogReflectionViewController", sender: self)
-    }
+//    @IBAction func unwindToReflection(sender: UIStoryboardSegue) {
+//        print("clicked save from daily log")
+//        if let sourceViewController = sender.source as? DailyLogReflectionViewController, let reflection = sourceViewController.reflection {
+//            
+//            // Add a new meal.
+//            let newIndexPath = IndexPath(row: reflections.count, section: 0)
+//            
+//            reflections.append(reflection)
+//            tableView.insertRows(at: [newIndexPath], with: .automatic)
+//        }
+////        self.performSegue(withIdentifier: "unwindFromDailyLogReflectionViewController", sender: self)
+//    }
 
 }

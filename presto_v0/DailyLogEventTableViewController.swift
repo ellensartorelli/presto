@@ -71,12 +71,6 @@ class DailyLogEventTableViewController: UITableViewController, UITextFieldDelega
     
     func setTime() {
         let calendar = Calendar.current
-        
-//        let day = calendar.component(.day, from: Date.init())
-//        let month = calendar.component(.month, from: Date.init())
-//        let monthName = calendar.monthSymbols[month - 1]
-//        
-//        dateDisplay.text = "At: \(monthName) \(day)"
 
   
         let hour = calendar.component(.hour, from: timePicker.date) % 12
@@ -108,12 +102,6 @@ class DailyLogEventTableViewController: UITableViewController, UITextFieldDelega
         if indexPath.row == 2 && pickerVisible == false {
             return 165.0
         }
-//        if indexPath.row == 3 {
-//            if pickerVisible == true {
-//                return 165.0
-//            }
-//            return 0.0
-//        }
         return 44.0
     }
     

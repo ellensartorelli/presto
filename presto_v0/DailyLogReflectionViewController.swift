@@ -18,9 +18,9 @@ class DailyLogReflectionViewController: UIViewController, UITextViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         
         reflectionText.delegate = self
-
         reflectionText.becomeFirstResponder()
     
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tap(gesture:)))
@@ -42,11 +42,28 @@ class DailyLogReflectionViewController: UIViewController, UITextViewDelegate {
         dismiss(animated: true, completion: nil)
     }
     
-//    func textViewShouldReturn(_ textView: UITextView) -> Bool {
-//        textView.resignFirstResponder()
-//        return true
-//    }
     
+    //TextField delegate functions
+    
+    //this does nothing? THESE do nothing?
+    func textViewShouldReturn(_ textField: UITextView) -> Bool {
+        reflectionText.resignFirstResponder()
+        return true
+    }
+    
+    func textViewDidBeginEditing(_ textField: UITextView) {
+        saveButton.isEnabled = false
+    }
+    
+    func textViewDidEndEditing(_ textField: UITextView) {
+        updateSaveButtonState()
+        navigationItem.title = textField.text
+    }
+    
+    func updateSaveButtonState(){
+        let text = reflectionText.text ?? ""
+        saveButton.isEnabled = !text.isEmpty
+    }
     
     
     
