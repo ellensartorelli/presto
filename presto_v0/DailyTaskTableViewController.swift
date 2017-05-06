@@ -42,6 +42,16 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
         
         tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0)
         tableView.tableFooterView = UIView(frame: .zero)
+        
+        if let task = task {       
+            
+            navigationItem.title = task.title
+            taskTextField.text = task.title
+            pickerVisible = task.alert
+            timePicker.date = task.alertTime!
+        }
+        
+        
         }
 
     override func didReceiveMemoryWarning() {

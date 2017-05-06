@@ -195,7 +195,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1g4-xC-AM6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3259.4202898550725" y="545.38043478260875"/>
+            <point key="canvasLocation" x="4778" y="337"/>
         </scene>
         <!--Daily Log-->
         <scene sceneID="cYp-Yf-Ncn">
@@ -232,6 +232,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="taskLabel" destination="NrC-nU-u0p" id="KdV-X1-sbo"/>
+                                            <segue destination="Hqc-0y-wGS" kind="show" identifier="ShowDetailTask" id="Vnq-Lq-6VV"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="eventCell" id="2p5-xj-S9s" customClass="DailyLogEventTableViewCell" customModule="presto_v0" customModuleProvider="target">
@@ -252,6 +253,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="eventLabel" destination="Qmg-OO-qv1" id="gmD-q1-ETZ"/>
+                                            <segue destination="srE-D0-AcF" kind="show" identifier="ShowDetailEvent" id="NCW-8m-Hbk"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="reflectionCell" id="gCj-Go-t1r" customClass="DailyLogReflectionTableViewCell" customModule="presto_v0" customModuleProvider="target">
@@ -272,6 +274,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="reflectionText" destination="PS9-9y-bhU" id="UtQ-wN-JQl"/>
+                                            <segue destination="r2m-Ue-kKP" kind="show" identifier="ShowDetailReflection" id="B6j-Wl-uDv"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -396,6 +399,7 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="nkK-vJ-YBb">
                             <connections>
                                 <action selector="cancel:" destination="srE-D0-AcF" id="blj-Xp-W4S"/>
+                                <segue destination="a7n-wF-ZRu" kind="unwind" unwindAction="unwindToDailyLogEventWithSender:" id="WZ8-2D-LSB"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="oNx-0q-FwH">
@@ -415,7 +419,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o2g-JF-nKb" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="a7n-wF-ZRu" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3206" y="2901"/>
+            <point key="canvasLocation" x="2916" y="2301"/>
         </scene>
         <!--New Reflection-->
         <scene sceneID="ASK-PN-qxA">
@@ -460,7 +464,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s5E-pR-3wf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="cFT-Wf-3vx" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3987" y="2997"/>
+            <point key="canvasLocation" x="4587" y="2447"/>
         </scene>
         <!--New Task-->
         <scene sceneID="jg5-7k-4pX">
@@ -529,7 +533,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="w5b-dP-z4F">
-                                                    <rect key="frame" x="-6" y="-52" width="416" height="216"/>
+                                                    <rect key="frame" x="-7" y="-52" width="416" height="216"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <date key="date" timeIntervalSinceReferenceDate="514846593.11594498">
                                                         <!--2017-04-25 20:56:33 +0000-->
@@ -573,7 +577,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M31-RW-1bC" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="G8P-HQ-ZH1" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4948" y="2901"/>
+            <point key="canvasLocation" x="7358" y="1921"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="fuK-3I-qEK">
@@ -675,7 +679,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nnh-SB-QS5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4948" y="2195"/>
+            <point key="canvasLocation" x="6455" y="2243"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MiH-Zn-naX">
@@ -693,7 +697,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fGh-zx-w4w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3207" y="2195"/>
+            <point key="canvasLocation" x="2143" y="2301"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="a2Z-xi-ddN">
@@ -711,7 +715,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tbQ-Bo-ayt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3987" y="2143"/>
+            <point key="canvasLocation" x="3748" y="2448"/>
         </scene>
         <!--Daily Log-->
         <scene sceneID="VM0-Va-kB2">
@@ -1125,8 +1129,11 @@
         <image name="To Do-50" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="t4N-X5-XfR"/>
+        <segue reference="lLH-gf-fzd"/>
         <segue reference="Gf7-Dx-4lZ"/>
-        <segue reference="04F-lm-W0z"/>
+        <segue reference="Vnq-Lq-6VV"/>
+        <segue reference="twu-GI-fCL"/>
+        <segue reference="NCW-8m-Hbk"/>
+        <segue reference="B6j-Wl-uDv"/>
     </inferredMetricsTieBreakers>
 </document>
