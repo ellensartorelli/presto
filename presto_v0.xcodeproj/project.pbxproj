@@ -221,6 +221,7 @@
 				TargetAttributes = {
 					07A395B21EAE74EC003C6E64 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = ZG569DZJ7J;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -456,6 +457,7 @@
 			baseConfigurationReference = 54E6C8FB1ED58BF35B826AC3 /* Pods-presto_v0.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = ZG569DZJ7J;
 				INFOPLIST_FILE = presto_v0/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.middlebury.cs466.presto-v0";
@@ -469,6 +471,7 @@
 			baseConfigurationReference = 7396B9FC5F8EFB54F6E9E21C /* Pods-presto_v0.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = ZG569DZJ7J;
 				INFOPLIST_FILE = presto_v0/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.middlebury.cs466.presto-v0";
