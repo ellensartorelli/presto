@@ -29,6 +29,7 @@ class HabitViewController: UIViewController {
             selected = (habit?.selectedDates)!
         }
         
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -42,16 +43,13 @@ class HabitViewController: UIViewController {
         
         super.prepare(for: segue, sender: sender)
         
-        // Configure the destination view controller only when the save button is pressed.
-        //        guard let button = sender as? UIBarButtonItem, button === saveButton else {
-        //            os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
-        //            return
-        //        }
-        
-        
-        
-        // Set the habit to be passed to MealTableViewController after the unwind segue.
-        
+        /* // Configure the destination view controller only when the save button is pressed.
+                guard let button = sender as? UIBarButtonItem, button === saveButton else {
+                    os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
+                    return
+                }
+        */
+       
     }
     
     
@@ -92,6 +90,7 @@ extension HabitViewController: JTAppleCalendarViewDataSource{
         formatter.timeZone = Calendar.current.timeZone
         formatter.locale = Calendar.current.locale
         guard let startDate = habit?.startDate else{
+            //later replace with defaults
             fatalError("doing it like this was a terrible idea")}
         guard let endDate = habit?.endDate else{
             fatalError("doing it like this was a terrible idea")}
