@@ -41,6 +41,11 @@ class DailyLogEventTableViewController: UITableViewController, UITextFieldDelega
         tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0)
         tableView.tableFooterView = UIView(frame: .zero)
         
+        //start with save button false if new event
+        if(titleTextField.text?.isEmpty)!{
+            saveButton.isEnabled = false
+        }
+        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -208,6 +213,7 @@ class DailyLogEventTableViewController: UITableViewController, UITextFieldDelega
     
     private func updateSaveButtonState(){
         let text = titleTextField.text ?? ""
+        print("button shoould be disabled if ", String(!text.isEmpty))
         saveButton.isEnabled = !text.isEmpty
     }
  

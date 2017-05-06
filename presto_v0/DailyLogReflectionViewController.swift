@@ -45,26 +45,26 @@ class DailyLogReflectionViewController: UIViewController, UITextViewDelegate {
     
     //TextField delegate functions
     
-    //this does nothing? THESE do nothing?
-    func textViewShouldReturn(_ textField: UITextView) -> Bool {
-        reflectionText.resignFirstResponder()
-        return true
-    }
+//    //this does nothing? THESE do nothing?
+//    func textViewShouldReturn(_ textField: UITextView) -> Bool {
+//        reflectionText.resignFirstResponder()
+//        return true
+//    }
+//    
+//    func textViewDidBeginEditing(_ textField: UITextView) {
+//        saveButton.isEnabled = false
+//    }
+//
+//    func textViewDidEndEditing(_ textField: UITextView) {
+//        updateSaveButtonState()
+//        navigationItem.title = textField.text
+//    }
     
-    func textViewDidBeginEditing(_ textField: UITextView) {
-        saveButton.isEnabled = false
-    }
-    
-    func textViewDidEndEditing(_ textField: UITextView) {
-        updateSaveButtonState()
-        navigationItem.title = textField.text
-    }
-    
-    func updateSaveButtonState(){
-        let text = reflectionText.text ?? ""
-        saveButton.isEnabled = !text.isEmpty
-    }
-    
+//    func updateSaveButtonState(){
+//        let text = reflectionText.text ?? ""
+//        saveButton.isEnabled = !text.isEmpty
+//    }
+//    
     
     
     // MARK: - Navigation
