@@ -41,9 +41,20 @@ class DailyLogEventTableViewController: UITableViewController, UITextFieldDelega
         tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0)
         tableView.tableFooterView = UIView(frame: .zero)
         
-        //start with save button false if new event
-        if(titleTextField.text?.isEmpty)!{
-            saveButton.isEnabled = false
+        
+        // Set up views if editing an existing Meal.
+        if let event = event {
+            //compute time for time label
+            let calendar = Calendar.current
+            
+            let hour = calendar.component(.hour, from: event.time)%12
+            let minute = calendar.component(.minute, from: event.time)
+            
+            
+            navigationItem.title = event.title
+            titleTextField.text = event.title
+            timeLabel.text = "\(hour):\(String(format: "%02d", minute))"
+            timePicker.date = event.time
         }
         
 
@@ -52,6 +63,12 @@ class DailyLogEventTableViewController: UITableViewController, UITextFieldDelega
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        //start with save button false if new event
+        if(titleTextField.text?.isEmpty)!{
+            saveButton.isEnabled = false
+        }else{
+            saveButton.isEnabled = true
+        }
     }
 
     override func didReceiveMemoryWarning() {
