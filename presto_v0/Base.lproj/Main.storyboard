@@ -234,16 +234,14 @@
                                                     <state key="normal" image="Checked Checkbox 2 Filled_28"/>
                                                     <connections>
                                                         <action selector="DoneTappedWithSender:" destination="JrQ-s0-C5E" eventType="touchUpInside" id="Zxq-oF-7Pn"/>
-                                                        <action selector="pauseTappedWithSender:" destination="JrQ-s0-C5E" eventType="touchUpInside" id="cO4-lS-oqh"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1p1-tk-vcH">
-                                                    <rect key="frame" x="37" y="8" width="28" height="28"/>
+                                                    <rect key="frame" x="36" y="8" width="28" height="28"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" image="Unchecked Checkbox_28"/>
                                                     <connections>
                                                         <action selector="DoTappedWithSender:" destination="JrQ-s0-C5E" eventType="touchUpInside" id="DkK-IW-fEm"/>
-                                                        <action selector="playTappedWithSender:" destination="JrQ-s0-C5E" eventType="touchUpInside" id="wQi-Ga-kgg"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
