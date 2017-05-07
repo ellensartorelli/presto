@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DsB-oA-a8T">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DsB-oA-a8T">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -410,7 +410,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="674-C0-cCU">
-                                                    <rect key="frame" x="-14" y="-26" width="411" height="216"/>
+                                                    <rect key="frame" x="-15" y="-26" width="408" height="216"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <date key="date" timeIntervalSinceReferenceDate="514915599.640513">
                                                         <!--2017-04-26 16:06:39 +0000-->
@@ -576,7 +576,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="w5b-dP-z4F">
-                                                    <rect key="frame" x="-11" y="-52" width="416" height="216"/>
+                                                    <rect key="frame" x="-12" y="-52" width="413" height="216"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <date key="date" timeIntervalSinceReferenceDate="514846593.11594498">
                                                         <!--2017-04-25 20:56:33 +0000-->
@@ -633,10 +633,10 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="Aor-6H-o7p" kind="relationship" relationship="viewControllers" id="0hr-OC-XPn"/>
                         <segue destination="01Y-xN-X6N" kind="relationship" relationship="viewControllers" id="eu1-JY-LR9"/>
-                        <segue destination="WIE-fg-xau" kind="relationship" relationship="viewControllers" id="0sF-hP-fed"/>
+                        <segue destination="Aor-6H-o7p" kind="relationship" relationship="viewControllers" id="0hr-OC-XPn"/>
                         <segue destination="Qbg-KZ-Jph" kind="relationship" relationship="viewControllers" id="GOB-LB-ewk"/>
+                        <segue destination="WIE-fg-xau" kind="relationship" relationship="viewControllers" id="0sF-hP-fed"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vkc-Zc-xSA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -801,17 +801,17 @@
         <!--Habit Tracker-->
         <scene sceneID="aLV-Tn-SJ9">
             <objects>
-                <tableViewController id="ZcP-HU-XOr" customClass="HabitTrackerTableViewController" customModule="presto_v0_02" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="ZcP-HU-XOr" customClass="HabitTrackerTableViewController" customModule="presto_v0" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="f6E-5b-Ifx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HabitTrackerHabitTableViewCell" rowHeight="60" id="pHC-3E-kgU" customClass="HabitTrackerHabitTableViewCell" customModule="presto_v0_02" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HabitTrackerHabitTableViewCell" rowHeight="60" id="pHC-3E-kgU" customClass="HabitTrackerHabitTableViewCell" customModule="presto_v0" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pHC-3E-kgU" id="wgK-JJ-mFK">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="59"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="id5-cF-5zy">
@@ -851,11 +851,11 @@
             </objects>
             <point key="canvasLocation" x="2642.0289855072465" y="-1688.3152173913045"/>
         </scene>
-        <!--Item-->
+        <!--Habit Tracker-->
         <scene sceneID="Cns-di-d8R">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Qbg-KZ-Jph" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="VDr-38-qRx"/>
+                    <tabBarItem key="tabBarItem" title="Habit Tracker" image="Calendar-50" id="VDr-38-qRx"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6nI-cV-bYt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -873,7 +873,7 @@
         <!--New Habit-->
         <scene sceneID="EWJ-3Z-XJS">
             <objects>
-                <viewController id="SPy-P5-a1Q" customClass="HabitTrackerDetailViewController" customModule="presto_v0_02" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="SPy-P5-a1Q" customClass="HabitTrackerDetailViewController" customModule="presto_v0" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6cZ-Ik-KoL"/>
                         <viewControllerLayoutGuide type="bottom" id="hcV-67-w8m"/>
@@ -883,28 +883,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="2cr-NM-fyP">
-                                <rect key="frame" x="20" y="25" width="374" height="315"/>
+                                <rect key="frame" x="20" y="69" width="374" height="313.66666666666669"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Habit Title:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xoF-sf-eaK">
-                                        <rect key="frame" x="0.0" y="0.0" width="84" height="21"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="83.333333333333329" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Habit Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rxj-Hl-2Qg">
-                                        <rect key="frame" x="0.0" y="30" width="374" height="30"/>
+                                        <rect key="frame" x="0.0" y="29.333333333333329" width="374" height="30.000000000000014"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C9G-Xh-rTY">
-                                        <rect key="frame" x="0.0" y="69" width="83" height="21"/>
+                                        <rect key="frame" x="0.0" y="68.333333333333343" width="82.666666666666671" height="20.333333333333314"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="TpD-hU-0El">
-                                        <rect key="frame" x="0.0" y="99" width="374" height="216"/>
+                                        <rect key="frame" x="0.0" y="97.666666666666671" width="374" height="216"/>
                                         <date key="date" timeIntervalSinceReferenceDate="514750336.730811">
                                             <!--2017-04-24 18:12:16 +0000-->
                                         </date>
@@ -971,7 +971,7 @@
         <!--Ib Calendar Data Source-->
         <scene sceneID="ZbC-43-jN9">
             <objects>
-                <viewController id="GLU-bC-d7C" customClass="HabitViewController" customModule="presto_v0_02" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="GLU-bC-d7C" customClass="HabitViewController" customModule="presto_v0" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hUv-9K-HM2"/>
                         <viewControllerLayoutGuide type="bottom" id="vMm-ua-x24"/>
@@ -1002,13 +1002,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="76"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BbH-rt-ic9">
-                                                <rect key="frame" x="177" y="0.0" width="61" height="30"/>
+                                                <rect key="frame" x="176.66666666666666" y="0.0" width="60.666666666666686" height="30.666666666666671"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xvc-o9-Czo">
-                                                <rect key="frame" x="168" y="37" width="78" height="39"/>
+                                                <rect key="frame" x="168.33333333333334" y="37.666666666666671" width="77.333333333333314" height="38.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -1028,31 +1028,31 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qa1-WY-yve">
-                                                <rect key="frame" x="59" y="0.0" width="59" height="21"/>
+                                                <rect key="frame" x="58.999999999999993" y="0.0" width="59.333333333333321" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5bH-df-vIs">
-                                                <rect key="frame" x="118" y="0.0" width="59" height="21"/>
+                                                <rect key="frame" x="118.33333333333334" y="0.0" width="59.000000000000028" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x2f-VG-3Sc">
-                                                <rect key="frame" x="177" y="0.0" width="60" height="21"/>
+                                                <rect key="frame" x="177.33333333333334" y="0.0" width="59.333333333333314" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sLx-fd-ff4">
-                                                <rect key="frame" x="237" y="0.0" width="59" height="21"/>
+                                                <rect key="frame" x="236.66666666666669" y="0.0" width="59.000000000000057" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fri" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xfS-Si-o2a">
-                                                <rect key="frame" x="296" y="0.0" width="59" height="21"/>
+                                                <rect key="frame" x="295.66666666666674" y="0.0" width="59.333333333333314" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -1081,7 +1081,7 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CustomCell" id="DhV-mh-hzK" customClass="CustomCell" customModule="presto_v0_02" customModuleProvider="target">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CustomCell" id="DhV-mh-hzK" customClass="CustomCell" customModule="presto_v0" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="126" height="136"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -1167,6 +1167,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Calendar-50" width="25" height="25"/>
         <image name="Checked Checkbox 2 Filled_28" width="28" height="28"/>
         <image name="Checked Filled_28" width="28" height="28"/>
         <image name="Future-50 (1)" width="25" height="25"/>
