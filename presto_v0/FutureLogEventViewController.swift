@@ -25,6 +25,8 @@ class FutureLogEventViewController: UIViewController, UITextFieldDelegate, UINav
     
 
     override func viewDidLoad() {
+        
+
         super.viewDidLoad()
         
         eventLabelTF.delegate = self
@@ -62,8 +64,7 @@ class FutureLogEventViewController: UIViewController, UITextFieldDelegate, UINav
         let endDate = endDatePicker.date
         
         event = FutureLogEvent(title: title, startDate: startDate, endDate: endDate, notes: "")
-        
-        print(startDate)
+
         
     }
     

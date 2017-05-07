@@ -30,6 +30,7 @@ class FutureLogTableViewController: UITableViewController {
     
 
         events += [event1, event2, event3]
+        events.sorted(by: { $0.startDate.compare($1.startDate) == .orderedAscending })
     }
     
  
@@ -38,13 +39,10 @@ class FutureLogTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.leftBarButtonItem = editButtonItem
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
+        print("SORT ARRAY HERE")
+//        events.sorted(by: { $0.startDate > $1.startDate })
+
         loadSampleEvents()
     }
 
@@ -80,11 +78,11 @@ class FutureLogTableViewController: UITableViewController {
         
         let calendar = Calendar.current
         let day = calendar.component(.day, from:event.startDate)
+        let month = calendar.component(.month, from:event.startDate)
+        let year = calendar.component(.year, from:event.startDate)
         
         cell.eventLabel.text = event.title
-        cell.dayLabel.text = String(day) + " - "
-    
-
+        cell.dayLabel.text = "\(month)/\(day)/\(year%100)"
         
         print(event.title)
 
@@ -114,6 +112,11 @@ class FutureLogTableViewController: UITableViewController {
                 
             }
         }
+        //sort months
+        events = events.sorted(by: { $0.startDate.compare($1.startDate) == .orderedAscending })
+        tableView.reloadData()
+
+
     }
     
     
@@ -184,7 +187,7 @@ class FutureLogTableViewController: UITableViewController {
                 fatalError("Unexpected Segue Identifier; \(segue.identifier)")
             
         }
-        
+ 
     }
    
 }
