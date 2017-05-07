@@ -122,11 +122,18 @@ class ReflectionTableViewController: UITableViewController, UITextViewDelegate {
         
         if let sourceViewController = sender.source as? DailyLogReflectionViewController, let reflection = sourceViewController.reflection {
             
-            // Add a new meal.
-            let newIndexPath = IndexPath(row: reflections.count, section: 0)
             
-            reflections.append(reflection)
-            tableView.insertRows(at: [newIndexPath], with: .automatic)
+            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                // Update an existing meal.
+                reflections[selectedIndexPath.row] = reflection
+                tableView.reloadRows(at: [selectedIndexPath], with: .none)
+            }
+            else {
+                // Add a new reflection.
+                let newIndexPath = IndexPath(row: reflections.count, section: 0)
+                
+                reflections.append(reflection)
+                tableView.insertRows(at: [newIndexPath], with: .automatic)            }
         }
 
     }
