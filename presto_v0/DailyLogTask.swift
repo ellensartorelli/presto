@@ -14,8 +14,9 @@ class DailyLogTask{
     var title:String
     var alert:Bool
     var alertTime:Date?
+    var completed:Bool
     
-    init?(title:String, alert:Bool, alertTime:Date){
+    init?(title:String, alert:Bool, alertTime:Date, completed:Bool){
         
         if title.isEmpty {
             print("title is empty)")
@@ -24,6 +25,7 @@ class DailyLogTask{
         self.title = title
         self.alert = alert
         self.alertTime = alertTime
+        self.completed = completed
     }
     
     

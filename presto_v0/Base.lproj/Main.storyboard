@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DsB-oA-a8T">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DsB-oA-a8T">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -195,7 +195,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1g4-xC-AM6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3259.4202898550725" y="545.38043478260875"/>
+            <point key="canvasLocation" x="4778" y="337"/>
         </scene>
         <!--Daily Log-->
         <scene sceneID="cYp-Yf-Ncn">
@@ -210,7 +210,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1hp-rK-kGV">
-                                <rect key="frame" x="-5" y="64" width="414" height="672"/>
+                                <rect key="frame" x="3" y="72" width="414" height="672"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -222,16 +222,35 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NrC-nU-u0p">
-                                                    <rect key="frame" x="36" y="12" width="385" height="21"/>
+                                                    <rect key="frame" x="85" y="12" width="321" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJp-wD-NxU">
+                                                    <rect key="frame" x="36" y="8" width="29" height="29"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" image="Checked Checkbox 2 Filled_28"/>
+                                                    <connections>
+                                                        <action selector="DoneTappedWithSender:" destination="JrQ-s0-C5E" eventType="touchUpInside" id="Zxq-oF-7Pn"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1p1-tk-vcH">
+                                                    <rect key="frame" x="36" y="8" width="28" height="28"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" image="Unchecked Checkbox_28"/>
+                                                    <connections>
+                                                        <action selector="DoTappedWithSender:" destination="JrQ-s0-C5E" eventType="touchUpInside" id="DkK-IW-fEm"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="taskButtonDo" destination="1p1-tk-vcH" id="eUZ-kZ-eDw"/>
+                                            <outlet property="taskButtonDone" destination="TJp-wD-NxU" id="81s-g0-iYy"/>
                                             <outlet property="taskLabel" destination="NrC-nU-u0p" id="KdV-X1-sbo"/>
+                                            <segue destination="Hqc-0y-wGS" kind="show" identifier="ShowDetailTask" id="Vnq-Lq-6VV"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="eventCell" id="2p5-xj-S9s" customClass="DailyLogEventTableViewCell" customModule="presto_v0" customModuleProvider="target">
@@ -242,16 +261,35 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qmg-OO-qv1">
-                                                    <rect key="frame" x="36" y="12" width="372" height="21"/>
+                                                    <rect key="frame" x="87" y="12" width="319" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rqM-Iv-GGT">
+                                                    <rect key="frame" x="38" y="7" width="27" height="26"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" image="Unchecked Circle_28"/>
+                                                    <connections>
+                                                        <action selector="IncompleteTappedWithSender:" destination="2p5-xj-S9s" eventType="touchUpInside" id="Nsc-nh-UcC"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hIM-yj-PJL">
+                                                    <rect key="frame" x="37" y="5" width="28" height="28"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" image="Checked Filled_28"/>
+                                                    <connections>
+                                                        <action selector="CompletedTappedWithSender:" destination="2p5-xj-S9s" eventType="touchUpInside" id="fV0-eS-5eM"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="eventButtonComplete" destination="hIM-yj-PJL" id="AFL-TX-SnB"/>
+                                            <outlet property="eventButtonIncomplete" destination="rqM-Iv-GGT" id="BxN-9s-YEb"/>
                                             <outlet property="eventLabel" destination="Qmg-OO-qv1" id="gmD-q1-ETZ"/>
+                                            <segue destination="srE-D0-AcF" kind="show" identifier="ShowDetailEvent" id="NCW-8m-Hbk"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="reflectionCell" id="gCj-Go-t1r" customClass="DailyLogReflectionTableViewCell" customModule="presto_v0" customModuleProvider="target">
@@ -262,9 +300,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PS9-9y-bhU">
-                                                    <rect key="frame" x="39" y="12" width="380" height="21"/>
+                                                    <rect key="frame" x="88" y="12" width="318" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9nD-h6-FGu">
+                                                    <rect key="frame" x="45" y="7" width="21" height="28"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="31"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -272,6 +317,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="reflectionText" destination="PS9-9y-bhU" id="UtQ-wN-JQl"/>
+                                            <segue destination="r2m-Ue-kKP" kind="show" identifier="ShowDetailReflection" id="B6j-Wl-uDv"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -295,7 +341,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Il0-Aw-qv5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4936.231884057971" y="1410.3260869565217"/>
+            <point key="canvasLocation" x="4934.7826086956529" y="1409.5108695652175"/>
         </scene>
         <!--New Event-->
         <scene sceneID="e5J-C1-vzd">
@@ -364,7 +410,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="674-C0-cCU">
-                                                    <rect key="frame" x="-7" y="-26" width="409" height="216"/>
+                                                    <rect key="frame" x="-10" y="-26" width="412" height="216"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <date key="date" timeIntervalSinceReferenceDate="514915599.640513">
                                                         <!--2017-04-26 16:06:39 +0000-->
@@ -396,6 +442,7 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="nkK-vJ-YBb">
                             <connections>
                                 <action selector="cancel:" destination="srE-D0-AcF" id="blj-Xp-W4S"/>
+                                <segue destination="a7n-wF-ZRu" kind="unwind" unwindAction="unwindToDailyLogEventWithSender:" id="WZ8-2D-LSB"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="oNx-0q-FwH">
@@ -415,7 +462,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o2g-JF-nKb" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="a7n-wF-ZRu" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3206" y="2901"/>
+            <point key="canvasLocation" x="2916" y="2301"/>
         </scene>
         <!--New Reflection-->
         <scene sceneID="ASK-PN-qxA">
@@ -460,7 +507,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s5E-pR-3wf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="cFT-Wf-3vx" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3987" y="2997"/>
+            <point key="canvasLocation" x="4587" y="2447"/>
         </scene>
         <!--New Task-->
         <scene sceneID="jg5-7k-4pX">
@@ -529,7 +576,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="w5b-dP-z4F">
-                                                    <rect key="frame" x="-6" y="-52" width="416" height="216"/>
+                                                    <rect key="frame" x="-7" y="-52" width="416" height="216"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <date key="date" timeIntervalSinceReferenceDate="514846593.11594498">
                                                         <!--2017-04-25 20:56:33 +0000-->
@@ -573,7 +620,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M31-RW-1bC" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="G8P-HQ-ZH1" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4948" y="2901"/>
+            <point key="canvasLocation" x="7358" y="1921"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="fuK-3I-qEK">
@@ -675,7 +722,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nnh-SB-QS5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4948" y="2195"/>
+            <point key="canvasLocation" x="6455" y="2243"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MiH-Zn-naX">
@@ -693,7 +740,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fGh-zx-w4w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3207" y="2195"/>
+            <point key="canvasLocation" x="2143" y="2301"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="a2Z-xi-ddN">
@@ -711,7 +758,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tbQ-Bo-ayt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3987" y="2143"/>
+            <point key="canvasLocation" x="3748" y="2448"/>
         </scene>
         <!--Daily Log-->
         <scene sceneID="VM0-Va-kB2">
@@ -798,28 +845,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="N5R-XY-WNX">
-                                <rect key="frame" x="20" y="69" width="374" height="315"/>
+                                <rect key="frame" x="20" y="69" width="374" height="313.66666666666669"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Habit Title:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DSM-WL-WIh">
-                                        <rect key="frame" x="0.0" y="0.0" width="84" height="21"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="83.333333333333329" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Habit Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E4Y-mv-zup">
-                                        <rect key="frame" x="0.0" y="30" width="374" height="30"/>
+                                        <rect key="frame" x="0.0" y="29.333333333333329" width="374" height="30.000000000000014"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0C7-Th-IkV">
-                                        <rect key="frame" x="0.0" y="69" width="83" height="21"/>
+                                        <rect key="frame" x="0.0" y="68.333333333333343" width="82.666666666666671" height="20.333333333333314"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="GG4-Px-feD">
-                                        <rect key="frame" x="0.0" y="99" width="374" height="216"/>
+                                        <rect key="frame" x="0.0" y="97.666666666666671" width="374" height="216"/>
                                         <date key="date" timeIntervalSinceReferenceDate="514750336.730811">
                                             <!--2017-04-24 18:12:16 +0000-->
                                         </date>
@@ -1120,13 +1167,20 @@
     </scenes>
     <resources>
         <image name="Calendar-50" width="25" height="25"/>
+        <image name="Checked Checkbox 2 Filled_28" width="28" height="28"/>
+        <image name="Checked Filled_28" width="28" height="28"/>
         <image name="Future-50 (1)" width="25" height="25"/>
         <image name="Paper-50" width="25" height="25"/>
         <image name="To Do-50" width="25" height="25"/>
+        <image name="Unchecked Checkbox_28" width="28" height="28"/>
+        <image name="Unchecked Circle_28" width="28" height="28"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="t4N-X5-XfR"/>
+        <segue reference="lLH-gf-fzd"/>
         <segue reference="Gf7-Dx-4lZ"/>
-        <segue reference="04F-lm-W0z"/>
+        <segue reference="Vnq-Lq-6VV"/>
+        <segue reference="twu-GI-fCL"/>
+        <segue reference="NCW-8m-Hbk"/>
+        <segue reference="B6j-Wl-uDv"/>
     </inferredMetricsTieBreakers>
 </document>
