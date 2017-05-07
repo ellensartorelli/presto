@@ -37,9 +37,6 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         }
         
 
-        
-        
-        
         if let savedTasks = loadDailyLogTasks() {
             tasks += savedTasks
         } else{
@@ -367,6 +364,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     
     private func loadDailyLogEvents() -> [DailyLogEvent]?  {
         return NSKeyedUnarchiver.unarchiveObject(withFile: DailyLogEvent.ArchiveURL.path) as? [DailyLogEvent]
+    }
 
     private func saveDailyLogTasks() {
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(tasks, toFile: DailyLogTask.ArchiveURL.path)
