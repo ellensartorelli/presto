@@ -8,12 +8,15 @@
 
 import UIKit
 import JTAppleCalendar
+import os.log
 
 class HabitViewController: UIViewController {
     
     @IBOutlet weak var calendarView: JTAppleCalendarView!
     @IBOutlet weak var year: UILabel!
     @IBOutlet weak var month: UILabel!
+    @IBOutlet weak var habitName: UINavigationItem!
+    @IBOutlet weak var doneButton: UIBarButtonItem!
     
     var habit: Habit?
     
@@ -24,7 +27,7 @@ class HabitViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCalendarView()
-        navigationItem.title = habit?.name
+        habitName.title = habit?.name
         if(habit != nil){
             selected = (habit?.selectedDates)!
         }
@@ -39,17 +42,19 @@ class HabitViewController: UIViewController {
     
     //MARK: - Navigation
     
+    // This method lets you configure a view controller before it's presented.
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         super.prepare(for: segue, sender: sender)
         
-        /* // Configure the destination view controller only when the save button is pressed.
-                guard let button = sender as? UIBarButtonItem, button === saveButton else {
-                    os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
-                    return
-                }
-        */
-       
+        // Configure the destination view controller only when the save button is pressed.
+        guard let button = sender as? UIBarButtonItem, button === doneButton else {
+            os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
+            return
+        }
+        
+        habit?.selectedDates = selected
     }
     
     
