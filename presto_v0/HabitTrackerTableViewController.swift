@@ -23,7 +23,7 @@ class HabitTrackerTableViewController: UITableViewController {
         let month:TimeInterval = 31 * day
         var startHabit1 = Date(timeInterval: -month, since: Date())
         ///TESTING
-
+        
         
         guard let habit1 = Habit(name: "Running", startDate: startHabit1) else {
             fatalError("Unable to instantiate habit1")
@@ -38,7 +38,7 @@ class HabitTrackerTableViewController: UITableViewController {
         habit1.selectedDates.append(Date())
         habit1.selectedDates.append(Date(timeInterval: -day, since: Date()))
         ///TESTING
-
+        
         
         habits += [habit1, habit2]
     }
@@ -150,13 +150,42 @@ class HabitTrackerTableViewController: UITableViewController {
     }
     
     @IBAction func unwindToHabitList(sender: UIStoryboardSegue) {
+        
         if let sourceViewController = sender.source as? HabitTrackerDetailViewController, let habit = sourceViewController.habit {
+            print("unwinding "+habit.name)
             
-            // Add a new meal.
+            // Add a new habit.
             let newIndexPath = IndexPath(row: habits.count, section: 0)
             
             habits.append(habit)
             tableView.insertRows(at: [newIndexPath], with: .automatic)
         }
+        if let sourceViewController = sender.source as? HabitViewController, let habit = sourceViewController.habit {
+            print("unwinding "+habit.name)
+            
+            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                // Update an existing habit.
+                habits[selectedIndexPath.row] = habit
+                tableView.reloadRows(at: [selectedIndexPath], with: .none)
+                print("unwinding "+habit.name)
+            }
+            
+        }
+        
+    }
+    @IBAction func unwindToHabitListFromEdit(sender: UIStoryboardSegue) {
+        
+        if let sourceViewController = sender.source as? HabitViewController, let habit = sourceViewController.habit {
+            print("unwinding "+habit.name)
+            
+            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                // Update an existing habit.
+                habits[selectedIndexPath.row] = habit
+                tableView.reloadRows(at: [selectedIndexPath], with: .none)
+                print("unwinding "+habit.name)
+            }
+            
+        }
+        
     }
 }

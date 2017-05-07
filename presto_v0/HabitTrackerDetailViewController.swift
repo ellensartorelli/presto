@@ -12,13 +12,13 @@ import os.log
 
 class HabitTrackerDetailViewController: UIViewController, UITextFieldDelegate {
     //MARK: Properties
-
+    
     @IBOutlet weak var habitTitleTextField: UITextField!
     @IBOutlet weak var habitStartDatePicker: UIDatePicker!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
     var habit: Habit?
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +26,7 @@ class HabitTrackerDetailViewController: UIViewController, UITextFieldDelegate {
         habitStartDatePicker.minimumDate = Date.init()
         updateSaveButtonState()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -49,7 +49,7 @@ class HabitTrackerDetailViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: - Navigation
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         
@@ -67,7 +67,7 @@ class HabitTrackerDetailViewController: UIViewController, UITextFieldDelegate {
     }
     @IBAction func cancel(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
-
+        
     }
     
     //MARK: Private Methods
@@ -78,5 +78,5 @@ class HabitTrackerDetailViewController: UIViewController, UITextFieldDelegate {
         saveButton.isEnabled = !text.isEmpty
     }
     
-
+    
 }

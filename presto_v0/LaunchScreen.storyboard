@@ -1,51 +1,60 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wim-h1-lzN">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
-        <scene sceneID="EHf-IW-A2E">
+        <scene sceneID="x2k-ud-CMr">
             <objects>
-                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                <viewController id="wim-h1-lzN" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Llm-lL-Icb"/>
-                        <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
+                        <viewControllerLayoutGuide type="top" id="iGl-1m-E3O"/>
+                        <viewControllerLayoutGuide type="bottom" id="qnr-Y5-exT"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                    <view key="view" contentMode="scaleToFill" id="f0c-1m-OWE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f2s-dw-Nfh">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u9g-Pf-kts">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="presto_logo_trans_test" translatesAutoresizingMaskIntoConstraints="NO" id="DRH-4A-Pdd">
-                                        <rect key="frame" x="51" y="195" width="273" height="45"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="presto_logo_trans_test" translatesAutoresizingMaskIntoConstraints="NO" id="1cO-Nc-3W8">
+                                        <rect key="frame" x="51" y="195" width="273" height="54"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="1cO-Nc-3W8" secondAttribute="height" multiplier="91:18" id="8Zg-RN-iBI"/>
+                                            <constraint firstAttribute="width" constant="273" id="Qrd-zE-FJv"/>
+                                            <constraint firstAttribute="height" constant="54" id="h4V-5f-Hc7"/>
+                                        </constraints>
                                     </imageView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="DRH-4A-Pdd" secondAttribute="trailing" constant="51" id="T1K-Qn-XW0"/>
-                                    <constraint firstAttribute="bottom" secondItem="DRH-4A-Pdd" secondAttribute="bottom" constant="427" id="Uh2-Dk-Ruz"/>
-                                    <constraint firstItem="DRH-4A-Pdd" firstAttribute="leading" secondItem="f2s-dw-Nfh" secondAttribute="leading" constant="51" id="iNQ-rC-ead"/>
-                                    <constraint firstItem="DRH-4A-Pdd" firstAttribute="top" secondItem="f2s-dw-Nfh" secondAttribute="top" constant="195" id="rCz-ut-wvq"/>
+                                    <constraint firstItem="1cO-Nc-3W8" firstAttribute="top" secondItem="u9g-Pf-kts" secondAttribute="top" constant="195" id="FzK-cC-rdU"/>
+                                    <constraint firstItem="1cO-Nc-3W8" firstAttribute="leading" secondItem="u9g-Pf-kts" secondAttribute="leading" constant="51" id="LTq-ma-RH9"/>
+                                    <constraint firstAttribute="trailing" secondItem="1cO-Nc-3W8" secondAttribute="trailing" constant="51" id="QkL-iX-phR"/>
+                                    <constraint firstAttribute="width" secondItem="u9g-Pf-kts" secondAttribute="height" multiplier="375:667" id="hTF-UM-A9Z"/>
+                                    <constraint firstAttribute="width" constant="375" id="jRk-Ig-pwU"/>
+                                    <constraint firstAttribute="height" constant="667" id="l5C-TU-LWj"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="f2s-dw-Nfh" secondAttribute="bottom" id="9gQ-Re-tDf"/>
-                            <constraint firstItem="f2s-dw-Nfh" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="Eie-ML-Y3l"/>
-                            <constraint firstItem="f2s-dw-Nfh" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="aLS-9E-6Ou"/>
-                            <constraint firstAttribute="trailing" secondItem="f2s-dw-Nfh" secondAttribute="trailing" id="nPv-pf-ihn"/>
+                            <constraint firstItem="u9g-Pf-kts" firstAttribute="leading" secondItem="f0c-1m-OWE" secondAttribute="leading" id="BED-Nz-c0l"/>
+                            <constraint firstItem="u9g-Pf-kts" firstAttribute="centerX" secondItem="f0c-1m-OWE" secondAttribute="centerX" id="Ikf-bR-gHn"/>
+                            <constraint firstAttribute="trailing" secondItem="u9g-Pf-kts" secondAttribute="trailing" id="Jdc-eg-irH"/>
+                            <constraint firstItem="u9g-Pf-kts" firstAttribute="top" secondItem="f0c-1m-OWE" secondAttribute="top" id="Nex-hd-JKD"/>
+                            <constraint firstItem="qnr-Y5-exT" firstAttribute="top" secondItem="u9g-Pf-kts" secondAttribute="bottom" id="qy1-qb-Ezn"/>
                         </constraints>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Dk-Za-nNt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
