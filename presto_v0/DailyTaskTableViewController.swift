@@ -50,7 +50,6 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
             taskTextField.text = task.title
             timePicker.date = task.alertTime!
             toggle.isOn = task.alert
-            
         }else{
             toggle.setOn(false, animated: true)
         }
@@ -221,11 +220,8 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
         let time = timePicker.date
         let isAlertOn = toggle.isOn
         
-        print("togle is enabled \(toggle.isOn)")
         
-        print("alerting on is getting saved as \(isAlertOn)")
-        
-        task = DailyLogTask(title: taskText, alert: isAlertOn, alertTime: time)
+        task = DailyLogTask(title: taskText, alert: isAlertOn, alertTime: time, completed: (task?.completed)!)
         
     }
  

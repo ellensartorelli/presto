@@ -17,6 +17,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     var events = [DailyLogEvent]()
     var tasks = [DailyLogTask]()
     
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +35,6 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         // Use the edit button item provided by the table view controller.
         navigationItem.leftBarButtonItem = editButtonItem
     
-
     }
     
     override func didReceiveMemoryWarning() {
@@ -58,6 +58,9 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
             let cell: DailyLogTaskTableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! DailyLogTaskTableViewCell
             //set the data here
             let task = tasks[indexPath.row]
+            
+            cell.taskButtonDo.isHidden = task.completed
+            cell.taskButtonDone.isHidden = !task.completed
             cell.taskLabel.text = task.title
             
             return cell
@@ -305,13 +308,13 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     private func loadSampleTasks(){
         print("called Tasks")
         
-        guard let task1 = DailyLogTask(title: "task", alert: false, alertTime: Date.init()) else {
+        guard let task1 = DailyLogTask(title: "task", alert: false, alertTime: Date.init(), completed: true) else {
             fatalError("Unable to instantiate task")
         }
-        guard let task2 = DailyLogTask(title: "task2", alert: false, alertTime: Date.init()) else {
+        guard let task2 = DailyLogTask(title: "task2", alert: false, alertTime: Date.init(), completed: false) else {
             fatalError("Unable to instantiate task")
         }
-        guard let task3 = DailyLogTask(title: "task3", alert: false, alertTime: Date.init()) else {
+        guard let task3 = DailyLogTask(title: "task3", alert: false, alertTime: Date.init(), completed: true) else {
             fatalError("Unable to instantiate task")
         }
         

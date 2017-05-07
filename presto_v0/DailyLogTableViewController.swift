@@ -199,10 +199,10 @@ class DailyLogTableViewController: UITableViewController {
     private func loadSampleTasks(){
         print("called Tasks")
         
-        guard let task1 = DailyLogTask(title: "task", alert: false, alertTime: Date.init()) else {
+        guard let task1 = DailyLogTask(title: "task", alert: false, alertTime: Date.init(), completed: true) else {
             fatalError("Unable to instantiate task")
         }
-        guard let task2 = DailyLogTask(title: "task2", alert: false, alertTime: Date.init()) else {
+        guard let task2 = DailyLogTask(title: "task2", alert: false, alertTime: Date.init(), completed: false) else {
             fatalError("Unable to instantiate task")
         }
         
