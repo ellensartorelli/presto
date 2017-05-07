@@ -27,7 +27,6 @@
 		07A395BC1EAE74ED003C6E64 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07A395BA1EAE74ED003C6E64 /* Main.storyboard */; };
 		07A395BF1EAE74ED003C6E64 /* presto_v0.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 07A395BD1EAE74ED003C6E64 /* presto_v0.xcdatamodeld */; };
 		07A395C11EAE74ED003C6E64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A395C01EAE74ED003C6E64 /* Assets.xcassets */; };
-		07A395C41EAE74ED003C6E64 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07A395C21EAE74ED003C6E64 /* LaunchScreen.storyboard */; };
 		94BBC65C331E4EF9FEBF0923 /* Pods_presto_v0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 700729FE8C512C54E3B17704 /* Pods_presto_v0.framework */; };
 		A839C7051EBE65DB004A71B1 /* HabitTrackerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A839C7041EBE65DB004A71B1 /* HabitTrackerDetailViewController.swift */; };
 		A842F1A91EBF9D5100D228FB /* MiniCalendarCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A842F1A81EBF9D5100D228FB /* MiniCalendarCustomCell.swift */; };
@@ -60,7 +59,6 @@
 		07A395BB1EAE74ED003C6E64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		07A395BE1EAE74ED003C6E64 /* presto_v0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = presto_v0.xcdatamodel; sourceTree = "<group>"; };
 		07A395C01EAE74ED003C6E64 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		07A395C31EAE74ED003C6E64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		07A395C51EAE74ED003C6E64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		54E6C8FB1ED58BF35B826AC3 /* Pods-presto_v0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-presto_v0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-presto_v0/Pods-presto_v0.debug.xcconfig"; sourceTree = "<group>"; };
 		700729FE8C512C54E3B17704 /* Pods_presto_v0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_presto_v0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,7 +158,6 @@
 				A839C7031EBE53ED004A71B1 /* Habit Tracker */,
 				073F6AB01EB1715D00116DC5 /* Daily Log */,
 				07A395C01EAE74ED003C6E64 /* Assets.xcassets */,
-				07A395C21EAE74ED003C6E64 /* LaunchScreen.storyboard */,
 				07A395C51EAE74ED003C6E64 /* Info.plist */,
 				07A395BD1EAE74ED003C6E64 /* presto_v0.xcdatamodeld */,
 			);
@@ -276,7 +273,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				07A395C41EAE74ED003C6E64 /* LaunchScreen.storyboard in Resources */,
 				0739B57A1EBC1FD500DE6328 /* LaunchScreen.storyboard in Resources */,
 				07A395C11EAE74ED003C6E64 /* Assets.xcassets in Resources */,
 				07A395BC1EAE74ED003C6E64 /* Main.storyboard in Resources */,
@@ -374,14 +370,6 @@
 				07A395BB1EAE74ED003C6E64 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		07A395C21EAE74ED003C6E64 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				07A395C31EAE74ED003C6E64 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
