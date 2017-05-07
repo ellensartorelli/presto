@@ -13,19 +13,25 @@ class HabitTrackerTableViewController: UITableViewController {
     
     var habits = [Habit]()
     
+
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationItem.leftBarButtonItem = editButtonItem
+        loadSampleHabits()
+
+
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
     //MARK: Private Methods
     
     private func loadSampleHabits() {
-        ///TESTING
-        let minute:TimeInterval = 60.0
-        let hour:TimeInterval = 60.0 * minute
-        let day:TimeInterval = 24 * hour
-        let month:TimeInterval = 31 * day
-        var startHabit1 = Date(timeInterval: -month, since: Date())
-        ///TESTING
-        
-        
-        guard let habit1 = Habit(name: "Running", startDate: startHabit1) else {
+     
+        guard let habit1 = Habit(name: "Running", startDate: Date()) else {
             fatalError("Unable to instantiate habit1")
         }
         
@@ -34,22 +40,7 @@ class HabitTrackerTableViewController: UITableViewController {
         }
         
         
-        ///TESTING
-        habit1.selectedDates.append(Date())
-        habit1.selectedDates.append(Date(timeInterval: -day, since: Date()))
-        ///TESTING
-        
-        
         habits += [habit1, habit2]
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        loadSampleHabits()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
     
     // MARK: - Table view data source
@@ -81,25 +72,27 @@ class HabitTrackerTableViewController: UITableViewController {
         return cell
     }
     
-    /*
+    
      // Override to support conditional editing of the table view.
      override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
      // Return false if you do not want the specified item to be editable.
      return true
      }
-     */
+     
     
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
+    
+    
+    // Override to support editing the table view.
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            habits.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
+    }
+    
     
     /*
      // Override to support rearranging the table view.
