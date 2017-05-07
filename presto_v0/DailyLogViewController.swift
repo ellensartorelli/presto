@@ -327,7 +327,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     private func loadSampleReflections(){
         print("called Reflections")
         
-        guard let ref1 = DailyLogReflection(reflection: "I hate this project! Ugh", date: Date.init()) else {
+        guard let ref1 = DailyLogReflection(reflection: "Today was a long and overcast day", date: Date.init()) else {
             fatalError("Unable to instantiate reflection")
         }
         

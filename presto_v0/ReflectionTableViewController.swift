@@ -135,7 +135,7 @@ class ReflectionTableViewController: UITableViewController, UITextViewDelegate {
     private func loadSampleReflections(){
         print("called Reflections from reftab")
         
-        guard let ref1 = DailyLogReflection(reflection: "hello this is a long asdfjkl; fghjfghjdxcfgvbh ", date: Date.init()) else {
+        guard let ref1 = DailyLogReflection(reflection: "In 1531 the Virgin of Guadalupe’s miraculous apparition to an indigenous man, Juan Diego was quickly seen as highly symbolic and was especially celebrated and cherished by the native population of Mexico. Yet the apparition tradition is similar to the story of the Spanish statuette, Our Lady of Guadalupe in Extremadura, Spain, and the location of the apparition in Mexico was home to an Aztec mother deity.The roots of the Virgin of Guadalupe’s apparition story, like most of Mexico’s existing culture, came over with the Spanish conquistadores and Catholic clergy who coerced many of the indigenous peoples of Mexico into Catholicism. This conversion was crucial to colonizing the new country and led to new oral narratives such as the story of the apparition of the Virgin of Guadalupe, but also to Indian ambivalence toward the Spanish. Image passive and docile. The image of the Virgin of Guadalupe is responsible for fusing together both Spanish and Aztec traditions that unifies Mexico as it is today. Has also influence the role of women.", date: Date.init()) else {
             fatalError("Unable to instantiate reflection")
         }
         
