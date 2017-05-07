@@ -120,6 +120,11 @@ class FutureLogEventViewController: UIViewController, UITextFieldDelegate, UINav
         saveButton.isEnabled = !text.isEmpty
     }
     
+    //close keyboard with swipe
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        eventLabelTF.resignFirstResponder()
+    }
+    
 
     
     
