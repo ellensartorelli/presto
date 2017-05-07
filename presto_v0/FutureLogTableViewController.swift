@@ -18,7 +18,8 @@ class FutureLogTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.leftBarButtonItem = editButtonItem
-    
+        events = events.sorted(by: { $0.startDate.compare($1.startDate) == .orderedAscending })
+
         if let savedEvents = loadFutureLogEvents(){
             events += savedEvents
         }else{

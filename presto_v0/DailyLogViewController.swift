@@ -27,7 +27,15 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         
         // Do any additional setup after loading the view.
         
-        loadSampleTasks()
+        
+        
+        
+        if let savedTasks = loadDailyLogTasks() {
+            tasks += savedTasks
+        } else{
+            loadSampleTasks()
+        }
+        
         loadSampleEvents()
         loadSampleReflections()
         
@@ -104,6 +112,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
             // Delete the row from the data source
             if indexPath.row < tasks.count{
                 tasks.remove(at: indexPath.row)
+                saveDailyLogTasks()
             } else if indexPath.row >= tasks.count && indexPath.row < tasks.count + events.count {
                 events.remove(at: indexPath.row - tasks.count)
             } else{
@@ -237,6 +246,8 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
                 
             }
+            // Save the taks.
+            saveDailyLogTasks()
         }
     
     }
@@ -330,17 +341,18 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         tasks += [task1, task2, task3]
         print(tasks.count)
     }
-//    @IBAction func unwindToReflection(sender: UIStoryboardSegue) {
-//        print("clicked save from daily log")
-//        if let sourceViewController = sender.source as? DailyLogReflectionViewController, let reflection = sourceViewController.reflection {
-//            
-//            // Add a new meal.
-//            let newIndexPath = IndexPath(row: reflections.count, section: 0)
-//            
-//            reflections.append(reflection)
-//            tableView.insertRows(at: [newIndexPath], with: .automatic)
-//        }
-////        self.performSegue(withIdentifier: "unwindFromDailyLogReflectionViewController", sender: self)
-//    }
+
+    private func saveDailyLogTasks() {
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(tasks, toFile: DailyLogTask.ArchiveURL.path)
+        if isSuccessfulSave {
+            os_log("DL Tasks successfully saved.", log: OSLog.default, type: .debug)
+        } else {
+            os_log("Failed to save DL tasks...", log: OSLog.default, type: .error)
+        }
+    }
+    
+    private func loadDailyLogTasks() -> [DailyLogTask]? {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: DailyLogTask.ArchiveURL.path) as? [DailyLogTask]
+    }
 
 }
