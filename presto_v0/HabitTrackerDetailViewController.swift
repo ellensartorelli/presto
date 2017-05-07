@@ -48,6 +48,10 @@ class HabitTrackerDetailViewController: UIViewController, UITextFieldDelegate {
         saveButton.isEnabled = false
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        habitTitleTextField.resignFirstResponder()
+    }
+    
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
