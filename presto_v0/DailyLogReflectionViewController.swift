@@ -51,6 +51,15 @@ class DailyLogReflectionViewController: UIViewController, UITextViewDelegate {
     }
     
     
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if (text == "\n") {
+            reflectionText.resignFirstResponder()
+            return false
+        }
+        return true
+    }
+    
+    
     //TextField delegate functions
     
 //    //this does nothing? THESE do nothing?
