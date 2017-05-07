@@ -124,7 +124,7 @@ class DailyLogEventTableViewController: UITableViewController, UITextFieldDelega
         if indexPath.row == 2 && pickerVisible == false {
             return 165.0
         }
-        return 44.0
+        return 70.0
     }
     
     
