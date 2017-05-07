@@ -13,37 +13,18 @@ import os.log
 class FutureLogTableViewController: UITableViewController {
     
     var events = [FutureLogEvent]()
-    
-    private func loadSampleEvents(){
-        
-        guard let event1 = FutureLogEvent(title:"Graduation",  startDate: Date.init(), endDate: Date.init(), notes:"It can't come soon enough") else {
-            fatalError("Unable to instantiate event1")
-        }
-        
-        guard let event2 = FutureLogEvent(title:"Job Starts",  startDate: Date.init(), endDate: Date.init(), notes:"It can't come soon enough") else {
-            fatalError("Unable to instantiate event1")
-        }
-        
-        guard let event3 = FutureLogEvent(title:"School Starts",  startDate: Date.init(), endDate: Date.init(), notes:"It can't come soon enough") else {
-            fatalError("Unable to instantiate event1")
-        }
-    
 
-        events += [event1, event2, event3]
-        events.sorted(by: { $0.startDate.compare($1.startDate) == .orderedAscending })
-    }
-    
- 
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.leftBarButtonItem = editButtonItem
-        
-        print("SORT ARRAY HERE")
-//        events.sorted(by: { $0.startDate > $1.startDate })
-
-        loadSampleEvents()
+    
+        if let savedEvents = loadFutureLogEvents(){
+            events += savedEvents
+        }else{
+            loadSampleEvents()
+        }
+   
     }
 
     override func didReceiveMemoryWarning() {
@@ -111,6 +92,7 @@ class FutureLogTableViewController: UITableViewController {
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
                 
             }
+            saveFutureLogEvents()
         }
         //sort months
         events = events.sorted(by: { $0.startDate.compare($1.startDate) == .orderedAscending })
@@ -136,6 +118,7 @@ class FutureLogTableViewController: UITableViewController {
         if editingStyle == .delete {
             // Delete the row from the data source
             events.remove(at: indexPath.row)
+            saveFutureLogEvents()
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -189,5 +172,41 @@ class FutureLogTableViewController: UITableViewController {
         }
  
     }
+    
+    //MARK: - Private Methods
+    
+    private func loadSampleEvents(){
+        
+        guard let event1 = FutureLogEvent(title:"Graduation",  startDate: Date.init(), endDate: Date.init(), notes:"It can't come soon enough") else {
+            fatalError("Unable to instantiate event1")
+        }
+        
+        guard let event2 = FutureLogEvent(title:"Job Starts",  startDate: Date.init(), endDate: Date.init(), notes:"It can't come soon enough") else {
+            fatalError("Unable to instantiate event1")
+        }
+        
+        guard let event3 = FutureLogEvent(title:"School Starts",  startDate: Date.init(), endDate: Date.init(), notes:"It can't come soon enough") else {
+            fatalError("Unable to instantiate event1")
+        }
+        
+        
+        events += [event1, event2, event3]
+        events.sorted(by: { $0.startDate.compare($1.startDate) == .orderedAscending })
+    }
+
+    private func saveFutureLogEvents(){
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(events, toFile: FutureLogEvent.ArchiveURL.path)
+        if isSuccessfulSave {
+            os_log("Events successfully saved.", log: OSLog.default, type: .debug)
+        } else {
+            os_log("Failed to save events...", log: OSLog.default, type: .error)
+        }
+    }
+    
+    
+    private func loadFutureLogEvents() -> [FutureLogEvent]? {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: FutureLogEvent.ArchiveURL.path) as? [FutureLogEvent]
+    }
+    
    
 }
