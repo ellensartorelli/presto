@@ -210,7 +210,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1hp-rK-kGV">
-                                <rect key="frame" x="-5" y="64" width="414" height="672"/>
+                                <rect key="frame" x="3" y="72" width="414" height="672"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -233,14 +233,16 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" image="Checked Checkbox 2 Filled_28"/>
                                                     <connections>
+                                                        <action selector="DoneTappedWithSender:" destination="JrQ-s0-C5E" eventType="touchUpInside" id="Zxq-oF-7Pn"/>
                                                         <action selector="pauseTappedWithSender:" destination="JrQ-s0-C5E" eventType="touchUpInside" id="cO4-lS-oqh"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1p1-tk-vcH">
-                                                    <rect key="frame" x="36" y="8" width="28" height="28"/>
+                                                    <rect key="frame" x="37" y="8" width="28" height="28"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" image="Unchecked Checkbox_28"/>
                                                     <connections>
+                                                        <action selector="DoTappedWithSender:" destination="JrQ-s0-C5E" eventType="touchUpInside" id="DkK-IW-fEm"/>
                                                         <action selector="playTappedWithSender:" destination="JrQ-s0-C5E" eventType="touchUpInside" id="wQi-Ga-kgg"/>
                                                     </connections>
                                                 </button>
@@ -271,10 +273,23 @@
                                                     <rect key="frame" x="38" y="7" width="27" height="26"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" image="Unchecked Circle_28"/>
+                                                    <connections>
+                                                        <action selector="IncompleteTappedWithSender:" destination="2p5-xj-S9s" eventType="touchUpInside" id="Nsc-nh-UcC"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hIM-yj-PJL">
+                                                    <rect key="frame" x="37" y="5" width="28" height="28"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" image="Checked Filled_28"/>
+                                                    <connections>
+                                                        <action selector="CompletedTappedWithSender:" destination="2p5-xj-S9s" eventType="touchUpInside" id="fV0-eS-5eM"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="eventButtonComplete" destination="hIM-yj-PJL" id="AFL-TX-SnB"/>
+                                            <outlet property="eventButtonIncomplete" destination="rqM-Iv-GGT" id="BxN-9s-YEb"/>
                                             <outlet property="eventLabel" destination="Qmg-OO-qv1" id="gmD-q1-ETZ"/>
                                             <segue destination="srE-D0-AcF" kind="show" identifier="ShowDetailEvent" id="NCW-8m-Hbk"/>
                                         </connections>
@@ -1155,6 +1170,7 @@
     <resources>
         <image name="Calendar-50" width="25" height="25"/>
         <image name="Checked Checkbox 2 Filled_28" width="28" height="28"/>
+        <image name="Checked Filled_28" width="28" height="28"/>
         <image name="Future-50 (1)" width="25" height="25"/>
         <image name="Paper-50" width="25" height="25"/>
         <image name="To Do-50" width="25" height="25"/>

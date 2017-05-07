@@ -209,7 +209,7 @@ class DailyLogEventTableViewController: UITableViewController, UITextFieldDelega
         }
         
         let title = titleTextField.text
-        event = DailyLogEvent(title:title!, time: timePicker.date)!
+        event = DailyLogEvent(title:title!, time: timePicker.date, completed: (event?.completed)!)!
         
     }
     //TextField delegate functions

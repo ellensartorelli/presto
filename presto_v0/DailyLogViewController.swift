@@ -77,6 +77,9 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
             
             let minute = calendar.component(.minute, from: event.time)
             let eventTimeString = "\(hour%12):\(String(format: "%02d", minute)) \(amPM), "
+            
+            cell.eventButtonIncomplete.isHidden = event.completed
+            cell.eventButtonComplete.isHidden = !event.completed
             cell.eventLabel.text = eventTimeString + event.title
 
             return cell
@@ -293,10 +296,10 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     private func loadSampleEvents(){
         print("called Events")
         
-        guard let ev1 = DailyLogEvent(title: "ev", time: Date.init()) else {
+        guard let ev1 = DailyLogEvent(title: "ev", time: Date.init(), completed: true) else {
             fatalError("Unable to instantiate event")
         }
-        guard let ev2 = DailyLogEvent(title: "ev2", time: Date.init()) else {
+        guard let ev2 = DailyLogEvent(title: "ev2", time: Date.init(), completed: false) else {
             fatalError("Unable to instantiate event")
         }
         

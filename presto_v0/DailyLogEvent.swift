@@ -12,8 +12,9 @@ class DailyLogEvent{
     
     var title:String
     var time:Date
+    var completed:Bool
     
-    init?(title:String, time:Date){
+    init?(title:String, time:Date, completed:Bool){
         
         if title.isEmpty {
             print("title is empty)")
@@ -21,6 +22,7 @@ class DailyLogEvent{
         }
         self.title = title
         self.time = time
+        self.completed = completed
     }
     
     
