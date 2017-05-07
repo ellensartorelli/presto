@@ -27,8 +27,16 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         
         // Do any additional setup after loading the view.
         
+        if let savedDailyLogEvents = loadDailyLogEvents() {
+            events += savedDailyLogEvents
+        }
+        else {
+            // Load the sample data.
+            loadSampleEvents()
+        }
+        
         loadSampleTasks()
-        loadSampleEvents()
+        
         loadSampleReflections()
         
         
@@ -106,6 +114,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
                 tasks.remove(at: indexPath.row)
             } else if indexPath.row >= tasks.count && indexPath.row < tasks.count + events.count {
                 events.remove(at: indexPath.row - tasks.count)
+                saveDailyLogEvents()
             } else{
                 reflections.remove(at: indexPath.row - (events.count + tasks.count))
             }
@@ -237,6 +246,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
                 
             }
+            
         }
     
     }
@@ -277,6 +287,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
                 events.append(event)
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
             }
+            saveDailyLogEvents()
         }
     }
  
@@ -330,17 +341,19 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         tasks += [task1, task2, task3]
         print(tasks.count)
     }
-//    @IBAction func unwindToReflection(sender: UIStoryboardSegue) {
-//        print("clicked save from daily log")
-//        if let sourceViewController = sender.source as? DailyLogReflectionViewController, let reflection = sourceViewController.reflection {
-//            
-//            // Add a new meal.
-//            let newIndexPath = IndexPath(row: reflections.count, section: 0)
-//            
-//            reflections.append(reflection)
-//            tableView.insertRows(at: [newIndexPath], with: .automatic)
-//        }
-////        self.performSegue(withIdentifier: "unwindFromDailyLogReflectionViewController", sender: self)
-//    }
+
+    
+    private func saveDailyLogEvents() {
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(events, toFile: DailyLogEvent.ArchiveURL.path)
+        if isSuccessfulSave {
+            os_log("DLEvents successfully saved.", log: OSLog.default, type: .debug)
+        } else {
+            os_log("Failed to save DLEvents...", log: OSLog.default, type: .error)
+        }
+    }
+    
+    private func loadDailyLogEvents() -> [DailyLogEvent]?  {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: DailyLogEvent.ArchiveURL.path) as? [DailyLogEvent]
+    }
 
 }
