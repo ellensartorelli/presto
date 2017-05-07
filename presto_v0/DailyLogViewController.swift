@@ -27,6 +27,16 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         
         // Do any additional setup after loading the view.
         
+
+        if let savedDailyLogEvents = loadDailyLogEvents() {
+            events += savedDailyLogEvents
+        }
+        else {
+            // Load the sample data.
+            loadSampleEvents()
+        }
+        
+
         
         
         
@@ -35,8 +45,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         } else{
             loadSampleTasks()
         }
-        
-        loadSampleEvents()
+
         loadSampleReflections()
         
         
@@ -115,6 +124,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
                 saveDailyLogTasks()
             } else if indexPath.row >= tasks.count && indexPath.row < tasks.count + events.count {
                 events.remove(at: indexPath.row - tasks.count)
+                saveDailyLogEvents()
             } else{
                 reflections.remove(at: indexPath.row - (events.count + tasks.count))
             }
@@ -248,6 +258,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
             }
             // Save the taks.
             saveDailyLogTasks()
+
         }
     
     }
@@ -288,6 +299,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
                 events.append(event)
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
             }
+            saveDailyLogEvents()
         }
     }
  
@@ -342,6 +354,20 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         print(tasks.count)
     }
 
+
+    
+    private func saveDailyLogEvents() {
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(events, toFile: DailyLogEvent.ArchiveURL.path)
+        if isSuccessfulSave {
+            os_log("DLEvents successfully saved.", log: OSLog.default, type: .debug)
+        } else {
+            os_log("Failed to save DLEvents...", log: OSLog.default, type: .error)
+        }
+    }
+    
+    private func loadDailyLogEvents() -> [DailyLogEvent]?  {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: DailyLogEvent.ArchiveURL.path) as? [DailyLogEvent]
+
     private func saveDailyLogTasks() {
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(tasks, toFile: DailyLogTask.ArchiveURL.path)
         if isSuccessfulSave {
@@ -353,6 +379,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     
     private func loadDailyLogTasks() -> [DailyLogTask]? {
         return NSKeyedUnarchiver.unarchiveObject(withFile: DailyLogTask.ArchiveURL.path) as? [DailyLogTask]
+
     }
 
 }
