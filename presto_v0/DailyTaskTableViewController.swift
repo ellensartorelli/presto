@@ -220,13 +220,16 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
         let time = timePicker.date
         let isAlertOn = toggle.isOn
         
+        //set completed when edting or adding new task
+        let completedBool = (task?.completed != nil) ? (task?.completed) : false
         
-        task = DailyLogTask(title: taskText, alert: isAlertOn, alertTime: time, completed: (task?.completed)!)
+        task = DailyLogTask(title: taskText, alert: isAlertOn, alertTime: time, completed: completedBool!)
         
     }
  
     
     //TextField delegate functions
+    
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()

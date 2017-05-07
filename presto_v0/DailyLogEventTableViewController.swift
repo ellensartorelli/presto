@@ -209,15 +209,19 @@ class DailyLogEventTableViewController: UITableViewController, UITextFieldDelega
         }
         
         let title = titleTextField.text
-        event = DailyLogEvent(title:title!, time: timePicker.date, completed: (event?.completed)!)!
+        
+        //set completed when edting or adding new task
+        let completedBool = (event?.completed != nil) ? (event?.completed) : false
+        
+        event = DailyLogEvent(title:title!, time: timePicker.date, completed: completedBool!)
         
     }
     //TextField delegate functions
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
+//    func textFieldShouldReturn(textField: UITextField) -> Bool {
+//        textField.resignFirstResponder()
+//        return true
+//    }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         saveButton.isEnabled = false
