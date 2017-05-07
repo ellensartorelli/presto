@@ -30,6 +30,7 @@
 		07A395C41EAE74ED003C6E64 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07A395C21EAE74ED003C6E64 /* LaunchScreen.storyboard */; };
 		94BBC65C331E4EF9FEBF0923 /* Pods_presto_v0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 700729FE8C512C54E3B17704 /* Pods_presto_v0.framework */; };
 		A839C7051EBE65DB004A71B1 /* HabitTrackerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A839C7041EBE65DB004A71B1 /* HabitTrackerDetailViewController.swift */; };
+		A842F1A91EBF9D5100D228FB /* MiniCalendarCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A842F1A81EBF9D5100D228FB /* MiniCalendarCustomCell.swift */; };
 		A8E463F31EB1C6C300B45B10 /* HabitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E463F21EB1C6C300B45B10 /* HabitViewController.swift */; };
 		A8E463F51EB1C6E600B45B10 /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E463F41EB1C6E600B45B10 /* Habit.swift */; };
 		A8E463F71EB1C72A00B45B10 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E463F61EB1C72A00B45B10 /* CustomCell.swift */; };
@@ -65,6 +66,7 @@
 		700729FE8C512C54E3B17704 /* Pods_presto_v0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_presto_v0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7396B9FC5F8EFB54F6E9E21C /* Pods-presto_v0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-presto_v0.release.xcconfig"; path = "Pods/Target Support Files/Pods-presto_v0/Pods-presto_v0.release.xcconfig"; sourceTree = "<group>"; };
 		A839C7041EBE65DB004A71B1 /* HabitTrackerDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HabitTrackerDetailViewController.swift; sourceTree = "<group>"; };
+		A842F1A81EBF9D5100D228FB /* MiniCalendarCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiniCalendarCustomCell.swift; sourceTree = "<group>"; };
 		A8E463F21EB1C6C300B45B10 /* HabitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HabitViewController.swift; sourceTree = "<group>"; };
 		A8E463F41EB1C6E600B45B10 /* Habit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; };
 		A8E463F61EB1C72A00B45B10 /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 		073F6AB01EB1715D00116DC5 /* Daily Log */ = {
 			isa = PBXGroup;
 			children = (
+				A842F1A71EBF9D1700D228FB /* Mini Calendar */,
 				073F6ABB1EB1825800116DC5 /* Table View Cells */,
 				073F6AAC1EB166E400116DC5 /* DailyLogReflectionViewController.swift */,
 				073F6AAA1EB0FD4400116DC5 /* DailyLogEventTableViewController.swift */,
@@ -191,6 +194,14 @@
 				A8E463F41EB1C6E600B45B10 /* Habit.swift */,
 			);
 			name = "Habit Tracker Data";
+			sourceTree = "<group>";
+		};
+		A842F1A71EBF9D1700D228FB /* Mini Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				A842F1A81EBF9D5100D228FB /* MiniCalendarCustomCell.swift */,
+			);
+			name = "Mini Calendar";
 			sourceTree = "<group>";
 		};
 		FD6D677C9BE7E995D1CBF15B /* Pods */ = {
@@ -328,6 +339,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				073F6AB91EB174F500116DC5 /* DailyLogReflectionTableViewCell.swift in Sources */,
+				A842F1A91EBF9D5100D228FB /* MiniCalendarCustomCell.swift in Sources */,
 				073F6ABD1EB1828100116DC5 /* DailyLogEventTableViewCell.swift in Sources */,
 				07801AED1EAE8189007FEB0B /* FutureLogEvent.swift in Sources */,
 				073F6AAB1EB0FD4400116DC5 /* DailyLogEventTableViewController.swift in Sources */,

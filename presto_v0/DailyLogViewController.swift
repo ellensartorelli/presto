@@ -8,6 +8,7 @@
 
 import UIKit
 import os.log
+import JTAppleCalendar
 
 class DailyLogViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -16,11 +17,19 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     var reflections = [DailyLogReflection]()
     var events = [DailyLogEvent]()
     var tasks = [DailyLogTask]()
+    var date = Date()
+    
+    //miniCalendar properties
+    let formatter = DateFormatter()
+    @IBOutlet weak var currentDateLabel: UILabel!
+    @IBOutlet weak var calendarView: JTAppleCalendarView!
     
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupCalendar()
+
         tableView.delegate = self
         tableView.dataSource = self
         self.view.addSubview(self.tableView)
@@ -54,6 +63,19 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    //MARK: - MiniCalendar
+    func setupCalendar(){
+        calendarView.minimumLineSpacing=0
+        calendarView.minimumInteritemSpacing=0
+        
+        //setup labels
+        calendarView.visibleDates{(visibleDates) in
+
+            self.formatter.dateStyle = .long
+            self.currentDateLabel.text = self.formatter.string(from:self.date)
+        }
     }
     
     //MARK: - Table View Data Source
@@ -380,4 +402,55 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
 
     }
 
+}
+
+
+extension DailyLogViewController: JTAppleCalendarViewDelegate{
+    func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
+        formatter.dateFormat = "yyyy MM dd"
+        formatter.timeZone = Calendar.current.timeZone
+        formatter.locale = Calendar.current.locale
+        let startDate = Date()
+        let endDate = formatter.date(from: "2017 12 31")!
+        
+        let parameters = ConfigurationParameters(startDate: startDate, endDate: endDate, numberOfRows: 1)
+        return parameters
+    }
+    
+    
+}
+
+extension DailyLogViewController: JTAppleCalendarViewDataSource{
+    func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
+        let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "MiniCalendarCustomCell", for: indexPath) as! MiniCalendarCustomCell
+        cell.dateLabel.text = cellState.text
+        if cellState.isSelected{
+            cell.selectedView.isHidden = false
+            cell.dateLabel.textColor = UIColor.white
+            
+        }else{
+            cell.selectedView.isHidden = true
+            cell.dateLabel.textColor = UIColor.black
+            
+        }
+        return cell
+    }
+    func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
+        guard let validCell = cell as? MiniCalendarCustomCell else {return}
+        validCell.selectedView.isHidden = false
+        validCell.dateLabel.textColor = UIColor.white
+        
+        //setup labels
+        formatter.dateStyle = .long
+        currentDateLabel.text = formatter.string(from:date)
+        
+    }
+    func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
+        guard let validCell = cell as? MiniCalendarCustomCell else {return}
+        validCell.selectedView.isHidden = true
+        validCell.dateLabel.textColor = UIColor.black
+        
+        
+    }
+    
 }
