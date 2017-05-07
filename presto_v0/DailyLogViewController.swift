@@ -327,11 +327,11 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     private func loadSampleReflections(){
         print("called Reflections")
         
-        guard let ref1 = DailyLogReflection(reflection: "ref1", date: Date.init()) else {
+        guard let ref1 = DailyLogReflection(reflection: "I hate this project! Ugh", date: Date.init()) else {
             fatalError("Unable to instantiate reflection")
         }
         
-        guard let ref2 = DailyLogReflection(reflection: "ref2", date: Date.init()) else {
+        guard let ref2 = DailyLogReflection(reflection: "I wonder if Sean Kingston actually sounds good live?", date: Date.init()) else {
             fatalError("Unable to instantiate reflection")
         }
         
@@ -344,10 +344,10 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     private func loadSampleEvents(){
         print("called Events")
         
-        guard let ev1 = DailyLogEvent(title: "ev", time: Date.init(), completed: true) else {
+        guard let ev1 = DailyLogEvent(title: "Dinner with Joy", time: Date.init(), completed: true) else {
             fatalError("Unable to instantiate event")
         }
-        guard let ev2 = DailyLogEvent(title: "ev2", time: Date.init(), completed: false) else {
+        guard let ev2 = DailyLogEvent(title: "Shannia thesis presentation", time: Date.init(), completed: false) else {
             fatalError("Unable to instantiate event")
         }
         
@@ -359,13 +359,13 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     private func loadSampleTasks(){
         print("called Tasks")
         
-        guard let task1 = DailyLogTask(title: "task", alert: false, alertTime: Date.init(), completed: true) else {
+        guard let task1 = DailyLogTask(title: "Finish CS466 App", alert: false, alertTime: Date.init(), completed: true) else {
             fatalError("Unable to instantiate task")
         }
-        guard let task2 = DailyLogTask(title: "task2", alert: false, alertTime: Date.init(), completed: false) else {
+        guard let task2 = DailyLogTask(title: "Call Mom", alert: false, alertTime: Date.init(), completed: false) else {
             fatalError("Unable to instantiate task")
         }
-        guard let task3 = DailyLogTask(title: "task3", alert: false, alertTime: Date.init(), completed: true) else {
+        guard let task3 = DailyLogTask(title: "Buy more food", alert: false, alertTime: Date.init(), completed: true) else {
             fatalError("Unable to instantiate task")
         }
         
