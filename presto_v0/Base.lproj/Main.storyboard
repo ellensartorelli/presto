@@ -81,12 +81,14 @@
                     </view>
                     <navigationItem key="navigationItem" title="New Event" id="hcn-Wu-LDO">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="6LL-He-q0Z">
+                            <color key="tintColor" red="0.1647058824" green="0.43921568630000002" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="cancel:" destination="BYZ-38-t0r" id="dft-di-6ZM"/>
                                 <segue destination="mdM-j9-c3Y" kind="unwind" unwindAction="unwindToEventListWithSender:" id="Ab5-tK-2RV"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="baj-0Y-P0X">
+                            <color key="tintColor" red="0.1647058824" green="0.43921568630000002" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="mdM-j9-c3Y" kind="unwind" unwindAction="unwindToEventListWithSender:" id="e0U-RW-IDZ"/>
                             </connections>
@@ -150,6 +152,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Future Log" id="9p7-ja-RiQ">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="NQr-vc-T9M">
+                            <color key="tintColor" red="0.16470588235294117" green="0.4392156862745098" blue="0.47843137254901957" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="SCN-03-Gqc" kind="presentation" identifier="AddItem" id="PQR-UY-rjI"/>
                             </connections>
@@ -522,6 +525,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Daily Log" id="nYB-47-bFM">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="1wH-oc-YkF">
+                            <color key="tintColor" red="0.1647058824" green="0.43921568630000002" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="showAlert" destination="AkV-24-3yl" id="Ikb-bO-Etd"/>
                             </connections>
@@ -651,12 +655,14 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="New Event" id="Xtw-k3-d3D">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="nkK-vJ-YBb">
+                            <color key="tintColor" red="0.1647058824" green="0.43921568630000002" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="cancel:" destination="srE-D0-AcF" id="blj-Xp-W4S"/>
                                 <segue destination="a7n-wF-ZRu" kind="unwind" unwindAction="unwindToDailyLogEventWithSender:" id="WZ8-2D-LSB"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="oNx-0q-FwH">
+                            <color key="tintColor" red="0.1647058824" green="0.43921568630000002" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="a7n-wF-ZRu" kind="unwind" unwindAction="unwindToDailyLogEventWithSender:" id="vK5-ds-uxW"/>
                             </connections>
@@ -699,12 +705,14 @@
                     </view>
                     <navigationItem key="navigationItem" title="New Reflection" id="zwo-om-TI7">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="sIQ-By-OiJ">
+                            <color key="tintColor" red="0.1647058824" green="0.43921568630000002" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="cancel:" destination="r2m-Ue-kKP" id="Bqh-r3-TSm"/>
                                 <segue destination="cFT-Wf-3vx" kind="unwind" unwindAction="unwindToReflectionListWithSender:" id="O6y-Z0-IIF"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="zSq-ZA-oSJ">
+                            <color key="tintColor" red="0.1647058824" green="0.43921568630000002" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="cFT-Wf-3vx" kind="unwind" unwindAction="unwindToReflectionListWithSender:" id="7TU-NT-4GW"/>
                             </connections>
@@ -810,12 +818,14 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="New Task" id="NZP-cD-KVo">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="DQm-Yh-y7x">
+                            <color key="tintColor" red="0.1647058824" green="0.43921568630000002" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="cancel:" destination="Hqc-0y-wGS" id="JDn-US-o1B"/>
                                 <segue destination="G8P-HQ-ZH1" kind="unwind" unwindAction="unwindToTaskListWithSender:" id="NeY-SB-CXS"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="mUx-5D-PaZ">
+                            <color key="tintColor" red="0.1647058824" green="0.43921568630000002" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="G8P-HQ-ZH1" kind="unwind" unwindAction="unwindToTaskListWithSender:" id="yGe-lh-tjh"/>
                             </connections>
@@ -843,6 +853,14 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.24313725490196078" green="0.19607843137254902" blue="0.23921568627450979" alpha="1" colorSpace="calibratedRGB"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="0.24313725490196078" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="unselectedItemTintColor">
+                                <color key="value" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
                         <segue destination="01Y-xN-X6N" kind="relationship" relationship="viewControllers" id="eu1-JY-LR9"/>
@@ -909,6 +927,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Reflections" id="Gk9-vN-FPY">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="g7k-BZ-wMQ">
+                            <color key="tintColor" red="0.1647058824" green="0.43921568630000002" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="ecG-kb-mhY" kind="show" identifier="AddItem" id="6Aq-Sj-ILc"/>
                             </connections>
@@ -943,11 +962,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="New Reflection" id="8N7-s8-R5g">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="YzR-Pt-9DK">
+                            <color key="tintColor" red="0.1647058824" green="0.43921568630000002" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="I6n-Yw-6K5" kind="unwind" unwindAction="unwindToReflectionWithSender:" id="q1q-KX-pvN"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="93S-Rl-GOE">
+                            <color key="tintColor" red="0.1647058824" green="0.43921568630000002" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="I6n-Yw-6K5" kind="unwind" unwindAction="unwindToReflectionWithSender:" id="TwD-CY-ZEX"/>
                             </connections>
@@ -1098,6 +1119,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Habit Tracker" id="4S7-e0-zUK">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="aDa-fi-KgD">
+                            <color key="tintColor" red="0.1647058824" green="0.43921568630000002" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="zKS-by-oRc" kind="presentation" identifier="Add Item" id="QWj-L0-yZZ"/>
                             </connections>
@@ -1186,11 +1208,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="New Habit" id="DG7-Kc-9R6">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="GZZ-DR-aZW">
+                            <color key="tintColor" red="0.1647058824" green="0.43921568630000002" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="cancel:" destination="SPy-P5-a1Q" id="SkZ-RR-V2K"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="q6j-xk-Uj3">
+                            <color key="tintColor" red="0.1647058824" green="0.43921568630000002" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="uNq-ht-Oy2" kind="unwind" unwindAction="unwindToHabitListWithSender:" id="8Rv-Hb-jMA"/>
                             </connections>
@@ -1245,6 +1269,7 @@
                                 <items>
                                     <navigationItem title="Habit Name" id="BBk-Cz-puC">
                                         <barButtonItem key="leftBarButtonItem" systemItem="done" id="Ucv-34-bN6">
+                                            <color key="tintColor" red="0.1647058824" green="0.43921568630000002" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
                                                 <segue destination="10p-l8-BwO" kind="unwind" unwindAction="unwindToHabitListFromEditWithSender:" id="8q4-yQ-Qqb"/>
                                             </connections>
@@ -1347,7 +1372,7 @@
                                                     <subviews>
                                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nXR-nE-HEW">
                                                             <rect key="frame" x="43" y="48" width="40" height="40"/>
-                                                            <color key="backgroundColor" red="1" green="0.90709966630000005" blue="0.1586448714" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="backgroundColor" red="0.83529411764705885" green="0.70980392156862748" blue="0.32156862745098036" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="40" id="lGE-yi-uug"/>
                                                                 <constraint firstAttribute="width" constant="40" id="smm-VL-mbL"/>
