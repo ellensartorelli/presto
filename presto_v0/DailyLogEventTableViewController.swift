@@ -41,12 +41,34 @@ class DailyLogEventTableViewController: UITableViewController, UITextFieldDelega
         tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0)
         tableView.tableFooterView = UIView(frame: .zero)
         
+        
+        // Set up views if editing an existing Meal.
+        if let event = event {
+            //compute time for time label
+            let calendar = Calendar.current
+            
+            let hour = calendar.component(.hour, from: event.time)%12
+            let minute = calendar.component(.minute, from: event.time)
+            
+            
+            navigationItem.title = event.title
+            titleTextField.text = event.title
+            timeLabel.text = "\(hour):\(String(format: "%02d", minute))"
+            timePicker.date = event.time
+        }
+        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        //start with save button false if new event
+        if(titleTextField.text?.isEmpty)!{
+            saveButton.isEnabled = false
+        }else{
+            saveButton.isEnabled = true
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -187,7 +209,7 @@ class DailyLogEventTableViewController: UITableViewController, UITextFieldDelega
         }
         
         let title = titleTextField.text
-        event = DailyLogEvent(title:title!, time: timePicker.date)!
+        event = DailyLogEvent(title:title!, time: timePicker.date, completed: (event?.completed)!)!
         
     }
     //TextField delegate functions
@@ -208,6 +230,7 @@ class DailyLogEventTableViewController: UITableViewController, UITextFieldDelega
     
     private func updateSaveButtonState(){
         let text = titleTextField.text ?? ""
+        print("button shoould be disabled if ", String(!text.isEmpty))
         saveButton.isEnabled = !text.isEmpty
     }
  

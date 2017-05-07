@@ -25,6 +25,14 @@ class DailyLogReflectionViewController: UIViewController, UITextViewDelegate {
     
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tap(gesture:)))
         self.view.addGestureRecognizer(tapGesture)
+        
+    
+        // Set up views if editing an existing Meal.
+        if let reflection = reflection {
+            navigationItem.title = reflection.reflection
+            reflectionText.text = reflection.reflection
+        }
+        
     }
 
     func tap(gesture: UITapGestureRecognizer) {
@@ -45,43 +53,33 @@ class DailyLogReflectionViewController: UIViewController, UITextViewDelegate {
     
     //TextField delegate functions
     
-    //this does nothing? THESE do nothing?
-    func textViewShouldReturn(_ textField: UITextView) -> Bool {
-        reflectionText.resignFirstResponder()
-        return true
-    }
+//    //this does nothing? THESE do nothing?
+//    func textViewShouldReturn(_ textField: UITextView) -> Bool {
+//        reflectionText.resignFirstResponder()
+//        return true
+//    }
+//    
+//    func textViewDidBeginEditing(_ textField: UITextView) {
+//        saveButton.isEnabled = false
+//    }
+//
+//    func textViewDidEndEditing(_ textField: UITextView) {
+//        updateSaveButtonState()
+//        navigationItem.title = textField.text
+//    }
     
-    func textViewDidBeginEditing(_ textField: UITextView) {
-        saveButton.isEnabled = false
-    }
-    
-    func textViewDidEndEditing(_ textField: UITextView) {
-        updateSaveButtonState()
-        navigationItem.title = textField.text
-    }
-    
-    func updateSaveButtonState(){
-        let text = reflectionText.text ?? ""
-        saveButton.isEnabled = !text.isEmpty
-    }
-    
+//    func updateSaveButtonState(){
+//        let text = reflectionText.text ?? ""
+//        saveButton.isEnabled = !text.isEmpty
+//    }
+//    
     
     
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-//        if segue.identifier == "refTabReflectionSegue" {
-//            if myTextField.text = "words inside text field" {
-//                let controller = segue.destination as! ReflectionTableViewController
-//            } else if myTextField.text = "different words in text field" {
-//                let controller = segue.destination as! DailyLogReflectionViewController
-//            }
-//        }
-//    
-        
-    
+
         
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
@@ -95,6 +93,7 @@ class DailyLogReflectionViewController: UIViewController, UITextViewDelegate {
         }
         
         let refText = reflectionText.text ?? ""
+        print("refelction text: \(refText)")
         
         // Set the meal to be passed to MealTableViewController after the unwind segue.
         reflection = DailyLogReflection(reflection: refText, date: Date.init())

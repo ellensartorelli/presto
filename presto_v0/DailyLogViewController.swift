@@ -17,6 +17,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     var events = [DailyLogEvent]()
     var tasks = [DailyLogTask]()
     
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         
         // Use the edit button item provided by the table view controller.
         navigationItem.leftBarButtonItem = editButtonItem
-
+    
     }
     
     override func didReceiveMemoryWarning() {
@@ -52,10 +53,14 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         if indexPath.row < tasks.count {
             let cell: DailyLogTaskTableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! DailyLogTaskTableViewCell
             //set the data here
             let task = tasks[indexPath.row]
+            
+            cell.taskButtonDo.isHidden = task.completed
+            cell.taskButtonDone.isHidden = !task.completed
             cell.taskLabel.text = task.title
             
             return cell
@@ -64,8 +69,19 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
             let cell: DailyLogEventTableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! DailyLogEventTableViewCell
             //set the data here
             let event = events[indexPath.row - tasks.count]
-            cell.eventLabel.text = event.title
+ 
+            let calendar = Calendar.current
+            let hour = calendar.component(.hour, from: event.time)
             
+            let amPM = (hour > 11) ? "pm" : "am"
+            
+            let minute = calendar.component(.minute, from: event.time)
+            let eventTimeString = "\(hour%12):\(String(format: "%02d", minute)) \(amPM), "
+            
+            cell.eventButtonIncomplete.isHidden = event.completed
+            cell.eventButtonComplete.isHidden = !event.completed
+            cell.eventLabel.text = eventTimeString + event.title
+
             return cell
         }
         else {
@@ -73,6 +89,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
             //set the data here
             let reflection = reflections[indexPath.row - tasks.count - events.count]
             cell.reflectionText.text = reflection.reflection
+            print("printing the reflection.reflection from DLVC: \(reflection.reflection)")
             
             return cell
         }
@@ -134,8 +151,67 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        super.prepare(for: segue, sender: sender)
+        
+        switch(segue.identifier ?? ""){
+        case "eventSegue":
+            os_log("Adding a event", log: OSLog.default, type: .debug)
+        case "taskSegue":
+            os_log("Adding a task", log: OSLog.default, type: .debug)
+        case "reflectionSegue":
+            os_log("Adding a reflection", log: OSLog.default, type: .debug)
+        case "ShowDetailEvent":
+            guard let eventDetailViewController = segue.destination as? DailyLogEventTableViewController else {
+                fatalError("Unexpected destination: \(segue.destination)")
+            }
+            
+            guard let selectedEventCell = sender as? DailyLogEventTableViewCell else {
+                fatalError("Unexpected sender: \(sender)")
+            }
+            
+            guard let indexPath = tableView.indexPath(for: selectedEventCell) else {
+                fatalError("The selected cell is not being displayed by the table")
+            }
+            
+            let selectedEvent = events[indexPath.row - tasks.count]
+            eventDetailViewController.event = selectedEvent
+            
+        case "ShowDetailTask":
+            guard let taskDetailViewController = segue.destination as? DailyTaskTableViewController else {
+                fatalError("Unexpected destination: \(segue.destination)")
+            }
+            
+            guard let selectedTaskCell = sender as? DailyLogTaskTableViewCell else {
+                fatalError("Unexpected sender: \(sender)")
+            }
+            
+            guard let indexPath = tableView.indexPath(for: selectedTaskCell) else {
+                fatalError("The selected cell is not being displayed by the table")
+            }
+            
+            let selectedTask = tasks[indexPath.row]
+            taskDetailViewController.task = selectedTask
+            
+        case "ShowDetailReflection":
+            guard let reflectionDetailViewController = segue.destination as? DailyLogReflectionViewController else {
+                fatalError("Unexpected destination: \(segue.destination)")
+            }
+            
+            guard let selectedReflectionCell = sender as? DailyLogReflectionTableViewCell else {
+                fatalError("Unexpected sender: \(sender)")
+            }
+            
+            guard let indexPath = tableView.indexPath(for: selectedReflectionCell) else {
+                fatalError("The selected cell is not being displayed by the table")
+            }
+            
+            let selectedReflection = reflections[indexPath.row - events.count - tasks.count]
+            reflectionDetailViewController.reflection = selectedReflection
+            
+        default:
+            fatalError("Unexpected Segue Identifier; \(segue.identifier)")
+            
+        }
     }
     
     //MARK: Actions
@@ -162,13 +238,12 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     @IBAction func unwindToReflectionList(sender: UIStoryboardSegue) {
         
         if let sourceViewController = sender.source as? DailyLogReflectionViewController, let reflection = sourceViewController.reflection {
-            
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
-                reflections[selectedIndexPath.row] = reflection
+                reflections[selectedIndexPath.row - tasks.count - events.count] = reflection
                 tableView.reloadRows(at: [selectedIndexPath], with: .none)
             }
             else{
-                let newIndexPath = IndexPath(row: tasks.count+events.count, section: 0)
+                let newIndexPath = IndexPath(row: reflections.count + tasks.count + events.count, section: 0)
                 
                 reflections.append(reflection)
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
@@ -179,17 +254,41 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     }
  
     
-    
+// MARK: Actions
+    @IBAction func unwindToDailyLogEvent(sender: UIStoryboardSegue) {
+        
+        if let sourceViewController = sender.source as?
+            DailyLogEventTableViewController, let event = sourceViewController.event{
+            
+            // Add a new meal.
+            if let selectedIndexPath = tableView.indexPathForSelectedRow{
+                events[selectedIndexPath.row - tasks.count] = event
+                tableView.reloadRows(at: [selectedIndexPath], with: .none)
+            }
+            else{
+                let newIndexPath = IndexPath(row: events.count+tasks.count, section: 0)
+                
+                events.append(event)
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
+        }
+    }
+ 
     //MARK: Private methods
     
     private func loadSampleReflections(){
         print("called Reflections")
         
-        guard let ref1 = DailyLogReflection(reflection: "ref", date: Date.init()) else {
+        guard let ref1 = DailyLogReflection(reflection: "ref1", date: Date.init()) else {
             fatalError("Unable to instantiate reflection")
         }
         
-        reflections += [ref1]
+        guard let ref2 = DailyLogReflection(reflection: "ref2", date: Date.init()) else {
+            fatalError("Unable to instantiate reflection")
+        }
+        
+        
+        reflections += [ref1, ref2]
         print(reflections.count)
     }
     
@@ -197,10 +296,10 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     private func loadSampleEvents(){
         print("called Events")
         
-        guard let ev1 = DailyLogEvent(title: "ev", time: Date.init()) else {
+        guard let ev1 = DailyLogEvent(title: "ev", time: Date.init(), completed: true) else {
             fatalError("Unable to instantiate event")
         }
-        guard let ev2 = DailyLogEvent(title: "ev2", time: Date.init()) else {
+        guard let ev2 = DailyLogEvent(title: "ev2", time: Date.init(), completed: false) else {
             fatalError("Unable to instantiate event")
         }
         
@@ -212,41 +311,19 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     private func loadSampleTasks(){
         print("called Tasks")
         
-        guard let task1 = DailyLogTask(title: "task", alert: false, alertTime: Date.init()) else {
+        guard let task1 = DailyLogTask(title: "task", alert: false, alertTime: Date.init(), completed: true) else {
             fatalError("Unable to instantiate task")
         }
-        guard let task2 = DailyLogTask(title: "task2", alert: false, alertTime: Date.init()) else {
+        guard let task2 = DailyLogTask(title: "task2", alert: false, alertTime: Date.init(), completed: false) else {
             fatalError("Unable to instantiate task")
         }
-        guard let task3 = DailyLogTask(title: "task3", alert: false, alertTime: Date.init()) else {
+        guard let task3 = DailyLogTask(title: "task3", alert: false, alertTime: Date.init(), completed: true) else {
             fatalError("Unable to instantiate task")
         }
         
         tasks += [task1, task2, task3]
         print(tasks.count)
     }
-    
-    
-// MARK: Actions
-    @IBAction func unwindToDailyLogEvent(sender: UIStoryboardSegue) {
-        
-        if let sourceViewController = sender.source as?
-            DailyLogEventTableViewController, let event = sourceViewController.event{
-            
-            // Add a new meal.
-            if let selectedIndexPath = tableView.indexPathForSelectedRow{
-                events[selectedIndexPath.row] = event
-                tableView.reloadRows(at: [selectedIndexPath], with: .none)
-            }
-            else{
-                let newIndexPath = IndexPath(row: events.count+tasks.count, section: 0)
-                
-                events.append(event)
-                tableView.insertRows(at: [newIndexPath], with: .automatic)
-            }
-        }
-    }
-    
 //    @IBAction func unwindToReflection(sender: UIStoryboardSegue) {
 //        print("clicked save from daily log")
 //        if let sourceViewController = sender.source as? DailyLogReflectionViewController, let reflection = sourceViewController.reflection {

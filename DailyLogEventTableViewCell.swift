@@ -12,6 +12,28 @@ class DailyLogEventTableViewCell: UITableViewCell {
 
     @IBOutlet weak var eventLabel: UILabel!
     
+    @IBOutlet weak var eventButtonIncomplete: UIButton!
+    
+    @IBOutlet weak var eventButtonComplete: UIButton!
+    
+    
+    
+    @IBAction func IncompleteTapped(sender: AnyObject)
+    {
+        eventButtonIncomplete.isHidden = true
+        eventButtonComplete.isHidden = false
+        
+    }
+    
+    @IBAction func CompletedTapped(sender: AnyObject)
+    {
+        eventButtonIncomplete.isHidden = false
+        eventButtonComplete.isHidden = true
+    
+    }
+    
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

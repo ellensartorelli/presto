@@ -15,6 +15,7 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
     @IBOutlet weak var toggle: UISwitch!
     @IBOutlet weak var taskTextField: UITextField!
     @IBOutlet weak var timePicker: UIDatePicker!
+    
     var pickerVisible = false
     
     var task:DailyLogTask?
@@ -31,7 +32,7 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        toggle.setOn(false, animated: true)
+//        toggle.setOn(false, animated: true)
         updateSaveButtonState()
         
         setMinDate()
@@ -42,7 +43,25 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
         
         tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0)
         tableView.tableFooterView = UIView(frame: .zero)
+        
+        if let task = task {       
+            
+            navigationItem.title = task.title
+            taskTextField.text = task.title
+            timePicker.date = task.alertTime!
+            toggle.isOn = task.alert
+        }else{
+            toggle.setOn(false, animated: true)
         }
+        
+        //keep at end
+        if(taskTextField.text?.isEmpty)!{
+            saveButton.isEnabled = false
+        }else{
+            saveButton.isEnabled = true
+        }
+        
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -121,6 +140,7 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
         }
         if indexPath.row == 2 {
             if toggle.isOn == true {
+                
                 return 165.0
             }
             return 0.0
@@ -198,11 +218,10 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
         }
         let taskText = taskTextField.text ?? ""
         let time = timePicker.date
-        let isAlertOn = pickerVisible
+        let isAlertOn = toggle.isOn
         
-        print("save button has been clicked - preparing")
         
-        task = DailyLogTask(title: taskText, alert: isAlertOn, alertTime: time)
+        task = DailyLogTask(title: taskText, alert: isAlertOn, alertTime: time, completed: (task?.completed)!)
         
     }
  

@@ -12,6 +12,27 @@ class DailyLogTaskTableViewCell: UITableViewCell {
 
     @IBOutlet weak var taskLabel: UILabel!
     
+    @IBOutlet weak var taskButtonDone: UIButton!
+    
+    @IBOutlet weak var taskButtonDo: UIButton!
+    
+ 
+    @IBAction func DoTapped(sender: AnyObject)
+    {
+        taskButtonDo.isHidden = true
+        taskButtonDone.isHidden = false
+        
+        //do other stuff
+    }
+    
+    @IBAction func DoneTapped(sender: AnyObject)
+    {
+        taskButtonDo.isHidden = false
+        taskButtonDone.isHidden = true
+        
+        //do other stuff 
+    }
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

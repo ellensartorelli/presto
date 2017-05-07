@@ -25,12 +25,12 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="presto_logo_trans_test" translatesAutoresizingMaskIntoConstraints="NO" id="DRH-4A-Pdd">
-                                        <rect key="frame" x="51" y="195" width="273" height="54"/>
+                                        <rect key="frame" x="51" y="195" width="273" height="45"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="DRH-4A-Pdd" secondAttribute="trailing" constant="51" id="T1K-Qn-XW0"/>
-                                    <constraint firstAttribute="bottom" secondItem="DRH-4A-Pdd" secondAttribute="bottom" constant="418" id="Uh2-Dk-Ruz"/>
+                                    <constraint firstAttribute="bottom" secondItem="DRH-4A-Pdd" secondAttribute="bottom" constant="427" id="Uh2-Dk-Ruz"/>
                                     <constraint firstItem="DRH-4A-Pdd" firstAttribute="leading" secondItem="f2s-dw-Nfh" secondAttribute="leading" constant="51" id="iNQ-rC-ead"/>
                                     <constraint firstItem="DRH-4A-Pdd" firstAttribute="top" secondItem="f2s-dw-Nfh" secondAttribute="top" constant="195" id="rCz-ut-wvq"/>
                                 </constraints>
