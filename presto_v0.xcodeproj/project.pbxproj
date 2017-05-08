@@ -38,6 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		07096E7D1EC0184A005F4137 /* presto_v0.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = presto_v0.entitlements; sourceTree = "<group>"; };
 		0739B5791EBC1FD500DE6328 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		073F6AAA1EB0FD4400116DC5 /* DailyLogEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyLogEventTableViewController.swift; sourceTree = "<group>"; };
 		073F6AAC1EB166E400116DC5 /* DailyLogReflectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyLogReflectionViewController.swift; sourceTree = "<group>"; };
@@ -150,6 +151,7 @@
 		07A395B51EAE74ED003C6E64 /* presto_v0 */ = {
 			isa = PBXGroup;
 			children = (
+				07096E7D1EC0184A005F4137 /* presto_v0.entitlements */,
 				07A395B61EAE74ED003C6E64 /* AppDelegate.swift */,
 				07A395BA1EAE74ED003C6E64 /* Main.storyboard */,
 				0739B5791EBC1FD500DE6328 /* LaunchScreen.storyboard */,
@@ -245,8 +247,13 @@
 				TargetAttributes = {
 					07A395B21EAE74EC003C6E64 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = ZG569DZJ7J;
+						DevelopmentTeam = TSRANL5S76;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -473,10 +480,12 @@
 			baseConfigurationReference = 54E6C8FB1ED58BF35B826AC3 /* Pods-presto_v0.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = ZG569DZJ7J;
+				CODE_SIGN_ENTITLEMENTS = presto_v0/presto_v0.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = TSRANL5S76;
 				INFOPLIST_FILE = presto_v0/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.middlebury.cs466.presto-v0";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.middlebury.cs466.presto-v1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -487,10 +496,12 @@
 			baseConfigurationReference = 7396B9FC5F8EFB54F6E9E21C /* Pods-presto_v0.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = ZG569DZJ7J;
+				CODE_SIGN_ENTITLEMENTS = presto_v0/presto_v0.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = TSRANL5S76;
 				INFOPLIST_FILE = presto_v0/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "edu.middlebury.cs466.presto-v0";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.middlebury.cs466.presto-v1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

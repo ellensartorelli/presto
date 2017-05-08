@@ -16,7 +16,7 @@ class DailyLogTask: NSObject, NSCoding{
     
     var title:String
     var alert:Bool
-    var alertTime:Date?
+    var alertTime:Date
     var completed:Bool
     
     init?(title:String, alert:Bool, alertTime:Date, completed:Bool){
@@ -28,7 +28,7 @@ class DailyLogTask: NSObject, NSCoding{
         self.title = title
         self.alert = alert
         self.alertTime = alertTime
-        self.completed = completed
+        self.completed = false
     }
     
     //MARK: - Archiving Paths
@@ -59,7 +59,7 @@ class DailyLogTask: NSObject, NSCoding{
             os_log("Unable to decode the title for a Daily Log Task object.", log: OSLog.default, type: .debug)
             return nil
         }
-        guard let alert = aDecoder.decodeObject(forKey: PropertyKey.alert) as? Bool else {
+        guard let alertBool = aDecoder.decodeBool(forKey: PropertyKey.alert) as? Bool else {
             os_log("Unable to decode the alert bool for a Daily Log Task object.", log: OSLog.default, type: .debug)
             return nil
         }
@@ -67,13 +67,13 @@ class DailyLogTask: NSObject, NSCoding{
             os_log("Unable to decode the alert time for a Daily Log Task object.", log: OSLog.default, type: .debug)
             return nil
         }
-        guard let completed = aDecoder.decodeObject(forKey: PropertyKey.completed) as? Bool else {
-            os_log("Unable to decode the completed for a Daily Log Task object.", log: OSLog.default, type: .debug)
-            return nil
-        }
+//        guard let completed = aDecoder.decodeObject(forKey: PropertyKey.completed) as? Bool else {
+//            os_log("Unable to decode the completed for a Daily Log Task object.", log: OSLog.default, type: .debug)
+//            return nil
+//        }
         
         // Must call designated initializer.
-        self.init(title: title, alert: alert, alertTime: alertTime, completed: completed)
+        self.init(title: title, alert: alertBool, alertTime: alertTime, completed: false)
     }
     
 }

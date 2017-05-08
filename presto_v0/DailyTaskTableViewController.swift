@@ -10,7 +10,7 @@ import UIKit
 import os.log
 
 class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, UINavigationControllerDelegate, UIPickerViewDelegate {
-    
+
     
     @IBOutlet weak var toggle: UISwitch!
     @IBOutlet weak var taskTextField: UITextField!
@@ -32,24 +32,22 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        toggle.setOn(false, animated: true)
         updateSaveButtonState()
-        
         setMinDate()
-        
         taskTextField.delegate = self
         timePicker.minimumDate = Date.init()
-    
-        
         tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0)
         tableView.tableFooterView = UIView(frame: .zero)
         
-        if let task = task {       
+        if let task = task {
+            print("loading in a task to edit/create. task completed is \(task.completed)")
             
             navigationItem.title = task.title
             taskTextField.text = task.title
-            timePicker.date = task.alertTime!
-            toggle.isOn = task.alert
+            timePicker.date = task.alertTime
+            if(task.completed == false){
+                toggle.isOn = task.alert
+            }
         }else{
             toggle.setOn(false, animated: true)
         }
@@ -69,6 +67,7 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
     }
 
     
+
     //MARK: Actions
     
     @IBAction func cancel(_ sender: UIBarButtonItem) {
@@ -220,11 +219,10 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
         let time = timePicker.date
         let isAlertOn = toggle.isOn
         
-        //set completed when edting or adding new task
-        let completedBool = (task?.completed != nil) ? (task?.completed) : false
+        print("in prepare for segue, task.completed is \(task?.completed)")
+        let completedBool = task?.completed
         
         task = DailyLogTask(title: taskText, alert: isAlertOn, alertTime: time, completed: completedBool!)
-        
     }
  
     
@@ -249,7 +247,5 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
         let text = taskTextField.text ?? ""
         saveButton.isEnabled = !text.isEmpty
     }
-    
-
 
 }

@@ -9,6 +9,8 @@
 import UIKit
 
 class DailyLogEventTableViewCell: UITableViewCell {
+    
+    var event:DailyLogEvent?
 
     @IBOutlet weak var eventLabel: UILabel!
     
@@ -22,6 +24,7 @@ class DailyLogEventTableViewCell: UITableViewCell {
     {
         eventButtonIncomplete.isHidden = true
         eventButtonComplete.isHidden = false
+        event?.completed = true
         
     }
     
@@ -29,7 +32,8 @@ class DailyLogEventTableViewCell: UITableViewCell {
     {
         eventButtonIncomplete.isHidden = false
         eventButtonComplete.isHidden = true
-    
+        event?.completed = false
+
     }
     
     

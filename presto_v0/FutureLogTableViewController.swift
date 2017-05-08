@@ -43,6 +43,11 @@ class FutureLogTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //empty view
+//        if(events.count == 0){
+//            return 1
+//        }
+        //min of one and length
         return events.count
     }
     // SECTION HEADERS
@@ -51,6 +56,19 @@ class FutureLogTableViewController: UITableViewController {
 //        return monthName
 //    }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        //empty view
+//        if(events.count == 0){
+//            
+//            let cellIdentifier = "EmptyFutureLogTableViewCell"
+//            
+//            guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? EmptyFutureLogTableViewCell  else {
+//                fatalError("The dequeued cell is not an instance of EmptyFutureLogTableViewCell.")
+//                
+//                return cell
+//            }
+//            
+//        }
         
         let cellIdentifier = "FutureLogTableViewCell"
 

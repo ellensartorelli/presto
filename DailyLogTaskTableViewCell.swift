@@ -9,7 +9,10 @@
 import UIKit
 
 class DailyLogTaskTableViewCell: UITableViewCell {
-
+    
+    
+    var task:DailyLogTask?
+    
     @IBOutlet weak var taskLabel: UILabel!
     
     @IBOutlet weak var taskButtonDone: UIButton!
@@ -19,18 +22,24 @@ class DailyLogTaskTableViewCell: UITableViewCell {
  
     @IBAction func DoTapped(sender: AnyObject)
     {
+        print("task completed was \(task?.completed)")
         taskButtonDo.isHidden = true
         taskButtonDone.isHidden = false
-        
-        //do other stuff
+        task?.completed = true
+        print("task completed is now \(task?.completed)")
+
+    
     }
     
     @IBAction func DoneTapped(sender: AnyObject)
     {
+        print("task completed was \(task?.completed)")
         taskButtonDo.isHidden = false
         taskButtonDone.isHidden = true
-        
-        //do other stuff 
+        task?.completed = false
+        print("task completed is now \(task?.completed)")
+
+
     }
     
     

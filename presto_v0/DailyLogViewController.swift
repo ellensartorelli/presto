@@ -13,6 +13,7 @@ import JTAppleCalendar
 class DailyLogViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+
     
     var reflections = [DailyLogReflection]()
     var events = [DailyLogEvent]()
@@ -29,41 +30,36 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCalendar()
-
         tableView.delegate = self
         tableView.dataSource = self
         self.view.addSubview(self.tableView)
+        navigationItem.leftBarButtonItem = editButtonItem
+        editButtonItem.tintColor = UIColorFromRGB(rgbValue: 2781306)
         
-        // Do any additional setup after loading the view.
         
-
         if let savedDailyLogEvents = loadDailyLogEvents() {
             events += savedDailyLogEvents
         }
         else {
-            // Load the sample data.
             loadSampleEvents()
         }
         
 
         if let savedTasks = loadDailyLogTasks() {
             tasks += savedTasks
+            print("loading in the tasks. the first task.completed is \(tasks[0].completed)")
         } else{
             loadSampleTasks()
         }
 
         loadSampleReflections()
-        
-        
-        // Use the edit button item provided by the table view controller.
-        navigationItem.leftBarButtonItem = editButtonItem
-        editButtonItem.tintColor = UIColorFromRGB(rgbValue: 2781306)
-    
+
     }
+    
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     //MARK: - MiniCalendar
@@ -93,40 +89,43 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         
         if indexPath.row < tasks.count {
             let cell: DailyLogTaskTableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! DailyLogTaskTableViewCell
+            
             //set the data here
             let task = tasks[indexPath.row]
             
             cell.taskButtonDo.isHidden = task.completed
             cell.taskButtonDone.isHidden = !task.completed
+            cell.task = task
             cell.taskLabel.text = task.title
+            
+            print("in the table we are returning task.completed as \(task.completed)")
             
             return cell
         }
         else if indexPath.row >= tasks.count && indexPath.row < tasks.count + events.count {
             let cell: DailyLogEventTableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! DailyLogEventTableViewCell
+            
             //set the data here
             let event = events[indexPath.row - tasks.count]
- 
             let calendar = Calendar.current
             let hour = calendar.component(.hour, from: event.time)
-            
             let amPM = (hour > 11) ? "pm" : "am"
-            
             let minute = calendar.component(.minute, from: event.time)
             let eventTimeString = "\(hour%12):\(String(format: "%02d", minute)) \(amPM), "
             
             cell.eventButtonIncomplete.isHidden = event.completed
             cell.eventButtonComplete.isHidden = !event.completed
             cell.eventLabel.text = eventTimeString + event.title
+            cell.event = event
 
             return cell
         }
         else {
             let cell: DailyLogReflectionTableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "reflectionCell", for: indexPath) as! DailyLogReflectionTableViewCell
+            
             //set the data here
             let reflection = reflections[indexPath.row - tasks.count - events.count]
             cell.reflectionText.text = reflection.reflection
-            print("printing the reflection.reflection from DLVC: \(reflection.reflection)")
             
             return cell
         }
@@ -158,7 +157,6 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     // Override to support conditional editing of the table view.
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
-        //we don't want the user to delete the calendar
         return true
     }
     
@@ -265,19 +263,22 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         if let sourceViewController = sender.source as? DailyTaskTableViewController, let task = sourceViewController.task {
         
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
-                // Update an existing meal.
+                // Update an existing task.
                 tasks[selectedIndexPath.row] = task
                 tableView.reloadRows(at: [selectedIndexPath], with: .none)
             }
             else{
                 let newIndexPath = IndexPath(row: tasks.count, section: 0)
                 
+                print("before we append a task, we see that task.completed is\(task.completed)")
                 tasks.append(task)
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
                 
             }
             // Save the taks.
+            print("before we save a task in unwind, we see that task.completed is \(task.completed)")
             saveDailyLogTasks()
+            print("after we save a task in unwind, we see that task.completed is \(task.completed)")
 
         }
     
@@ -287,6 +288,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         
         if let sourceViewController = sender.source as? DailyLogReflectionViewController, let reflection = sourceViewController.reflection {
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                // Update an existing reflection.
                 reflections[selectedIndexPath.row - tasks.count - events.count] = reflection
                 tableView.reloadRows(at: [selectedIndexPath], with: .none)
             }
@@ -308,8 +310,8 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         if let sourceViewController = sender.source as?
             DailyLogEventTableViewController, let event = sourceViewController.event{
             
-            // Add a new meal.
             if let selectedIndexPath = tableView.indexPathForSelectedRow{
+                // Update an existing event.
                 events[selectedIndexPath.row - tasks.count] = event
                 tableView.reloadRows(at: [selectedIndexPath], with: .none)
             }
@@ -319,6 +321,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
                 events.append(event)
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
             }
+            // Save the events.
             saveDailyLogEvents()
         }
     }
@@ -326,7 +329,6 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     //MARK: Private methods
     
     private func loadSampleReflections(){
-        print("called Reflections")
         
         guard let ref1 = DailyLogReflection(reflection: "Today was a long and overcast day", date: Date.init()) else {
             fatalError("Unable to instantiate reflection")
@@ -343,7 +345,6 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     private func loadSampleEvents(){
-        print("called Events")
         
         guard let ev1 = DailyLogEvent(title: "Dinner with Joy", time: Date.init(), completed: true) else {
             fatalError("Unable to instantiate event")
@@ -358,7 +359,6 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     private func loadSampleTasks(){
-        print("called Tasks")
         
         guard let task1 = DailyLogTask(title: "Finish CS466 App", alert: false, alertTime: Date.init(), completed: true) else {
             fatalError("Unable to instantiate task")
