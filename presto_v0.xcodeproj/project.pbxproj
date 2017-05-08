@@ -153,7 +153,7 @@
 				07A395B61EAE74ED003C6E64 /* AppDelegate.swift */,
 				07A395BA1EAE74ED003C6E64 /* Main.storyboard */,
 				0739B5791EBC1FD500DE6328 /* LaunchScreen.storyboard */,
-				075CAF791EBAA6FF0057E2A4 /* ReflectionTableViewController.swift */,
+				A8486C9B1EC0D3E400B1DF6B /* Reflection Log */,
 				073F6AB11EB1716700116DC5 /* Future Log */,
 				A839C7031EBE53ED004A71B1 /* Habit Tracker */,
 				073F6AB01EB1715D00116DC5 /* Daily Log */,
@@ -199,6 +199,14 @@
 				A842F1A81EBF9D5100D228FB /* MiniCalendarCustomCell.swift */,
 			);
 			name = "Mini Calendar";
+			sourceTree = "<group>";
+		};
+		A8486C9B1EC0D3E400B1DF6B /* Reflection Log */ = {
+			isa = PBXGroup;
+			children = (
+				075CAF791EBAA6FF0057E2A4 /* ReflectionTableViewController.swift */,
+			);
+			name = "Reflection Log";
 			sourceTree = "<group>";
 		};
 		FD6D677C9BE7E995D1CBF15B /* Pods */ = {

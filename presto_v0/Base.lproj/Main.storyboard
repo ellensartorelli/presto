@@ -919,28 +919,51 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ob-dE-UkI">
-                                            <rect key="frame" x="8" y="30" width="42" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="You shouldn't see this." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jmX-o4-uxx">
-                                            <rect key="frame" x="8" y="51" width="398" height="149"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                        </textView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DateTime" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r2v-Gl-bUD">
-                                            <rect key="frame" x="8" y="8" width="398" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="YTN-kp-T2m">
+                                            <rect key="frame" x="8" y="8" width="398" height="190"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DateTime" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r2v-Gl-bUD">
+                                                    <rect key="frame" x="0.0" y="0.0" width="80.666666666666671" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="5eX-TH-Zdw"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ob-dE-UkI">
+                                                    <rect key="frame" x="0.0" y="36" width="398" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="25" id="DqK-Dc-VQa"/>
+                                                        <constraint firstAttribute="width" constant="37" id="Dqb-Jk-fML"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="You shouldn't see this." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jmX-o4-uxx">
+                                                    <rect key="frame" x="0.0" y="67" width="398" height="123"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="jmX-o4-uxx" secondAttribute="trailing" id="2qc-Xf-SID"/>
+                                                <constraint firstItem="r2v-Gl-bUD" firstAttribute="leading" secondItem="YTN-kp-T2m" secondAttribute="leading" id="7Nt-Vw-eJV"/>
+                                                <constraint firstAttribute="trailing" secondItem="2Ob-dE-UkI" secondAttribute="trailing" id="HKB-iz-ocv"/>
+                                                <constraint firstItem="2Ob-dE-UkI" firstAttribute="leading" secondItem="YTN-kp-T2m" secondAttribute="leading" id="Xq3-9X-8nx"/>
+                                                <constraint firstItem="r2v-Gl-bUD" firstAttribute="top" secondItem="YTN-kp-T2m" secondAttribute="top" id="i0H-R3-kTQ"/>
+                                                <constraint firstItem="r2v-Gl-bUD" firstAttribute="top" secondItem="YTN-kp-T2m" secondAttribute="top" id="oQF-wn-ZNo"/>
+                                            </constraints>
+                                        </stackView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="YTN-kp-T2m" firstAttribute="trailing" secondItem="knm-YK-AEh" secondAttribute="trailingMargin" id="2jd-zk-eGp"/>
+                                        <constraint firstItem="YTN-kp-T2m" firstAttribute="top" secondItem="knm-YK-AEh" secondAttribute="topMargin" id="APE-2l-dZn"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="YTN-kp-T2m" secondAttribute="bottom" constant="-7" id="EeY-RJ-krm"/>
+                                        <constraint firstItem="YTN-kp-T2m" firstAttribute="leading" secondItem="knm-YK-AEh" secondAttribute="leadingMargin" id="Hd8-Gq-H5E"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="dateTime" destination="r2v-Gl-bUD" id="xBK-l4-M26"/>

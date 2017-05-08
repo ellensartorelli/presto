@@ -55,25 +55,19 @@ class ReflectionTableViewController: UITableViewController, UITextViewDelegate {
         let cellIdentifier = "reflectionTabReflection"
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? DailyLogReflectionTableViewCell  else {
-            fatalError("The dequeued cell is not an instance of MealTableViewCell.")
+            fatalError("The dequeued cell is not an instance of DailyLogReflectionTableViewCell.")
         }
-        
+
         // Fetches the appropriate meal for the data source layout.
         let reflection = reflections[indexPath.row]
-        
         cell.reflectionTextLong.text = reflection.reflection
-        let calendar = Calendar.current
-        let month = calendar.component(.month, from:Date.init())
-         let monthName = calendar.monthSymbols[month - 1]
-        let day = calendar.component(.day, from:Date.init())
-        let year = calendar.component(.year, from: Date.init())
-        let hour = calendar.component(.hour, from:Date.init()) % 12
-        let minute = calendar.component(.minute, from:Date.init())
 
-        
-        cell.dateTime.text = String(monthName) + " " + String(day) + ", " + String(year)
-        cell.timeLabel.text = "\(hour):" + String(format: "%02d", minute)
-        
+        let myFormatter = DateFormatter()
+        myFormatter.dateStyle = .long
+        cell.dateTime.text = myFormatter.string(from: reflection.date) // "March 10, 1876"
+        myFormatter.dateStyle = .none
+        myFormatter.timeStyle = .short // 1:50 PM
+        cell.timeLabel.text = myFormatter.string(from: reflection.date)
         
         return cell
     }
@@ -148,9 +142,20 @@ class ReflectionTableViewController: UITableViewController, UITextViewDelegate {
         guard let ref1 = DailyLogReflection(reflection: "In 1531 the Virgin of Guadalupe’s miraculous apparition to an indigenous man, Juan Diego was quickly seen as highly symbolic and was especially celebrated and cherished by the native population of Mexico. Yet the apparition tradition is similar to the story of the Spanish statuette, Our Lady of Guadalupe in Extremadura, Spain, and the location of the apparition in Mexico was home to an Aztec mother deity.The roots of the Virgin of Guadalupe’s apparition story, like most of Mexico’s existing culture, came over with the Spanish conquistadores and Catholic clergy who coerced many of the indigenous peoples of Mexico into Catholicism. This conversion was crucial to colonizing the new country and led to new oral narratives such as the story of the apparition of the Virgin of Guadalupe, but also to Indian ambivalence toward the Spanish. Image passive and docile. The image of the Virgin of Guadalupe is responsible for fusing together both Spanish and Aztec traditions that unifies Mexico as it is today. Has also influence the role of women.", date: Date.init()) else {
             fatalError("Unable to instantiate reflection")
         }
+        let minute:TimeInterval = 60.0
+        let hour:TimeInterval = 60.0 * minute
+        let day:TimeInterval = 24 * hour
+        let month:TimeInterval = 31*day
         
-        reflections += [ref1]
-        print(reflections.count)
+        let date = Date(timeInterval: -month, since: Date())
+        
+
+        
+        guard let ref2 = DailyLogReflection(reflection: "Today we are announcing the establishment and membership of a College-wide committee to explore and discuss issues relating to the events of March 2, including, but not limited to, freedom of expression, inclusivity, and the educational and civic challenges of the 21st century. The creation of this committee was among the most frequently offered suggestions in the weeks following March 2. The committee will commence its work this spring and resume in the fall semester, with the aim of completing its work by the end of 2017.", date: date) else {
+            fatalError("Unable to instantiate reflection")
+        }
+        
+        reflections += [ref2, ref1]
     }
     
     
