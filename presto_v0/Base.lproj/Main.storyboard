@@ -122,17 +122,17 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="110"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="PYp-Lc-Kk4">
-                                            <rect key="frame" x="8" y="17" width="398" height="20"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="PYp-Lc-Kk4">
+                                            <rect key="frame" x="8" y="17" width="398" height="20.333333333333336"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" text="Day" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RyA-Mk-HVR">
-                                                    <rect key="frame" x="0.0" y="0.0" width="31.666666666666664" height="20.333333333333336"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="29.666666666666664" height="20.333333333333336"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dMj-iK-s59">
-                                                    <rect key="frame" x="41.666666666666657" y="0.0" width="356.33333333333337" height="20.333333333333336"/>
+                                                    <rect key="frame" x="39.666666666666657" y="0.0" width="358.33333333333337" height="20.333333333333336"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -705,15 +705,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" keyboardDismissMode="interactive" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Z0r-GS-twh">
-                                <rect key="frame" x="16" y="64" width="343" height="583"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Z0r-GS-twh">
+                                <rect key="frame" x="10" y="74" width="394" height="573"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Z0r-GS-twh" firstAttribute="top" secondItem="NXF-b1-s6U" secondAttribute="bottom" constant="10" id="HrX-y0-yFc"/>
+                            <constraint firstAttribute="trailing" secondItem="Z0r-GS-twh" secondAttribute="trailing" constant="10" id="O4w-jc-Lka"/>
+                            <constraint firstItem="cen-pQ-Def" firstAttribute="top" secondItem="Z0r-GS-twh" secondAttribute="bottom" constant="40" id="Y2l-yG-UhJ"/>
+                            <constraint firstItem="Z0r-GS-twh" firstAttribute="leading" secondItem="C9Y-et-uGK" secondAttribute="leading" constant="10" id="gSj-FK-X9g"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="New Reflection" id="zwo-om-TI7">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="sIQ-By-OiJ">
@@ -797,6 +802,7 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ruL-5D-X73">
                                                     <rect key="frame" x="308" y="6" width="51" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="onTintColor" red="0.83529411760000005" green="0.70980392160000005" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <connections>
                                                         <action selector="toggleValueChanged:" destination="Hqc-0y-wGS" eventType="valueChanged" id="xse-dL-OZE"/>
                                                     </connections>
@@ -974,15 +980,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" keyboardDismissMode="interactive" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ry8-OM-5LU">
-                                <rect key="frame" x="10" y="72" width="384" height="644"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="TopLeft" misplaced="YES" pagingEnabled="YES" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="Ry8-OM-5LU">
+                                <rect key="frame" x="10" y="72" width="395" height="607"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Ry8-OM-5LU" secondAttribute="trailing" constant="10" id="Fxk-5x-WkY"/>
+                            <constraint firstItem="TgH-cY-7Fi" firstAttribute="top" secondItem="Ry8-OM-5LU" secondAttribute="bottom" constant="8" symbolic="YES" id="GpY-0z-yNy"/>
+                            <constraint firstItem="Ry8-OM-5LU" firstAttribute="leading" secondItem="OmS-x8-1Rd" secondAttribute="leading" constant="10" id="IB4-hw-kFU"/>
+                            <constraint firstItem="Ry8-OM-5LU" firstAttribute="top" secondItem="6CT-oI-q0H" secondAttribute="bottom" constant="8" symbolic="YES" id="Ix7-iz-Tx4"/>
+                            <constraint firstItem="Ry8-OM-5LU" firstAttribute="leading" secondItem="OmS-x8-1Rd" secondAttribute="leading" constant="10" id="sMF-81-pCI"/>
+                            <constraint firstAttribute="trailing" secondItem="Ry8-OM-5LU" secondAttribute="trailing" constant="10" id="uuH-Xy-X0q"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="New Reflection" id="8N7-s8-R5g">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="YzR-Pt-9DK">
@@ -1006,7 +1019,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JEj-97-Pm1" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="I6n-Yw-6K5" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1439" y="1891"/>
+            <point key="canvasLocation" x="1437.68115942029" y="1890.4891304347827"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="P1k-CN-aoX">

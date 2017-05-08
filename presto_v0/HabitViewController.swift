@@ -82,9 +82,14 @@ class HabitViewController: UIViewController {
             validCell.dateLabel.textColor = UIColor.lightGray
         }
         else{
-            let purple:UIColor = UIColorFromRGB(rgbValue: 4141376)
-            validCell.dateLabel.textColor = purple
-            
+            if (!validCell.selectedView.isHidden){
+                validCell.dateLabel.textColor = UIColor.white
+
+            }
+            else{
+                let purple:UIColor = UIColorFromRGB(rgbValue: 4141376)
+                validCell.dateLabel.textColor = purple
+            }
         }
     }
     
@@ -115,7 +120,6 @@ extension HabitViewController: JTAppleCalendarViewDelegate{
     //Display the Cell
     func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell{
         let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CustomCell", for: indexPath) as! CustomCell
-        handleTextColor(view: cell, cellState: cellState)
         cell.dateLabel.text = cellState.text
         if(selected.contains(cellState.date)){
             cell.selectedView.isHidden = false
@@ -123,6 +127,7 @@ extension HabitViewController: JTAppleCalendarViewDelegate{
         else{
             cell.selectedView.isHidden = true
         }
+        handleTextColor(view: cell, cellState: cellState)
         return cell
     }
     
@@ -130,7 +135,7 @@ extension HabitViewController: JTAppleCalendarViewDelegate{
         guard let validCell = cell as? CustomCell else{
             return
         }
-        
+
         if(cellState.date<Date()){
             if(validCell.selectedView.isHidden){
                 selected.append(cellState.date)
@@ -143,6 +148,9 @@ extension HabitViewController: JTAppleCalendarViewDelegate{
                 }
             }
         }
+        handleTextColor(view: cell, cellState: cellState)
+
+
         
     }
     func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
