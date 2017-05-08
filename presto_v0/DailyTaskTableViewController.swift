@@ -145,7 +145,7 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
             }
             return 0.0
         }
-        return 44.0
+        return 70.0
     }
    
 
