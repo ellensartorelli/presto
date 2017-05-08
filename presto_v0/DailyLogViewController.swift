@@ -86,10 +86,24 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tasks.count + events.count + reflections.count
+        print("count is \(max(1, tasks.count + events.count + reflections.count))")
+        return max(1, tasks.count + events.count + reflections.count)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+    //    tableView.reloadData()
+        
+        if(events.count+tasks.count+reflections.count == 0){
+            print("empty cell time")
+            let cellIdentifier2 = "emptyCell"
+            
+            guard let cell2 = tableView.dequeueReusableCell(withIdentifier: cellIdentifier2, for: indexPath) as? EmptyDailyLogTableViewCell  else {
+                fatalError("The dequeued cell is not an instance of EmptyDailyLogTableViewCell.")
+            }
+            
+            return cell2
+        }else{
         
         if indexPath.row < tasks.count {
             let cell: DailyLogTaskTableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! DailyLogTaskTableViewCell
@@ -106,12 +120,9 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
             let cell: DailyLogEventTableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! DailyLogEventTableViewCell
             //set the data here
             let event = events[indexPath.row - tasks.count]
- 
             let calendar = Calendar.current
             let hour = calendar.component(.hour, from: event.time)
-            
             let amPM = (hour > 11) ? "pm" : "am"
-            
             let minute = calendar.component(.minute, from: event.time)
             let eventTimeString = "\(hour%12):\(String(format: "%02d", minute)) \(amPM), "
             
@@ -126,10 +137,12 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
             //set the data here
             let reflection = reflections[indexPath.row - tasks.count - events.count]
             cell.reflectionText.text = reflection.reflection
-            print("printing the reflection.reflection from DLVC: \(reflection.reflection)")
             
             return cell
         }
+    }
+        
+        
     }
     
     // Override to support editing the table view.
@@ -153,12 +166,14 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
+        tableView.reloadData()
     }
     
     // Override to support conditional editing of the table view.
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        //we don't want the user to delete the calendar
+        if(events.count + tasks.count + reflections.count == 0){
+            return false
+        }
         return true
     }
     
@@ -197,6 +212,9 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        tableView.reloadData()
+        
         super.prepare(for: segue, sender: sender)
         
         switch(segue.identifier ?? ""){
@@ -281,7 +299,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
             saveDailyLogTasks()
 
         }
-    
+    tableView.reloadData()
     }
     
     @IBAction func unwindToReflectionList(sender: UIStoryboardSegue) {
@@ -299,7 +317,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
                 
             }
         }
-        
+    tableView.reloadData()
     }
  
     
@@ -322,6 +340,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
             }
             saveDailyLogEvents()
         }
+    tableView.reloadData()
     }
  
     //MARK: Private methods

@@ -43,14 +43,24 @@ class FutureLogTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        tableView.reloadData()
+        if(events.count == 0){
+            return 1
+        }
         return events.count
     }
-    // SECTION HEADERS
-//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        let monthName = DateFormatter().monthSymbols[section]
-//        return monthName
-//    }
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+                
+        if(events.count == 0){
+            
+            let cellIdentifier = "EmptyCellTableViewCell"
+            
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? EmptyCellTableViewCell  else {
+                fatalError("The dequeued cell is not an instance of EmptyCellTableViewCell.")
+            }
+            return cell
+        }
         
         let cellIdentifier = "FutureLogTableViewCell"
 
@@ -70,8 +80,6 @@ class FutureLogTableViewController: UITableViewController {
         cell.dayLabel.text = "\(month)/\(day)/\(year%100)"
         
         print(event.title)
-
-        // Configure the cell...
 
         return cell
     }
@@ -149,6 +157,7 @@ class FutureLogTableViewController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         super.prepare(for: segue, sender: sender)
         switch(segue.identifier ?? ""){
             case "AddItem":

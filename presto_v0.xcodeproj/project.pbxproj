@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0739B57A1EBC1FD500DE6328 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0739B5791EBC1FD500DE6328 /* LaunchScreen.storyboard */; };
+		073F2B461EC0EA4000C29899 /* EmptyCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F2B451EC0EA4000C29899 /* EmptyCellTableViewCell.swift */; };
+		073F2B481EC0EDB200C29899 /* EmptyDailyLogTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F2B471EC0EDB200C29899 /* EmptyDailyLogTableViewCell.swift */; };
 		073F6AAB1EB0FD4400116DC5 /* DailyLogEventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F6AAA1EB0FD4400116DC5 /* DailyLogEventTableViewController.swift */; };
 		073F6AAD1EB166E400116DC5 /* DailyLogReflectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F6AAC1EB166E400116DC5 /* DailyLogReflectionViewController.swift */; };
 		073F6AB31EB1733000116DC5 /* DailyLogReflection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F6AB21EB1733000116DC5 /* DailyLogReflection.swift */; };
@@ -39,6 +41,8 @@
 
 /* Begin PBXFileReference section */
 		0739B5791EBC1FD500DE6328 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		073F2B451EC0EA4000C29899 /* EmptyCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyCellTableViewCell.swift; sourceTree = "<group>"; };
+		073F2B471EC0EDB200C29899 /* EmptyDailyLogTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyDailyLogTableViewCell.swift; sourceTree = "<group>"; };
 		073F6AAA1EB0FD4400116DC5 /* DailyLogEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyLogEventTableViewController.swift; sourceTree = "<group>"; };
 		073F6AAC1EB166E400116DC5 /* DailyLogReflectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyLogReflectionViewController.swift; sourceTree = "<group>"; };
 		073F6AB21EB1733000116DC5 /* DailyLogReflection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyLogReflection.swift; sourceTree = "<group>"; };
@@ -105,6 +109,7 @@
 				07801AEA1EAE7F87007FEB0B /* FutureLogTableViewCell.swift */,
 				07801AEC1EAE8189007FEB0B /* FutureLogEvent.swift */,
 				07801AEE1EAE855D007FEB0B /* FutureLogTableViewController.swift */,
+				073F2B451EC0EA4000C29899 /* EmptyCellTableViewCell.swift */,
 			);
 			name = "Future Log";
 			sourceTree = "<group>";
@@ -125,6 +130,7 @@
 				073F6ABE1EB1828F00116DC5 /* DailyLogTaskTableViewCell.swift */,
 				073F6ABC1EB1828100116DC5 /* DailyLogEventTableViewCell.swift */,
 				073F6AB81EB174F500116DC5 /* DailyLogReflectionTableViewCell.swift */,
+				073F2B471EC0EDB200C29899 /* EmptyDailyLogTableViewCell.swift */,
 			);
 			name = "Table View Cells";
 			sourceTree = "<group>";
@@ -358,6 +364,8 @@
 				07A395B71EAE74ED003C6E64 /* AppDelegate.swift in Sources */,
 				A8E463F91EB1C80600B45B10 /* HabitTrackerTableViewController.swift in Sources */,
 				073F6AC21EB1891800116DC5 /* DailyLogViewController.swift in Sources */,
+				073F2B481EC0EDB200C29899 /* EmptyDailyLogTableViewCell.swift in Sources */,
+				073F2B461EC0EA4000C29899 /* EmptyCellTableViewCell.swift in Sources */,
 				0754F22F1EB017D900A291C9 /* DailyTaskTableViewController.swift in Sources */,
 				07A395BF1EAE74ED003C6E64 /* presto_v0.xcdatamodeld in Sources */,
 				07801AEB1EAE7F87007FEB0B /* FutureLogTableViewCell.swift in Sources */,
