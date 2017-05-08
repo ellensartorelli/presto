@@ -1298,36 +1298,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A0l-WN-H33">
-                                <rect key="frame" x="0.0" y="20" width="414" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="ACD-Sc-HSu"/>
-                                </constraints>
-                                <items>
-                                    <navigationItem title="Habit Name" id="BBk-Cz-puC">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="Ucv-34-bN6">
-                                            <color key="tintColor" red="0.1647058824" green="0.43921568630000002" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
-                                            <connections>
-                                                <segue destination="10p-l8-BwO" kind="unwind" unwindAction="unwindToHabitListFromEditWithSender:" id="8q4-yQ-Qqb"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="VBQ-t8-tB1">
-                                <rect key="frame" x="0.0" y="80" width="414" height="497"/>
+                                <rect key="frame" x="0.0" y="100" width="414" height="497"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="GJM-N5-KI3">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="76"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BbH-rt-ic9">
-                                                <rect key="frame" x="176.66666666666666" y="0.0" width="60.666666666666686" height="30.666666666666671"/>
+                                                <rect key="frame" x="176.66666666666666" y="0.0" width="60.666666666666686" height="30.666666666666657"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xvc-o9-Czo">
-                                                <rect key="frame" x="168.33333333333334" y="37.666666666666671" width="77.333333333333314" height="38.333333333333329"/>
+                                                <rect key="frame" x="168.33333333333334" y="37.666666666666657" width="77.333333333333314" height="38.333333333333343"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -1458,15 +1442,34 @@
                                     <constraint firstAttribute="height" constant="497" id="Uxq-or-ZPy"/>
                                 </constraints>
                             </stackView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A0l-WN-H33">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="gb9-1H-ORE"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Habit Name" id="BBk-Cz-puC">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="Ucv-34-bN6">
+                                            <color key="tintColor" red="0.1647058824" green="0.43921568630000002" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <segue destination="10p-l8-BwO" kind="unwind" unwindAction="unwindToHabitListFromEditWithSender:" id="8q4-yQ-Qqb"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="VBQ-t8-tB1" secondAttribute="trailing" id="8Ss-xg-MW0"/>
-                            <constraint firstItem="A0l-WN-H33" firstAttribute="top" secondItem="hUv-9K-HM2" secondAttribute="bottom" id="9tY-uE-YAS"/>
+                            <constraint firstItem="A0l-WN-H33" firstAttribute="top" secondItem="hUv-9K-HM2" secondAttribute="bottom" constant="-20" id="9tY-uE-YAS"/>
+                            <constraint firstAttribute="trailing" secondItem="A0l-WN-H33" secondAttribute="trailing" id="C3S-rw-y60"/>
                             <constraint firstItem="VBQ-t8-tB1" firstAttribute="leading" secondItem="jfI-IJ-z9y" secondAttribute="leading" id="FtZ-Fa-dx1"/>
                             <constraint firstAttribute="trailing" secondItem="A0l-WN-H33" secondAttribute="trailing" id="NOy-Gk-o9N"/>
                             <constraint firstItem="A0l-WN-H33" firstAttribute="leading" secondItem="jfI-IJ-z9y" secondAttribute="leading" id="Qim-Fd-0HT"/>
-                            <constraint firstItem="VBQ-t8-tB1" firstAttribute="top" secondItem="A0l-WN-H33" secondAttribute="bottom" constant="16" id="fzx-T0-VtB"/>
+                            <constraint firstItem="A0l-WN-H33" firstAttribute="leading" secondItem="jfI-IJ-z9y" secondAttribute="leading" id="fGU-HE-YZc"/>
+                            <constraint firstItem="VBQ-t8-tB1" firstAttribute="top" secondItem="A0l-WN-H33" secondAttribute="bottom" constant="36" id="fzx-T0-VtB"/>
+                            <constraint firstItem="A0l-WN-H33" firstAttribute="top" secondItem="hUv-9K-HM2" secondAttribute="bottom" constant="-20" id="qbU-A5-ZVA"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Habit Name" id="rC9-4U-49s"/>

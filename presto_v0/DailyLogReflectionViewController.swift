@@ -18,7 +18,8 @@ class DailyLogReflectionViewController: UIViewController, UITextViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        self.automaticallyAdjustsScrollViewInsets = false
+
         
         reflectionText.delegate = self
         reflectionText.becomeFirstResponder()
@@ -27,9 +28,11 @@ class DailyLogReflectionViewController: UIViewController, UITextViewDelegate {
         self.view.addGestureRecognizer(tapGesture)
         
     
-        // Set up views if editing an existing Meal.
+        // Set up views if editing an existing Reflection.
         if let reflection = reflection {
-            navigationItem.title = reflection.reflection
+            let myFormatter = DateFormatter()
+            myFormatter.dateStyle = .long
+            navigationItem.title = myFormatter.string(from: reflection.date)
             reflectionText.text = reflection.reflection
         }
         
