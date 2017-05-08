@@ -60,12 +60,13 @@ class DailyLogEvent: NSObject, NSCoding{
             return nil
         }
         
-        // The completed boolean is required. If we cannot decode a completed bool, the initializer should fail.
-        guard let completed = aDecoder.decodeObject(forKey: PropertyKey.completed) as? Bool else {
-            os_log("Unable to decode the name for a Meal object.", log: OSLog.default, type: .debug)
-            return nil
-        }
-        self.init(title: title, time: time, completed: completed)
+//        // The completed boolean is required. If we cannot decode a completed bool, the initializer should fail.
+//        guard let completed = aDecoder.decodeObject(forKey: PropertyKey.completed) as? Bool else {
+//            os_log("Unable to decode the completed bool for a DLE object.", log: OSLog.default, type: .debug)
+////            return nil
+////            completed = false
+//        }
+        self.init(title: title, time: time, completed: false)
     }
     
 }

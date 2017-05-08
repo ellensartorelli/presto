@@ -184,7 +184,8 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         alertController.addAction(eventAction)
         alertController.addAction(reflectionAction)
         alertController.addAction(defaultAction)
-        
+        alertController.view.tintColor = UIColorFromRGB(rgbValue: 2781306)
+
         present(alertController, animated: true, completion: nil)
         
     }
@@ -402,6 +403,17 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         return NSKeyedUnarchiver.unarchiveObject(withFile: DailyLogTask.ArchiveURL.path) as? [DailyLogTask]
 
     }
+    
+    //MARK: - setting color
+    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+
 
 }
 
@@ -454,15 +466,5 @@ extension DailyLogViewController: JTAppleCalendarViewDataSource{
         
     }
     
-    //MARK: - setting color
-    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
-        return UIColor(
-            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-            alpha: CGFloat(1.0)
-        )
-    }
-
     
 }
