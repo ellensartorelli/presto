@@ -23,6 +23,9 @@ class ReflectionTableViewController: UITableViewController, UITextViewDelegate {
 
         // Use the edit button item provided by the table view controller.
         navigationItem.leftBarButtonItem = editButtonItem
+        editButtonItem.tintColor = UIColorFromRGB(rgbValue: 2781306)
+        
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -184,6 +187,16 @@ class ReflectionTableViewController: UITableViewController, UITextViewDelegate {
         
     }
 
+    
+    //MARK: - setting color
+    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
     
 
 }

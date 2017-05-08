@@ -17,7 +17,6 @@ class FutureLogTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.leftBarButtonItem = editButtonItem
         events = events.sorted(by: { $0.startDate.compare($1.startDate) == .orderedAscending })
 
         if let savedEvents = loadFutureLogEvents(){
@@ -25,6 +24,10 @@ class FutureLogTableViewController: UITableViewController {
         }else{
             loadSampleEvents()
         }
+        
+        // Use the edit button item provided by the table view controller.
+        navigationItem.leftBarButtonItem = editButtonItem
+        editButtonItem.tintColor = UIColorFromRGB(rgbValue: 2781306)
    
     }
 
@@ -208,6 +211,17 @@ class FutureLogTableViewController: UITableViewController {
     private func loadFutureLogEvents() -> [FutureLogEvent]? {
         return NSKeyedUnarchiver.unarchiveObject(withFile: FutureLogEvent.ArchiveURL.path) as? [FutureLogEvent]
     }
+    
+    //MARK: - setting color
+    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+
     
    
 }
