@@ -186,7 +186,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
                 fatalError("Can't get cell of the right kind")
             }
             
-            self.items.updateTask(oldItem: item, text: item.text!, time: item.time as! Date, completed: cell.taskButtonDone.isHidden, alert: item.alert)
+//            self.items.updateTask(oldItem: item, text: item.text!, time: item.time as! Date, completed: cell.taskButtonDone.isHidden, alert: item.alert)
             
             cell.configureCell(item: item)
             
