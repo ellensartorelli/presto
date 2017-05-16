@@ -7,83 +7,110 @@
 //
 
 import UIKit
-import os.log
 
 class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, UINavigationControllerDelegate, UIPickerViewDelegate {
     
+    var type: DetailType = .new
+    var callback: ((String, String, Date)->Void)?
+    
+    
+    //MARK: - PROPERTIES
+    
+//    var managedObjectContext: NSManagedObjectContext?
+    var pickerVisible = false
     
     @IBOutlet weak var toggle: UISwitch!
     @IBOutlet weak var taskTextField: UITextField!
     @IBOutlet weak var timePicker: UIDatePicker!
+    @IBOutlet weak var save: UIBarButtonItem!
     
-    var pickerVisible = false
+
     
-    var task:DailyLogTask?
+    // MARK: - VIEW 
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setMinDate()
+        taskTextField.delegate = self
+        
+        
+        // Do any additional setup after loading the view.
+        switch(type){
+        case .new:
+            break
+        case let .update(text, type, startDate):
+            navigationItem.title = text
+            taskTextField.text = text
+            taskTextField.text = type
+            timePicker.date = startDate
+        }
+        
+    }
     
-    @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBAction func cancel(_ sender: UIBarButtonItem) {
+        if presentingViewController is UINavigationController{
+            dismiss(animated: true, completion: nil)
+        }else if let owningNavController = navigationController{
+            owningNavController.popViewController(animated: true)
+        }else{
+            fatalError("View is not contained by a navigation controller")
+        }
+    }
     
-    //set min date
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let button = sender as? UIBarButtonItem, button === save else{
+            print("The save button was not pressed")
+            return
+        }
+   
+        let text = taskTextField.text ?? ""
+        let type = taskTextField.text ?? ""
+        let startDate = timePicker.date
+        
+        if callback != nil{
+            callback!(text, type, startDate)
+        }
+    }
+    
+
+    // MARK: - ACTIONS
     
     @IBAction func pickAlertTime(_ sender: UIDatePicker) {
         setMinDate()
     }
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-//        toggle.setOn(false, animated: true)
-        updateSaveButtonState()
-        
-        setMinDate()
-        
-        taskTextField.delegate = self
-        timePicker.minimumDate = Date.init()
-    
-        
-        tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0)
-        tableView.tableFooterView = UIView(frame: .zero)
-        
-        if let task = task {       
-            
-            navigationItem.title = task.title
-            taskTextField.text = task.title
-            timePicker.date = task.alertTime!
-            toggle.isOn = task.alert
-        }else{
-            toggle.setOn(false, animated: true)
-        }
-        
-        //keep at end
-        if(taskTextField.text?.isEmpty)!{
-            saveButton.isEnabled = false
-        }else{
-            saveButton.isEnabled = true
-        }
-        
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+//    @IBAction func save(sender: UIBarButtonItem) {
+//        print("Saving")
+//
+//        guard let managedObjectContext = managedObjectContext else { return }
+//        
+//        // Create Item
+//        let task = Item(context: managedObjectContext)
+//        
+//        // Configure Item
+//        task.text = taskTextField.text
+//        task.time = timePicker.date as NSDate?
+//
+//    }
 
     
-    //MARK: Actions
-    
-    @IBAction func cancel(_ sender: UIBarButtonItem) {
-        // Depending on style of presentation (modal or push presentation), this view controller needs to be dismissed in two different ways.
-        let isPresentingInAddTaskMode = presentingViewController is UINavigationController
-        
-        if isPresentingInAddTaskMode {
-            dismiss(animated: true, completion: nil)
-        } else if let owningNavigationController = navigationController{
-            owningNavigationController.popViewController(animated: true)
-        } else {
-            fatalError("The TaskViewController is not inside a navigation controller.")
-        }
-    }
-    
+//    @IBAction func cancel(_ sender: UIBarButtonItem) {
+//        // Depending on style of presentation (modal or push presentation), this view controller needs to be dismissed in two different ways.
+//        let isPresentingInAddTaskMode = presentingViewController is UINavigationController
+//        
+//        if isPresentingInAddTaskMode {
+//            dismiss(animated: true, completion: nil)
+//        } else if let owningNavigationController = navigationController{
+//            owningNavigationController.popViewController(animated: true)
+//        } else {
+//            fatalError("The TaskViewController is not inside a navigation controller.")
+//        }
+//    }
+
     @IBAction func toggleValueChanged(_ sender: UISwitch) {
         tableView.reloadData()
     }
@@ -92,34 +119,29 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
         setTime()
     }
     
-    //MARK:- Date and time
+    
+    
+    //MARK:- DATE AND TIME
     
     func setMinDate(){
         //for picker (interval of 5)
         let calendar = Calendar.current
         let minCurrent = (Float(calendar.component(.minute, from: Date.init())))
         let minFuture = (Float(Float(calendar.component(.minute, from: Date.init()))/Float(5))).rounded(.up) * 5
-        print(Float(Float(calendar.component(.minute, from: Date.init()))/Float(5)).rounded(.up))
-        
-        
         let newDate = Date(timeIntervalSinceNow: TimeInterval(Int((minFuture - minCurrent)*60)))
-        print(newDate)
         timePicker.minimumDate = newDate
     }
 
     
     func setTime() {
         let calendar = Calendar.current
-        
         let hour = calendar.component(.hour, from: timePicker.date) % 12
         let minutes = calendar.component(.minute, from: timePicker.date)
-    
-        
         let time = "\(hour):" + String(format: "%02d", minutes)
     }
     
     
-    // MARK: - Table view data source
+    // MARK: - TABLE VIEW DELEGATE
     
     override  func tableView(_ tableView: UITableView, didSelectRowAt
         indexPath: IndexPath){
@@ -148,16 +170,6 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
         return 70.0
     }
    
-
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        // #warning Incomplete implementation, return the number of sections
-//        return 0
-//    }
-//
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        // #warning Incomplete implementation, return the number of rows
-//        return 0
-//    }
 
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -203,33 +215,9 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
         return true
     }
     */
-
-
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-   
-        super.prepare(for: segue, sender: sender)
-        // Configure the destination view controller only when the save button is pressed.
-        guard let button = sender as? UIBarButtonItem, button === saveButton else {
-            os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
-            return
-        }
-        let taskText = taskTextField.text ?? ""
-        let time = timePicker.date
-        let isAlertOn = toggle.isOn
-        
-        //set completed when edting or adding new task
-        let completedBool = (task?.completed != nil) ? (task?.completed) : false
-        
-        task = DailyLogTask(title: taskText, alert: isAlertOn, alertTime: time, completed: completedBool!)
-        
-    }
- 
     
-    //TextField delegate functions
     
+    //MARK: - TEXT FIELD DELEGATE
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -237,19 +225,24 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        saveButton.isEnabled = false
+        save.isEnabled = false
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         updateSaveButtonState()
         navigationItem.title = textField.text
     }
-    
+
     func updateSaveButtonState(){
         let text = taskTextField.text ?? ""
-        saveButton.isEnabled = !text.isEmpty
+        save.isEnabled = !text.isEmpty
     }
     
-
-
 }
+
+
+enum DetailType{
+    case new
+    case update(String, String, Date)
+}
+

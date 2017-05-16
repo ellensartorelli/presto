@@ -27,6 +27,7 @@
 		07A395BC1EAE74ED003C6E64 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07A395BA1EAE74ED003C6E64 /* Main.storyboard */; };
 		07A395BF1EAE74ED003C6E64 /* presto_v0.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 07A395BD1EAE74ED003C6E64 /* presto_v0.xcdatamodeld */; };
 		07A395C11EAE74ED003C6E64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A395C01EAE74ED003C6E64 /* Assets.xcassets */; };
+		07D7D5381EC9FEB4000F6054 /* ItemCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7D5371EC9FEB4000F6054 /* ItemCollection.swift */; };
 		94BBC65C331E4EF9FEBF0923 /* Pods_presto_v0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 700729FE8C512C54E3B17704 /* Pods_presto_v0.framework */; };
 		A839C7051EBE65DB004A71B1 /* HabitTrackerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A839C7041EBE65DB004A71B1 /* HabitTrackerDetailViewController.swift */; };
 		A842F1A91EBF9D5100D228FB /* MiniCalendarCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A842F1A81EBF9D5100D228FB /* MiniCalendarCustomCell.swift */; };
@@ -60,6 +61,7 @@
 		07A395BE1EAE74ED003C6E64 /* presto_v0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = presto_v0.xcdatamodel; sourceTree = "<group>"; };
 		07A395C01EAE74ED003C6E64 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		07A395C51EAE74ED003C6E64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		07D7D5371EC9FEB4000F6054 /* ItemCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCollection.swift; sourceTree = "<group>"; };
 		54E6C8FB1ED58BF35B826AC3 /* Pods-presto_v0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-presto_v0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-presto_v0/Pods-presto_v0.debug.xcconfig"; sourceTree = "<group>"; };
 		700729FE8C512C54E3B17704 /* Pods_presto_v0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_presto_v0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7396B9FC5F8EFB54F6E9E21C /* Pods-presto_v0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-presto_v0.release.xcconfig"; path = "Pods/Target Support Files/Pods-presto_v0/Pods-presto_v0.release.xcconfig"; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 		07A395B51EAE74ED003C6E64 /* presto_v0 */ = {
 			isa = PBXGroup;
 			children = (
+				07D7D5371EC9FEB4000F6054 /* ItemCollection.swift */,
 				07A395B61EAE74ED003C6E64 /* AppDelegate.swift */,
 				07A395BA1EAE74ED003C6E64 /* Main.storyboard */,
 				0739B5791EBC1FD500DE6328 /* LaunchScreen.storyboard */,
@@ -351,6 +354,7 @@
 				073F6ABF1EB1828F00116DC5 /* DailyLogTaskTableViewCell.swift in Sources */,
 				A8E463FB1EB1C83100B45B10 /* HabitTrackerHabitTableViewCell.swift in Sources */,
 				A8E463F31EB1C6C300B45B10 /* HabitViewController.swift in Sources */,
+				07D7D5381EC9FEB4000F6054 /* ItemCollection.swift in Sources */,
 				A8E463F51EB1C6E600B45B10 /* Habit.swift in Sources */,
 				07A395B91EAE74ED003C6E64 /* FutureLogEventViewController.swift in Sources */,
 				073F6AAD1EB166E400116DC5 /* DailyLogReflectionViewController.swift in Sources */,
