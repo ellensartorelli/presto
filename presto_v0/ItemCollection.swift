@@ -33,43 +33,17 @@ class ItemCollection{
         }
     }
     
-    /*
-     This function will return an Item, creating if it doesn't exist.
-     
-     it is following the find-or-create design pattern
-     */
-//    private func findAuthor(name:String)->Author?{
-//        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Item")
-//        request.fetchLimit = 1
-//        request.predicate = NSPredicate(format:"text == %@", text)
-//        do {
-//            let matches = try managedObjectContext.fetch(request)
-//            
-//            if (matches.count == 0){
-//                // can't find the author, make one
-//                var author:Author!
-//                managedObjectContext.performAndWait {
-//                    author = Author(context: self.managedObjectContext)
-//                    author.name = name
-//                }
-//                return author
-//            }else{
-//                return matches[0] as? Item
-//            }
-//        }catch{
-//            fatalError("Unable to fetch Items")
-//        }
-//        return nil
-//    }
     
     /* Add a new book to the collection */
-    func add(text:String, type:String, startDate:Date){
+    func add(text:String, type:String, time:Date, completed:Bool, alert:Bool){
         var item:Item!
         managedObjectContext.performAndWait {
             item = Item(context: self.managedObjectContext)
             item.text = text
             item.type = type
-            item.startDate = startDate as NSDate?
+            item.time = time as NSDate?
+            item.completed = false //initialize completed as false
+            item.alert = false
             self.saveChanges()
         }
     }
@@ -78,11 +52,33 @@ class ItemCollection{
      
      We make this a seperate function rather than setting the values directly so that we can use findAuthor and save changes.
      */
-    func update(oldItem: Item, text:String, type: String, startDate: Date){
+    func updateTask(oldItem: Item, text:String, time: Date, completed:Bool, alert:Bool){
         oldItem.text = text
-        oldItem.startDate = startDate as NSDate?
+        oldItem.time = time as NSDate?
+        oldItem.completed = completed
+        oldItem.alert = alert
         //won't update type because it cannot change
     
+        self.saveChanges()
+    }
+    
+    func updateEvent(oldItem: Item, text:String, time: Date, completed:Bool, alert:Bool){
+        oldItem.text = text
+        oldItem.time = time as NSDate?
+        oldItem.completed = completed
+        oldItem.alert = false
+        //won't update type because it cannot change
+        
+        self.saveChanges()
+    }
+    
+    func updateReflection(oldItem: Item, text:String, time: Date, completed:Bool, alert:Bool){
+        oldItem.text = text
+        oldItem.time = time as NSDate?
+        oldItem.completed = false
+        oldItem.alert = false
+        //won't update type because it cannot change
+        
         self.saveChanges()
     }
     

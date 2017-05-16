@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CoreData
+
 
 class DailyLogTaskTableViewCell: UITableViewCell {
 
@@ -14,11 +16,12 @@ class DailyLogTaskTableViewCell: UITableViewCell {
     @IBOutlet weak var taskButtonDone: UIButton!
     @IBOutlet weak var taskButtonDo: UIButton!
     
+    
     func configureCell(item: Item){
         taskLabel.text = item.text
         //check
-        //taskButtonDo.isHidden = item.completed
-        //taskButtonDone.isHidden = !(item.completed)
+        taskButtonDo.isHidden = item.completed
+        taskButtonDone.isHidden = !(item.completed)
     }
     
  

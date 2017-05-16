@@ -11,6 +11,8 @@ import os.log
 
 class DailyLogEventTableViewController: UITableViewController, UITextFieldDelegate {
 
+    var type: DetailTypeEvent = .new
+    var callback: ((String, String, Date, Bool, Bool)->Void)?
 
     var event: DailyLogEvent?
     @IBOutlet weak var titleTextField: UITextField!
@@ -42,24 +44,15 @@ class DailyLogEventTableViewController: UITableViewController, UITextFieldDelega
         tableView.tableFooterView = UIView(frame: .zero)
         
         
-        // Set up views if editing an existing Meal.
-        if let event = event {
-            //compute time for time label
-            let calendar = Calendar.current
-            
-            let hour = calendar.component(.hour, from: event.time)%12
-            let minute = calendar.component(.minute, from: event.time)
-            
-            
-            navigationItem.title = event.title
-            titleTextField.text = event.title
-            timeLabel.text = "\(hour):\(String(format: "%02d", minute))"
-            timePicker.date = event.time
+        // Do any additional setup after loading the view.
+        switch(type){
+        case .new:
+            break
+        case let .updatingEvent(text, startDate):
+            navigationItem.title = text
+            titleTextField.text = text
+            timePicker.date = startDate
         }
-        
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
@@ -135,85 +128,27 @@ class DailyLogEventTableViewController: UITableViewController, UITextFieldDelega
         return true
     }
 
-    
-    
-    // MARK: - Table view data source
-//
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        // #warning Incomplete implementation, return the number of sections
-//        return 0
-//    }
-//
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        // #warning Incomplete implementation, return the number of rows
-//        return 0
-//    }
 
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
 
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        super.prepare(for: segue, sender: sender)
-        
-        guard let button = sender as? UIBarButtonItem, button === saveButton else {
-            os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
+        guard let button = sender as? UIBarButtonItem, button === saveButton else{
+            print("The save button was not pressed")
             return
         }
         
-        let title = titleTextField.text
+        let text = titleTextField.text ?? ""
+        let type = "event"
+        let startDate = timePicker.date
+        let completed = true //CHANGE CHANGE CHANGE CHANGE CHANGE
+        let alert = false
         
-        //set completed when edting or adding new task
-        let completedBool = (event?.completed != nil) ? (event?.completed) : false
-        
-        event = DailyLogEvent(title:title!, time: timePicker.date, completed: completedBool!)
+        if callback != nil{
+            callback!(text, type, startDate, completed, alert)
+        }
         
     }
     //TextField delegate functions
@@ -239,4 +174,9 @@ class DailyLogEventTableViewController: UITableViewController, UITextFieldDelega
     }
  
 
+}
+
+enum DetailTypeEvent{
+    case new
+    case updatingEvent(String, Date)
 }

@@ -677,13 +677,13 @@
                             <color key="tintColor" red="0.1647058824" green="0.43921568630000002" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="cancel:" destination="srE-D0-AcF" id="blj-Xp-W4S"/>
-                                <segue destination="a7n-wF-ZRu" kind="unwind" unwindAction="unwindToDailyLogEventWithSender:" id="WZ8-2D-LSB"/>
+                                <segue destination="a7n-wF-ZRu" kind="unwind" unwindAction="unwindFromEventWithSender:" id="Bea-Dg-pyX"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="oNx-0q-FwH">
                             <color key="tintColor" red="0.1647058824" green="0.43921568630000002" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="a7n-wF-ZRu" kind="unwind" unwindAction="unwindToDailyLogEventWithSender:" id="vK5-ds-uxW"/>
+                                <segue destination="a7n-wF-ZRu" kind="unwind" unwindAction="unwindFromEventWithSender:" id="3it-jE-EHg"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -732,13 +732,13 @@
                             <color key="tintColor" red="0.1647058824" green="0.43921568630000002" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="cancel:" destination="r2m-Ue-kKP" id="Bqh-r3-TSm"/>
-                                <segue destination="cFT-Wf-3vx" kind="unwind" unwindAction="unwindToReflectionListWithSender:" id="O6y-Z0-IIF"/>
+                                <segue destination="cFT-Wf-3vx" kind="unwind" unwindAction="unwindFromReflectionWithSender:" id="Brs-ZB-Hih"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="zSq-ZA-oSJ">
                             <color key="tintColor" red="0.1647058824" green="0.43921568630000002" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="cFT-Wf-3vx" kind="unwind" unwindAction="unwindToReflectionListWithSender:" id="7TU-NT-4GW"/>
+                                <segue destination="cFT-Wf-3vx" kind="unwind" unwindAction="unwindFromReflectionWithSender:" id="Y2P-oy-oJ6"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

@@ -11,7 +11,7 @@ import UIKit
 class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, UINavigationControllerDelegate, UIPickerViewDelegate {
     
     var type: DetailType = .new
-    var callback: ((String, String, Date)->Void)?
+    var callback: ((String, String, Date, Bool, Bool)->Void)?
     
     
     //MARK: - PROPERTIES
@@ -38,11 +38,12 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
         switch(type){
         case .new:
             break
-        case let .update(text, type, startDate):
+        case let .updating(text, startDate, _, alert):
             navigationItem.title = text
             taskTextField.text = text
-            taskTextField.text = type
             timePicker.date = startDate
+            
+            toggle.isOn = alert
         }
         
     }
@@ -65,13 +66,15 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
             print("The save button was not pressed")
             return
         }
-   
+        
         let text = taskTextField.text ?? ""
-        let type = taskTextField.text ?? ""
+        let type = "task"
         let startDate = timePicker.date
+        let completed = false //change change change change
+        let alert = toggle.isOn
         
         if callback != nil{
-            callback!(text, type, startDate)
+            callback!(text, type, startDate, completed, alert)
         }
     }
     
@@ -82,34 +85,6 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
         setMinDate()
     }
     
-    
-//    @IBAction func save(sender: UIBarButtonItem) {
-//        print("Saving")
-//
-//        guard let managedObjectContext = managedObjectContext else { return }
-//        
-//        // Create Item
-//        let task = Item(context: managedObjectContext)
-//        
-//        // Configure Item
-//        task.text = taskTextField.text
-//        task.time = timePicker.date as NSDate?
-//
-//    }
-
-    
-//    @IBAction func cancel(_ sender: UIBarButtonItem) {
-//        // Depending on style of presentation (modal or push presentation), this view controller needs to be dismissed in two different ways.
-//        let isPresentingInAddTaskMode = presentingViewController is UINavigationController
-//        
-//        if isPresentingInAddTaskMode {
-//            dismiss(animated: true, completion: nil)
-//        } else if let owningNavigationController = navigationController{
-//            owningNavigationController.popViewController(animated: true)
-//        } else {
-//            fatalError("The TaskViewController is not inside a navigation controller.")
-//        }
-//    }
 
     @IBAction func toggleValueChanged(_ sender: UISwitch) {
         tableView.reloadData()
@@ -243,6 +218,6 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
 
 enum DetailType{
     case new
-    case update(String, String, Date)
+    case updating(String, Date, Bool, Bool)
 }
 
