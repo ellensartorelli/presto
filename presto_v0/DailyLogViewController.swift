@@ -35,11 +35,10 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCalendar()
-        updateView()
+//        updateView()
         tableView.delegate = self
         tableView.dataSource = self
         self.view.addSubview(self.tableView)
-        print("initilize FRC")
         self.initializeFetchResultsController()
 
         // Use the edit button item provided by the table view controller.
@@ -76,7 +75,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
 
     
     // MARK: - Private Functions
-   
+   /*
     fileprivate func updateView() {
         var hasItems = false
         
@@ -87,7 +86,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.isHidden = !hasItems
         messageLabel.isHidden = hasItems
     }
-
+*/
 
     
     //MARK: - MiniCalendar
@@ -173,17 +172,52 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     /* Get a table cell loaded with the right data for the entry at indexPath (section/row)*/
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // get one of our custom cells, building or reusing as needed
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as? DailyLogTaskTableViewCell else{
-            fatalError("Can't get cell of the right kind")
-        }
+        
         
         guard let item = self.fetchedResultsController.object(at: indexPath) as? Item else{
             fatalError("Cannot find item")
         }
         
-        cell.configureCell(item: item)
         
-        return cell
+        switch item.type! {
+        case "task":
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as? DailyLogTaskTableViewCell else{
+                fatalError("Can't get cell of the right kind")
+            }
+            
+            
+            cell.configureCell(item: item)
+            
+            return cell
+        case "event":
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as? DailyLogEventTableViewCell else{
+                fatalError("Can't get cell of the right kind")
+            }
+            
+            
+            cell.configureCell(item: item)
+            
+            return cell
+        case "reflection":
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "reflectionCell", for: indexPath) as? DailyLogReflectionTableViewCell else{
+                fatalError("Can't get cell of the right kind")
+            }
+            
+            
+            cell.configureCell(item: item)
+            
+            return cell
+        default:
+            print("Cannot read cell type")
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "reflectionCell", for: indexPath) as? DailyLogReflectionTableViewCell else{
+                fatalError("Can't get cell of the right kind")
+            }
+            
+            cell.configureCell(item: item)
+            return cell
+        }
+
+ 
     }
     
     
@@ -223,7 +257,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
-        updateView()
+//        updateView()
     }
     
 
@@ -244,8 +278,8 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
                 fatalError("Unexpected destination: \(segue.destination)")
             }
             destination.type = .new
-            destination.callback = { (text, type, startDate) in
-                self.items.add(text:text, type: type, startDate: startDate)
+            destination.callback = { (text, type, time, completed, alert) in
+                self.items.add(text:text, type:type, time: time, completed:completed, alert:alert)
             }
         case "ShowDetailTask":
             
@@ -266,12 +300,82 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
                 fatalError("fetched object was not an Item")
             }
             
-            destination.type = .update(item.text!, item.type!, item.startDate as! Date)
-            destination.callback = { (text, type, startDate) in
-                self.items.update(oldItem: item, text: text, type: type, startDate: startDate)
+            destination.type = .updating(item.text!, item.time! as Date, item.completed, item.alert)
+            destination.callback = { (text, type, time, completed, alert) in
+                self.items.updateTask(oldItem: item, text: text, time: time, completed: completed, alert: alert)
+            }
+            
+        case "eventSegue":
+            guard let navController = segue.destination as? UINavigationController else{
+                fatalError("Unexpected destination: \(segue.destination)")
+            }
+            guard let destination = navController.topViewController as? DailyLogEventTableViewController else{
+                fatalError("Unexpected destination: \(segue.destination)")
+            }
+            destination.type = .new
+            destination.callback = { (text, type, time, completed, alert) in
+                self.items.add(text:text, type:type, time: time, completed:completed, alert:alert)
+            }
+        case "ShowDetailEvent":
+            
+            guard let destination = segue.destination as? DailyLogEventTableViewController else{
+                fatalError("Unexpected destination: \(segue.destination)")
+            }
+            
+            guard let cell = sender as? DailyLogEventTableViewCell else{
+                fatalError("Unexpected sender: \(sender)")
+            }
+            
+            guard let indexPath = tableView.indexPath(for: cell) else{
+                fatalError("The selected cell can't be found")
             }
             
             
+            guard let item = fetchedResultsController?.object(at: indexPath) as? Item else{
+                fatalError("fetched object was not an Item")
+            }
+            
+            destination.type = .updatingEvent(item.text! as String, (item.time! as NSDate) as Date)
+            destination.callback = { (text, type, time, completed, alert) in
+                self.items.updateTask(oldItem: item, text: text, time: time, completed: completed, alert: alert)
+            }
+            
+        case "reflectionSegue":
+            guard let navController = segue.destination as? UINavigationController else{
+                fatalError("Unexpected destination: \(segue.destination)")
+            }
+            guard let destination = navController.topViewController as? DailyLogReflectionViewController else{
+                fatalError("Unexpected destination: \(segue.destination)")
+            }
+            destination.type = .new
+            destination.callback = { (text, type, time, completed, alert) in
+                self.items.add(text:text, type:type, time: time, completed:completed, alert:alert)
+            }
+        case "ShowDetailReflection":
+            
+            guard let destination = segue.destination as? DailyLogReflectionViewController else{
+                fatalError("Unexpected destination: \(segue.destination)")
+            }
+            
+            guard let cell = sender as? DailyLogReflectionTableViewCell else{
+                fatalError("Unexpected sender: \(sender)")
+            }
+            
+            guard let indexPath = tableView.indexPath(for: cell) else{
+                fatalError("The selected cell can't be found")
+            }
+            
+            
+            guard let item = fetchedResultsController?.object(at: indexPath) as? Item else{
+                fatalError("fetched object was not an Item")
+            }
+            
+            destination.type = .updatingReflection(item.text!)
+            destination.callback = { (text, type, time, completed, alert) in
+                self.items.updateReflection(oldItem: item, text: text, time: time, completed: completed, alert: alert)
+            }
+            
+     
         default:
             fatalError("Unexpeced segue identifier: \(segue.identifier)")
         }
@@ -283,6 +387,13 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.reloadData()
     }
     
+    @IBAction func unwindFromEvent(sender: UIStoryboardSegue){
+        tableView.reloadData()
+    }
+    
+    @IBAction func unwindFromReflection(sender: UIStoryboardSegue){
+        tableView.reloadData()
+    }
     
 }
 

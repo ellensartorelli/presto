@@ -17,6 +17,11 @@ class DailyLogReflectionTableViewCell: UITableViewCell {
     @IBOutlet weak var reflectionText: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     
+    func configureCell(item: Item){
+        reflectionText.text = item.text
+    }
+    
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()

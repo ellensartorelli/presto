@@ -16,6 +16,11 @@ class DailyLogEventTableViewCell: UITableViewCell {
     
     @IBOutlet weak var eventButtonComplete: UIButton!
     
+    func configureCell(item: Item){
+        eventLabel.text = item.text
+        eventButtonIncomplete.isHidden = item.completed
+        eventButtonComplete.isHidden = !(item.completed)
+    }
     
     
     @IBAction func IncompleteTapped(sender: AnyObject)

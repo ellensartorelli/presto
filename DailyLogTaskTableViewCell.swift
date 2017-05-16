@@ -8,17 +8,22 @@
 
 import UIKit
 
+
 class DailyLogTaskTableViewCell: UITableViewCell {
 
     @IBOutlet weak var taskLabel: UILabel!
     @IBOutlet weak var taskButtonDone: UIButton!
     @IBOutlet weak var taskButtonDo: UIButton!
     
+//    private let items = ItemCollection(){
+//        print("Core Data connected")
+//    }
+    
     func configureCell(item: Item){
         taskLabel.text = item.text
         //check
-        //taskButtonDo.isHidden = item.completed
-        //taskButtonDone.isHidden = !(item.completed)
+        taskButtonDo.isHidden = item.completed
+        taskButtonDone.isHidden = !(item.completed)
     }
     
  
