@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 
 class DailyLogTaskTableViewCell: UITableViewCell {
@@ -15,9 +16,6 @@ class DailyLogTaskTableViewCell: UITableViewCell {
     @IBOutlet weak var taskButtonDone: UIButton!
     @IBOutlet weak var taskButtonDo: UIButton!
     
-//    private let items = ItemCollection(){
-//        print("Core Data connected")
-//    }
     
     func configureCell(item: Item){
         taskLabel.text = item.text

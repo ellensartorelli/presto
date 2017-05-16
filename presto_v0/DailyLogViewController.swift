@@ -179,12 +179,14 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         }
         
         
+        
         switch item.type! {
         case "task":
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as? DailyLogTaskTableViewCell else{
                 fatalError("Can't get cell of the right kind")
             }
             
+            self.items.updateTask(oldItem: item, text: item.text!, time: item.time as! Date, completed: cell.taskButtonDone.isHidden, alert: item.alert)
             
             cell.configureCell(item: item)
             

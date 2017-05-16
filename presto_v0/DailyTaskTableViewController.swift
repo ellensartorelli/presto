@@ -66,11 +66,11 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
             print("The save button was not pressed")
             return
         }
-   
+        
         let text = taskTextField.text ?? ""
         let type = "task"
         let startDate = timePicker.date
-        let completed = 
+        let completed = false //change change change change
         let alert = toggle.isOn
         
         if callback != nil{
