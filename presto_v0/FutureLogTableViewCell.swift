@@ -9,10 +9,24 @@
 import UIKit
 
 class FutureLogTableViewCell: UITableViewCell {
+    
+        
     @IBOutlet weak var dayLabel: UILabel!
 
     @IBOutlet weak var eventLabel: UILabel!
 
+    
+    func configureCell(item: Item){
+        eventLabel.text = item.text
+        let calendar = Calendar.current
+        let day = calendar.component(.day, from:item.time as! Date)
+        let month = calendar.component(.month, from:item.time as! Date)
+        let year = calendar.component(.year, from:item.time as! Date)
+        
+        dayLabel.text = "\(month)/\(day)/\(year%100)"
+        
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -25,3 +39,4 @@ class FutureLogTableViewCell: UITableViewCell {
     }
 
 }
+
