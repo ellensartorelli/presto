@@ -926,7 +926,6 @@
                         <segue destination="01Y-xN-X6N" kind="relationship" relationship="viewControllers" id="eu1-JY-LR9"/>
                         <segue destination="Aor-6H-o7p" kind="relationship" relationship="viewControllers" id="0hr-OC-XPn"/>
                         <segue destination="Qbg-KZ-Jph" kind="relationship" relationship="viewControllers" id="GOB-LB-ewk"/>
-                        <segue destination="WIE-fg-xau" kind="relationship" relationship="viewControllers" id="0sF-hP-fed"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vkc-Zc-xSA" userLabel="First Responder" sceneMemberID="firstResponder"/>

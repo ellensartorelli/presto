@@ -108,6 +108,18 @@ class ReflectionTableViewController: UITableViewController, UITextViewDelegate {
         return true
     }
     */
+    
+    
+    //MARK: Private Methods
+//    func updateView(){
+//        if(reflections.count == 0){
+//            messageLabel.isHidden = false
+//            emptyView.isHidden = false
+//        }else{
+//            messageLabel.isHidden = true
+//            emptyView.isHidden = true
+//        }
+//    }
 
     //MARK: -Actions
 
