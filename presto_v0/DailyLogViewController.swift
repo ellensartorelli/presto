@@ -474,6 +474,10 @@ extension DailyLogViewController: JTAppleCalendarViewDataSource{
         formatter.dateStyle = .long
         currentDateLabel.text = formatter.string(from:date)
         
+        //update Daily log property date
+        self.date = date
+        
+        
         //predicate stuff
         selectedDate(date: date)
 
