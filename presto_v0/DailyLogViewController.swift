@@ -105,6 +105,30 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
+    func selectedDate(date: Date){
+        
+        //just code for printing
+        print("A new date was selected")
+        formatter.dateFormat = "MM.dd.yyyy"
+        print(formatter.string(from: date))
+        
+        //Seting up predicate formatting
+        var calendar = Calendar.current
+        calendar.timeZone = NSTimeZone.local
+        
+        let dateFrom = calendar.startOfDay(for: date) // eg. 2016-10-10 00:00:00
+        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute],from: dateFrom)
+        components.day! += 1
+        let dateTo = calendar.date(from: components)! // eg. 2016-10-11 00:00:00
+        // Note: Times are printed in UTC. Depending on where you live it won't print 00:00:00 but it will work with UTC times which can be converted to local time
+        
+        // Set predicate as date being selected date
+        let datePredicate = NSPredicate(format: "(%@ <= date) AND (date < %@)", argumentArray: [dateFrom, dateTo])
+        
+    }
+    
+
+    
     
     //MARK: - Actions
     @IBAction func cancel(_ sender: UIBarButtonItem) {
@@ -449,6 +473,10 @@ extension DailyLogViewController: JTAppleCalendarViewDataSource{
         //setup labels
         formatter.dateStyle = .long
         currentDateLabel.text = formatter.string(from:date)
+        
+        //predicate stuff
+        selectedDate(date: date)
+
         
     }
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
