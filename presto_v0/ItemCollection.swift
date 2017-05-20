@@ -82,17 +82,6 @@ class ItemCollection{
         self.saveChanges()
     }
     
-    func updateFLEvent(oldItem: Item, text:String, time: Date, completed:Bool, alert:Bool){
-        oldItem.text = text
-        oldItem.time = time as NSDate?
-        oldItem.completed = false
-        oldItem.alert = false
-        //won't update type because it cannot change
-        
-        self.saveChanges()
-    }
-    
-    
     /*
      Remove an item from the collection
      */

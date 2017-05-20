@@ -7,23 +7,19 @@
 //
 import os.log
 import UIKit
-import CoreData
 
-class ReflectionTableViewController: UITableViewController, UITextViewDelegate, NSFetchedResultsControllerDelegate {
+class ReflectionTableViewController: UITableViewController, UITextViewDelegate {
     
-    private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
     
-    private let reflections = ItemCollection(){
-        print("Core Data connected")
-        print("reflection tab")
-    }
+    var reflections = [DailyLogReflection]()
+    
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loadSampleReflections()
         
-        self.initializeFetchResultsController()
 
         // Use the edit button item provided by the table view controller.
         navigationItem.leftBarButtonItem = editButtonItem
@@ -32,32 +28,10 @@ class ReflectionTableViewController: UITableViewController, UITextViewDelegate, 
 
     }
 
-    func initializeFetchResultsController(){
-        
-        // Create Fetch Request
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName:"Item")
-        
-        // Configure Fetch Request
-        request.sortDescriptors = [NSSortDescriptor(key: "time", ascending: true)]
-        request.predicate = NSPredicate(format: "type == %@", "reflection")
-        
-        let moc = reflections.managedObjectContext
-        // Create Fetched Results Controller
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
-        
-        // Configure Fetched Results Controller
-        fetchedResultsController.delegate = self
-        do {
-            try fetchedResultsController.performFetch()
-        }catch{
-            fatalError("Failed to fetch data")
-        }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
-    
-//    override func didReceiveMemoryWarning() {
-//        super.didReceiveMemoryWarning()
-//        // Dispose of any resources that can be recreated.
-//    }
 
     // MARK: - Table view data source
 
@@ -67,31 +41,35 @@ class ReflectionTableViewController: UITableViewController, UITextViewDelegate, 
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let sections = fetchedResultsController?.sections else{
-            return 0
-        }
-        
-        let sectionInfo = sections[section]
-        
-        return sectionInfo.numberOfObjects
+        // #warning Incomplete implementation, return the number of rows
+        return reflections.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("populating tableview in reflection tab")
-        guard let item = self.fetchedResultsController.object(at: indexPath) as? Item else{
-            fatalError("Cannot find item")
-        }
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "reflectionTabReflection", for: indexPath) as? DailyLogReflectionTableViewCell
-            else{
-                fatalError("Can't get cell of the right kind")
-        }
-        print("reflectioncell")
-        cell.configureCellRefTab(item: item)
-        return cell
         
 
+        // Configure the cell...
+
+        // Table view cells are reused and should be dequeued using a cell identifier.
+        let cellIdentifier = "reflectionTabReflection"
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? DailyLogReflectionTableViewCell  else {
+            fatalError("The dequeued cell is not an instance of DailyLogReflectionTableViewCell.")
+        }
+
+        // Fetches the appropriate meal for the data source layout.
+        let reflection = reflections[indexPath.row]
+        cell.reflectionTextLong.text = reflection.reflection
+
+        let myFormatter = DateFormatter()
+        myFormatter.dateStyle = .long
+        cell.dateTime.text = myFormatter.string(from: reflection.date) // "March 10, 1876"
+        myFormatter.dateStyle = .none
+        myFormatter.timeStyle = .short // 1:50 PM
+        cell.timeLabel.text = myFormatter.string(from: reflection.date)
+        
+        return cell
     }
     
 
@@ -108,11 +86,10 @@ class ReflectionTableViewController: UITableViewController, UITextViewDelegate, 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            guard let item = self.fetchedResultsController?.object(at: indexPath) as? Item else{
-                fatalError("Cannot find item")
-            }
-            
-            reflections.delete(item)
+            reflections.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
 
@@ -131,30 +108,6 @@ class ReflectionTableViewController: UITableViewController, UITextViewDelegate, 
         return true
     }
     */
-    
-    // MARK: Connect tableview to fetched results controller
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        switch type {
-        case .insert:
-            tableView.insertRows(at: [newIndexPath!], with: .fade)
-        case .delete:
-            tableView.deleteRows(at: [indexPath!], with: .fade)
-        case .update:
-            tableView.reloadRows(at: [indexPath!], with: .fade)
-        case .move:
-            tableView.moveRow(at: indexPath!, to: newIndexPath!)
-        }
-    }
-    
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.beginUpdates()
-    }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.endUpdates()
-        //        updateView()
-    }
 
     //MARK: -Actions
 
@@ -162,12 +115,48 @@ class ReflectionTableViewController: UITableViewController, UITextViewDelegate, 
     @IBAction func unwindToReflection(sender: UIStoryboardSegue) {
         print("clicked save from ref tab")
 
-        tableView.reloadData()
         
+        
+        if let sourceViewController = sender.source as? DailyLogReflectionViewController, let reflection = sourceViewController.reflection {
+            
+            
+            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                // Update an existing meal.
+                reflections[selectedIndexPath.row] = reflection
+                tableView.reloadRows(at: [selectedIndexPath], with: .none)
+            }
+            else {
+                // Add a new reflection.
+                let newIndexPath = IndexPath(row: reflections.count, section: 0)
+                
+                reflections.append(reflection)
+                tableView.insertRows(at: [newIndexPath], with: .automatic)            }
+        }
 
     }
     
+    
+    private func loadSampleReflections(){
+        print("called Reflections from reftab")
+        
+        guard let ref1 = DailyLogReflection(reflection: "In 1531 the Virgin of Guadalupe’s miraculous apparition to an indigenous man, Juan Diego was quickly seen as highly symbolic and was especially celebrated and cherished by the native population of Mexico. Yet the apparition tradition is similar to the story of the Spanish statuette, Our Lady of Guadalupe in Extremadura, Spain, and the location of the apparition in Mexico was home to an Aztec mother deity.The roots of the Virgin of Guadalupe’s apparition story, like most of Mexico’s existing culture, came over with the Spanish conquistadores and Catholic clergy who coerced many of the indigenous peoples of Mexico into Catholicism. This conversion was crucial to colonizing the new country and led to new oral narratives such as the story of the apparition of the Virgin of Guadalupe, but also to Indian ambivalence toward the Spanish. Image passive and docile. The image of the Virgin of Guadalupe is responsible for fusing together both Spanish and Aztec traditions that unifies Mexico as it is today. Has also influence the role of women.", date: Date.init()) else {
+            fatalError("Unable to instantiate reflection")
+        }
+        let minute:TimeInterval = 60.0
+        let hour:TimeInterval = 60.0 * minute
+        let day:TimeInterval = 24 * hour
+        let month:TimeInterval = 31*day
+        
+        let date = Date(timeInterval: -month, since: Date())
+        
 
+        
+        guard let ref2 = DailyLogReflection(reflection: "Today we are announcing the establishment and membership of a College-wide committee to explore and discuss issues relating to the events of March 2, including, but not limited to, freedom of expression, inclusivity, and the educational and civic challenges of the 21st century. The creation of this committee was among the most frequently offered suggestions in the weeks following March 2. The committee will commence its work this spring and resume in the fall semester, with the aim of completing its work by the end of 2017.", date: date) else {
+            fatalError("Unable to instantiate reflection")
+        }
+        
+        reflections += [ref2, ref1]
+    }
     
     
     // MARK: - Navigation
@@ -176,45 +165,31 @@ class ReflectionTableViewController: UITableViewController, UITextViewDelegate, 
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-
         switch(segue.identifier ?? ""){
         case "AddItem":
-            guard let navController = segue.destination as? UINavigationController else{
-                fatalError("Unexpected destination: \(segue.destination)")
-            }
-            guard let destination = navController.topViewController as? DailyLogReflectionViewController else{
-                fatalError("Unexpected destination: \(segue.destination)")
-            }
-            destination.type = .new
-            destination.callback = { (text, type, time, completed, alert) in
-                self.reflections.add(text:text, type:type, time: time, completed:completed, alert:alert)
-            }
+            os_log("Adding a new reflection", log: OSLog.default, type: .debug)
+            
         case "ShowDetail":
-            guard let destination = segue.destination as? DailyLogReflectionViewController else{
+            guard let reflectionDetailViewController = segue.destination as? DailyLogReflectionViewController else {
                 fatalError("Unexpected destination: \(segue.destination)")
             }
             
-            guard let cell = sender as? DailyLogReflectionTableViewCell else{
+            guard let selectedReflectionCell = sender as? DailyLogReflectionTableViewCell else {
                 fatalError("Unexpected sender: \(sender)")
             }
             
-            guard let indexPath = tableView.indexPath(for: cell) else{
-                fatalError("The selected cell can't be found")
+            guard let indexPath = tableView.indexPath(for: selectedReflectionCell) else {
+                fatalError("The selected cell is not being displayed by the table")
             }
             
+            let selectedReflection = reflections[indexPath.row]
+            reflectionDetailViewController.reflection = selectedReflection
             
-            guard let item = fetchedResultsController?.object(at: indexPath) as? Item else{
-                fatalError("fetched object was not an Item")
-            }
-            
-            destination.type = .updatingReflection(item.text!)
-            destination.callback = { (text, type, time, completed, alert) in
-                self.reflections.updateReflection(oldItem: item, text: text, time: time, completed: completed, alert: alert)
-            }
         default:
             fatalError("Unexpected Segue Identifier; \(segue.identifier)")
+            
         }
-    
+        
     }
 
     

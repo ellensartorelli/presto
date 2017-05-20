@@ -21,23 +21,6 @@ class DailyLogReflectionTableViewCell: UITableViewCell {
         reflectionText.text = item.text
     }
     
-    func configureCellRefTab (item:Item) {
-        reflectionTextLong.text = item.text
-        let calendar = Calendar.current
-        let day = calendar.component(.day, from:item.time as! Date)
-        let month = calendar.component(.month, from:item.time as! Date)
-
-        let monthName = DateFormatter().monthSymbols[month - 1]
-        let year = calendar.component(.year, from:item.time as! Date)
-        
-        let hour = (calendar.component(.hour, from: item.time as! Date)-1) % 12 + 1
-        let minutes = calendar.component(.minute, from: item.time as! Date)
-        let time = "\(hour):" + String(format: "%02d", minutes)
-        
-        dateTime.text = monthName + " \(day), \(year)"
-        timeLabel.text = time
-    }
-    
     
 
     override func awakeFromNib() {
