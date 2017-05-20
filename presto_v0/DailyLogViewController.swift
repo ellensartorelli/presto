@@ -310,7 +310,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
             return cell
         default:
             print("Cannot read cell type")
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "reflectionCell", for: indexPath) as? DailyLogReflectionTableViewCell else{
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as? DailyLogEventTableViewCell else{
                 fatalError("Can't get cell of the right kind")
             }
             
@@ -478,7 +478,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
             
      
         default:
-            fatalError("Unexpeced segue identifier: \(segue.identifier)")
+            fatalError("Unexpected segue identifier: \(segue.identifier)")
         }
     
     }

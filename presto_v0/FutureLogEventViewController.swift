@@ -14,7 +14,9 @@ class FutureLogEventViewController: UIViewController, UITextFieldDelegate, UINav
     
 
     var event: FutureLogEvent?
-    
+    var type: DetailTypeFLEvent = .new
+    var callback: ((String, String, Date, Bool, Bool)->Void)?
+
     
     //Outlets
     @IBOutlet weak var eventLabelTF: UITextField!
@@ -59,12 +61,17 @@ class FutureLogEventViewController: UIViewController, UITextFieldDelegate, UINav
             return
         }
         
-        let title = eventLabelTF.text ?? ""
+        let text = eventLabelTF.text ?? ""
         let startDate = startDatePicker.date
         let endDate = endDatePicker.date
+        let type = "futureLogEvent"
+        let alert = false
+        let completed = false
         
-        event = FutureLogEvent(title: title, startDate: startDate, endDate: endDate, notes: "")
-
+//        event = FutureLogEvent(title: title, startDate: startDate, endDate: endDate, notes: "")
+        if callback != nil{
+            callback!(text, type, startDate, completed, alert)
+        }
         
     }
     
@@ -131,7 +138,10 @@ class FutureLogEventViewController: UIViewController, UITextFieldDelegate, UINav
     
 }
 
-
+enum DetailTypeFLEvent{
+    case new
+    case updatingEvent(String, Date)
+}
 
 
 

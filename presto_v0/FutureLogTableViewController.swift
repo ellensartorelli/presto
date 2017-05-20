@@ -7,23 +7,24 @@
 //
 
 import UIKit
+import CoreData
 import os.log
 
 
-class FutureLogTableViewController: UITableViewController {
+class FutureLogTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
-    var events = [FutureLogEvent]()
+    private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
+    
+    private let events = ItemCollection(){
+        print("Core Data connected")
+    }
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        events = events.sorted(by: { $0.startDate.compare($1.startDate) == .orderedAscending })
 
-        if let savedEvents = loadFutureLogEvents(){
-            events += savedEvents
-        }else{
-            loadSampleEvents()
-        }
+        
+        self.initializeFetchResultsController()
         
         // Use the edit button item provided by the table view controller.
         navigationItem.leftBarButtonItem = editButtonItem
@@ -31,10 +32,31 @@ class FutureLogTableViewController: UITableViewController {
    
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func initializeFetchResultsController(){
+        
+        // Create Fetch Request
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName:"Item")
+        
+        // Configure Fetch Request
+        request.sortDescriptors = [NSSortDescriptor(key: "time", ascending: true)]
+        
+        let moc = events.managedObjectContext
+        // Create Fetched Results Controller
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
+        
+        // Configure Fetched Results Controller
+        fetchedResultsController.delegate = self
+        do {
+            try fetchedResultsController.performFetch()
+        }catch{
+            fatalError("Failed to fetch data")
+        }
     }
+    
+//    override func didReceiveMemoryWarning() {
+//        super.didReceiveMemoryWarning()
+//        // Dispose of any resources that can be recreated.
+//    }
 
     // MARK: - Table view data source
 
@@ -43,65 +65,52 @@ class FutureLogTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return events.count
+        guard let sections = fetchedResultsController?.sections else{
+            return 0
+        }
+        
+        let sectionInfo = sections[section]
+        
+        return sectionInfo.numberOfObjects
     }
+    
+    
     // SECTION HEADERS
 //    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 //        let monthName = DateFormatter().monthSymbols[section]
 //        return monthName
 //    }
+    
+    
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cellIdentifier = "FutureLogTableViewCell"
-
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? FutureLogTableViewCell  else {
-            fatalError("The dequeued cell is not an instance of FutureLogEventTableViewCell.")
+        guard let item = self.fetchedResultsController.object(at: indexPath) as? Item else{
+            fatalError("Cannot find item")
         }
         
-        // Fetches the appropriate meal for the data source layout.
-        let event = events[indexPath.row]
+        if item.type! == "futureLogEvent" {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "FutureLogTableViewCell", for: indexPath) as? FutureLogTableViewCell
+                else{
+                fatalError("Can't get cell of the right kind")
+            }
+            cell.configureCell(item: item)
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "FutureLogTableViewCell", for: indexPath) as? FutureLogTableViewCell
+                else{
+                    fatalError("Can't get cell of the right kind")
+            }
+            cell.configureCell(item: item)
+            return cell
+        }
         
-        let calendar = Calendar.current
-        let day = calendar.component(.day, from:event.startDate)
-        let month = calendar.component(.month, from:event.startDate)
-        let year = calendar.component(.year, from:event.startDate)
-        
-        cell.eventLabel.text = event.title
-        cell.dayLabel.text = "\(month)/\(day)/\(year%100)"
-        
-        print(event.title)
-
-        // Configure the cell...
-
-        return cell
     }
     
     
     //MARK: Actions
     @IBAction func unwindToEventList(sender: UIStoryboardSegue){
-        
-        
-        if let sourceViewController = sender.source as?
-            FutureLogEventViewController, let event = sourceViewController.event{
-        
-            
-            if let selectedIndexPath = tableView.indexPathForSelectedRow{
-                events[selectedIndexPath.row] = event
-                tableView.reloadRows(at: [selectedIndexPath], with: .none)
-            }
-            else{
-                let newIndexPath = IndexPath(row: events.count, section: 0)
-                
-                events.append(event)
-                tableView.insertRows(at: [newIndexPath], with: .automatic)
-                
-            }
-            saveFutureLogEvents()
-        }
-        //sort months
-        events = events.sorted(by: { $0.startDate.compare($1.startDate) == .orderedAscending })
-        tableView.reloadData()
 
+        tableView.reloadData()
 
     }
     
@@ -118,17 +127,40 @@ class FutureLogTableViewController: UITableViewController {
 
 
     // Override to support editing the table view.
+
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            events.remove(at: indexPath.row)
-            saveFutureLogEvents()
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+            guard let item = self.fetchedResultsController?.object(at: indexPath) as? Item else{
+                fatalError("Cannot find item")
+            }
+            
+            events.delete(item)
+        }
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
+        case .delete:
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+        case .update:
+            tableView.reloadRows(at: [indexPath!], with: .fade)
+        case .move:
+            tableView.moveRow(at: indexPath!, to: newIndexPath!)
+        }
     }
  
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+        //        updateView()
+    }
 
     /*
     // Override to support rearranging the table view.
@@ -152,65 +184,53 @@ class FutureLogTableViewController: UITableViewController {
         super.prepare(for: segue, sender: sender)
         switch(segue.identifier ?? ""){
             case "AddItem":
-                os_log("Adding a new event", log: OSLog.default, type: .debug)
-            
-            case "ShowDetail":
-                guard let eventDetailViewController = segue.destination as? FutureLogEventViewController else {
+                guard let navController = segue.destination as? UINavigationController else{
                     fatalError("Unexpected destination: \(segue.destination)")
                 }
-            
-                guard let selectedEventCell = sender as? FutureLogTableViewCell else {
+                guard let destination = navController.topViewController as? FutureLogEventViewController else{
+                    fatalError("Unexpected destination: \(segue.destination)")
+                }
+                destination.type = .new
+                destination.callback = { (text, type, time, completed, alert) in
+                    self.events.add(text:text, type:type, time: time, completed:completed, alert:alert)
+                }
+            case "ShowDetail":
+                guard let destination = segue.destination as? DailyTaskTableViewController else{
+                    fatalError("Unexpected destination: \(segue.destination)")
+                }
+                
+                guard let cell = sender as? DailyLogTaskTableViewCell else{
                     fatalError("Unexpected sender: \(sender)")
                 }
-            
-                guard let indexPath = tableView.indexPath(for: selectedEventCell) else {
-                    fatalError("The selected cell is not being displayed by the table")
+                
+                guard let indexPath = tableView.indexPath(for: cell) else{
+                    fatalError("The selected cell can't be found")
                 }
-            
-                let selectedEvent = events[indexPath.row]
-                eventDetailViewController.event = selectedEvent
-            
-            default:
-                fatalError("Unexpected Segue Identifier; \(segue.identifier)")
-            
+                
+                
+                guard let item = fetchedResultsController?.object(at: indexPath) as? Item else{
+                    fatalError("fetched object was not an Item")
+                }
+                
+                destination.type = .updating(item.text!, item.time! as Date, item.completed, item.alert)
+                destination.callback = { (text, type, time, completed, alert) in
+                    self.events.updateTask(oldItem: item, text: text, time: time, completed: completed, alert: alert)
+            }
+        default:
+            fatalError("Unexpected Segue Identifier; \(segue.identifier)")
+
+        
         }
- 
+        
     }
+ 
+    
     
     //MARK: - Private Methods
     
-    private func loadSampleEvents(){
-        
-        guard let event1 = FutureLogEvent(title:"Graduation",  startDate: Date.init(), endDate: Date.init(), notes:"It can't come soon enough") else {
-            fatalError("Unable to instantiate event1")
-        }
-        
-        guard let event2 = FutureLogEvent(title:"Job Starts",  startDate: Date.init(), endDate: Date.init(), notes:"It can't come soon enough") else {
-            fatalError("Unable to instantiate event1")
-        }
-        
-        guard let event3 = FutureLogEvent(title:"School Starts",  startDate: Date.init(), endDate: Date.init(), notes:"It can't come soon enough") else {
-            fatalError("Unable to instantiate event1")
-        }
-        
-        
-        events += [event1, event2, event3]
-        events.sorted(by: { $0.startDate.compare($1.startDate) == .orderedAscending })
-    }
 
-    private func saveFutureLogEvents(){
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(events, toFile: FutureLogEvent.ArchiveURL.path)
-        if isSuccessfulSave {
-            os_log("Events successfully saved.", log: OSLog.default, type: .debug)
-        } else {
-            os_log("Failed to save events...", log: OSLog.default, type: .error)
-        }
-    }
-    
-    
-    private func loadFutureLogEvents() -> [FutureLogEvent]? {
-        return NSKeyedUnarchiver.unarchiveObject(withFile: FutureLogEvent.ArchiveURL.path) as? [FutureLogEvent]
-    }
+
+
     
     //MARK: - setting color
     func UIColorFromRGB(rgbValue: UInt) -> UIColor {
