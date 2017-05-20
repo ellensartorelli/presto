@@ -75,7 +75,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
 
     
     // MARK: - Private Functions
-   /*
+/*
     fileprivate func updateView() {
         var hasItems = false
         
@@ -86,7 +86,8 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.isHidden = !hasItems
         messageLabel.isHidden = hasItems
     }
-*/
+ */
+
 
     
     //MARK: - MiniCalendar
@@ -183,10 +184,20 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let sections = fetchedResultsController?.sections else{
-           return 0
+            return 0
         }
-        
+
         let sectionInfo = sections[section]
+        
+        if(sectionInfo.numberOfObjects == 0){
+            print("hiding table, showing label")
+            tableView.isHidden = true
+            messageLabel.isHidden = false
+        }else{
+            print("hiding label, showing table")
+            tableView.isHidden = false
+            messageLabel.isHidden = true
+        }
         
         return sectionInfo.numberOfObjects
 
