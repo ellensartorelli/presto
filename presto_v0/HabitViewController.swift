@@ -31,8 +31,6 @@ class HabitViewController: UIViewController {
         if(habit != nil){
             selected = (habit?.selectedDates)!
         }
-        
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -160,16 +158,7 @@ extension HabitViewController: JTAppleCalendarViewDelegate{
         formatter.dateFormat = "MMMM"
         month.text = formatter.string(from: date)
     }
-    //deselect function not in use/ simulating toggle functionality
-    
-    /*    func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
-     guard let validCell = cell as? CustomCell else{
-     return
-     }
-     validCell.selectedView.isHidden = validCell.selectedView.isHidden
-     
-     }
-     */
+
     
     //MARK: - setting color
     func UIColorFromRGB(rgbValue: UInt) -> UIColor {

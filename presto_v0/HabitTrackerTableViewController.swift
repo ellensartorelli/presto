@@ -7,21 +7,32 @@
 //
 
 import UIKit
+import os.log
 
 class HabitTrackerTableViewController: UITableViewController {
+   
     //MARK: Properties
-    
     var habits = [Habit]()
-    
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadSampleHabits()
         
         // Use the edit button item provided by the table view controller.
         navigationItem.leftBarButtonItem = editButtonItem
         editButtonItem.tintColor = UIColorFromRGB(rgbValue: 2781306)
+        
+        // Load any saved meals, otherwise load sample data.
+        if let savedHabits = loadHabits() {
+            if(savedHabits == []){
+                loadSampleHabits()
+            }
+            habits += savedHabits
+        }
+        else {
+            // Load the sample data.
+            loadSampleHabits()
+        }
 
 
     }
@@ -42,8 +53,20 @@ class HabitTrackerTableViewController: UITableViewController {
             fatalError("Unable to instantiate habit2")
         }
         
-        
         habits += [habit1, habit2]
+    }
+    
+    private func loadHabits() -> [Habit]?  {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: Habit.ArchiveURL.path) as? [Habit]
+    }
+    
+    private func saveHabits() {
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(habits, toFile: Habit.ArchiveURL.path)
+        if isSuccessfulSave {
+            os_log("Habits successfully saved.", log: OSLog.default, type: .debug)
+        } else {
+            os_log("Failed to save habits...", log: OSLog.default, type: .error)
+        }
     }
     
     // MARK: - Table view data source
@@ -90,6 +113,8 @@ class HabitTrackerTableViewController: UITableViewController {
         if editingStyle == .delete {
             // Delete the row from the data source
             habits.remove(at: indexPath.row)
+            // Save the habits.
+            saveHabits()
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -148,38 +173,37 @@ class HabitTrackerTableViewController: UITableViewController {
     @IBAction func unwindToHabitList(sender: UIStoryboardSegue) {
         
         if let sourceViewController = sender.source as? HabitTrackerDetailViewController, let habit = sourceViewController.habit {
-            print("unwinding "+habit.name)
             
             // Add a new habit.
+            
             let newIndexPath = IndexPath(row: habits.count, section: 0)
             
             habits.append(habit)
             tableView.insertRows(at: [newIndexPath], with: .automatic)
         }
         if let sourceViewController = sender.source as? HabitViewController, let habit = sourceViewController.habit {
-            print("unwinding "+habit.name)
             
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 // Update an existing habit.
                 habits[selectedIndexPath.row] = habit
                 tableView.reloadRows(at: [selectedIndexPath], with: .none)
-                print("unwinding "+habit.name)
             }
             
         }
+        // Save the habits.
+        saveHabits()
         
     }
     @IBAction func unwindToHabitListFromEdit(sender: UIStoryboardSegue) {
         
         if let sourceViewController = sender.source as? HabitViewController, let habit = sourceViewController.habit {
-            print("unwinding "+habit.name)
             
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 // Update an existing habit.
                 habits[selectedIndexPath.row] = habit
                 tableView.reloadRows(at: [selectedIndexPath], with: .none)
-                print("unwinding "+habit.name)
             }
+            saveHabits()
             
         }
         

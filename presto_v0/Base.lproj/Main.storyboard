@@ -223,15 +223,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Tap '+' to add items to your Daily Log." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iCe-S7-jK3">
+                                <rect key="frame" x="0.0" y="346" width="414" height="44"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="y43-95-qL5">
                                 <rect key="frame" x="0.0" y="64" width="414" height="95"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap the '+' to add items!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RBQ-Dp-kqH">
-                                        <rect key="frame" x="114.66666666666669" y="0.0" width="184.66666666666663" height="0.0"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7dg-Vp-IRv">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
                                         <subviews>
@@ -532,12 +532,15 @@
                             <constraint firstItem="1hp-rK-kGV" firstAttribute="leading" secondItem="iS4-op-edZ" secondAttribute="leading" id="Fof-eb-vAX"/>
                             <constraint firstAttribute="trailing" secondItem="1hp-rK-kGV" secondAttribute="trailing" id="IGb-mB-xZd"/>
                             <constraint firstItem="1hp-rK-kGV" firstAttribute="leading" secondItem="iS4-op-edZ" secondAttribute="leading" id="JNO-El-dfG"/>
+                            <constraint firstItem="iCe-S7-jK3" firstAttribute="top" secondItem="y43-95-qL5" secondAttribute="bottom" constant="10" id="MCN-7a-Otg"/>
+                            <constraint firstItem="iCe-S7-jK3" firstAttribute="leading" secondItem="iS4-op-edZ" secondAttribute="leading" id="NUG-rj-JqA"/>
                             <constraint firstItem="1hp-rK-kGV" firstAttribute="top" secondItem="y43-95-qL5" secondAttribute="bottom" constant="8" id="Stm-DI-xoM"/>
                             <constraint firstAttribute="trailing" secondItem="1hp-rK-kGV" secondAttribute="trailing" id="Vcm-f9-Vcr"/>
                             <constraint firstAttribute="trailing" secondItem="1hp-rK-kGV" secondAttribute="trailing" id="WsP-aW-RNt"/>
                             <constraint firstItem="1hp-rK-kGV" firstAttribute="top" secondItem="y43-95-qL5" secondAttribute="bottom" constant="8" id="XDe-e7-hZW"/>
                             <constraint firstItem="Crk-Xf-ntD" firstAttribute="top" secondItem="1hp-rK-kGV" secondAttribute="bottom" constant="25" id="eaV-ba-3rJ"/>
                             <constraint firstItem="1hp-rK-kGV" firstAttribute="leading" secondItem="iS4-op-edZ" secondAttribute="leading" id="gWA-8e-Ild"/>
+                            <constraint firstAttribute="trailing" secondItem="iCe-S7-jK3" secondAttribute="trailing" id="xyr-Or-Cl0"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Daily Log" id="nYB-47-bFM">
@@ -549,9 +552,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addButton" destination="1wH-oc-YkF" id="57G-jx-UKg"/>
                         <outlet property="calendarView" destination="OBl-oU-Ae6" id="APc-OU-317"/>
                         <outlet property="currentDateLabel" destination="FOC-lB-O89" id="shS-yr-WRN"/>
-                        <outlet property="messageLabel" destination="RBQ-Dp-kqH" id="yQ6-nq-GrW"/>
+                        <outlet property="messageLabel" destination="iCe-S7-jK3" id="yD2-zf-zdd"/>
                         <outlet property="tableView" destination="1hp-rK-kGV" id="7L3-Zd-Zzz"/>
                         <segue destination="U7m-2Z-Zqs" kind="presentation" identifier="eventSegue" id="7GM-vV-S2c"/>
                         <segue destination="uZj-cA-ZR4" kind="presentation" identifier="reflectionSegue" id="twu-GI-fCL"/>
@@ -832,7 +836,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="w5b-dP-z4F">
-                                                    <rect key="frame" x="-30" y="-52" width="414" height="216"/>
+
+                                                    <rect key="frame" x="-31" y="-52" width="416" height="216"/>
+
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <date key="date" timeIntervalSinceReferenceDate="514846593.11594498">
                                                         <!--2017-04-25 20:56:33 +0000-->
