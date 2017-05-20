@@ -15,20 +15,14 @@ class FutureLogTableViewController: UITableViewController, NSFetchedResultsContr
     
     private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
     
-    var events = ItemCollection(){
+    private let events = ItemCollection(){
         print("Core Data connected")
     }
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        events = events.sorted(by: { $0.startDate.compare($1.startDate) == .orderedAscending })
-//
-//        if let savedEvents = loadFutureLogEvents(){
-//            events += savedEvents
-//        }else{
-//            loadSampleEvents()
-//        }
+
         
         self.initializeFetchResultsController()
         
@@ -90,8 +84,6 @@ class FutureLogTableViewController: UITableViewController, NSFetchedResultsContr
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-
         guard let item = self.fetchedResultsController.object(at: indexPath) as? Item else{
             fatalError("Cannot find item")
         }
@@ -117,10 +109,8 @@ class FutureLogTableViewController: UITableViewController, NSFetchedResultsContr
     
     //MARK: Actions
     @IBAction func unwindToEventList(sender: UIStoryboardSegue){
-        
-        
-        tableView.reloadData()
 
+        tableView.reloadData()
 
     }
     

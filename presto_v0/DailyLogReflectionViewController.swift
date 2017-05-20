@@ -17,7 +17,7 @@ class DailyLogReflectionViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var reflectionText: UITextView!
     
-      var reflection: DailyLogReflection?
+    var reflection: DailyLogReflection?
 
     override func viewDidLoad() {
         super.viewDidLoad()

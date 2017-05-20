@@ -379,7 +379,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
             
      
         default:
-            fatalError("Unexpeced segue identifier: \(segue.identifier)")
+            fatalError("Unexpected segue identifier: \(segue.identifier)")
         }
     
     }
