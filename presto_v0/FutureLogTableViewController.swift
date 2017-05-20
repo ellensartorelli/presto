@@ -23,6 +23,7 @@ class FutureLogTableViewController: UITableViewController {
 
         if let savedEvents = loadFutureLogEvents(){
             events += savedEvents
+            events = events.sorted(by: { $0.startDate.compare($1.startDate) == .orderedAscending })
             updateView()
         }
         
