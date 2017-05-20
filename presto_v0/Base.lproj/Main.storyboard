@@ -552,6 +552,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addButton" destination="1wH-oc-YkF" id="57G-jx-UKg"/>
                         <outlet property="calendarView" destination="OBl-oU-Ae6" id="APc-OU-317"/>
                         <outlet property="currentDateLabel" destination="FOC-lB-O89" id="shS-yr-WRN"/>
                         <outlet property="messageLabel" destination="iCe-S7-jK3" id="yD2-zf-zdd"/>

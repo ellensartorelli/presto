@@ -31,6 +31,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var currentDateLabel: UILabel!
     @IBOutlet weak var calendarView: JTAppleCalendarView!
     
+    @IBOutlet weak var addButton: UIBarButtonItem!
     
     // MARK: - View
     
@@ -187,6 +188,32 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         )
     }
     
+    
+    //MARK: - disable past dates in future log
+    func dateInPast() -> Bool{
+        
+        let selectedDate = date
+        let today = Date.init()
+        
+        let calendar = Calendar.current
+        
+        let selectedDay = calendar.component(.day, from: selectedDate)
+        let selectedMonth = calendar.component(.month, from: selectedDate)
+        let selectedYear = calendar.component(.year, from: selectedDate)
+        
+        let calendar2 = Calendar.current
+        
+        let todayDay = calendar2.component(.day, from: today)
+        let todayMonth = calendar2.component(.month, from: today)
+        let todayYear = calendar2.component(.year, from: today)
+        
+        if(selectedDay == todayDay && selectedMonth == todayMonth && selectedYear == todayYear){
+            return false
+        }else{
+            return date < Date.init()
+        }
+        
+    }
 
     
     // MARK: - Table view data source functions
@@ -202,16 +229,39 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         }
 
         let sectionInfo = sections[section]
-        
-        if(sectionInfo.numberOfObjects == 0){
-            print("hiding table, showing label")
-            tableView.isHidden = true
-            messageLabel.isHidden = false
+    
+        print("date in past is \(dateInPast())")
+        if(dateInPast() == true){
+            //if past date
+            if(sectionInfo.numberOfObjects == 0){
+                //if empty
+                print("hiding table, showing label")
+                tableView.isHidden = true
+                messageLabel.text = "You had no items on your Daily Log this day."
+                addButton.isEnabled = false
+                messageLabel.isHidden = false
+            }else{
+                print("hiding label, showing table")
+                tableView.isHidden = false
+                addButton.isEnabled = false
+                messageLabel.isHidden = true
+            }
         }else{
-            print("hiding label, showing table")
-            tableView.isHidden = false
-            messageLabel.isHidden = true
+            //future or today
+            if(sectionInfo.numberOfObjects == 0){
+                //if empty
+                addButton.isEnabled = true
+                tableView.isHidden = true
+                messageLabel.text = "Tap '+' to add an item!"
+                messageLabel.isHidden = false
+            }else{
+                addButton.isEnabled = true
+                tableView.isHidden = false
+                messageLabel.isHidden = true
+            }
         }
+        
+
         
         return sectionInfo.numberOfObjects
 
@@ -312,7 +362,6 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
-
 
     // MARK: - Navigation
     
