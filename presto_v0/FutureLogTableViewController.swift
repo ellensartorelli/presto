@@ -14,6 +14,8 @@ class FutureLogTableViewController: UITableViewController {
     
     var events = [FutureLogEvent]()
 
+    @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var emptyView: UIView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,8 +23,7 @@ class FutureLogTableViewController: UITableViewController {
 
         if let savedEvents = loadFutureLogEvents(){
             events += savedEvents
-        }else{
-            loadSampleEvents()
+            updateView()
         }
         
         // Use the edit button item provided by the table view controller.
@@ -45,11 +46,7 @@ class FutureLogTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return events.count
     }
-    // SECTION HEADERS
-//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        let monthName = DateFormatter().monthSymbols[section]
-//        return monthName
-//    }
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cellIdentifier = "FutureLogTableViewCell"
@@ -58,7 +55,7 @@ class FutureLogTableViewController: UITableViewController {
             fatalError("The dequeued cell is not an instance of FutureLogEventTableViewCell.")
         }
         
-        // Fetches the appropriate meal for the data source layout.
+        // Fetches the appropriate event for the data source layout.
         let event = events[indexPath.row]
         
         let calendar = Calendar.current
@@ -100,12 +97,22 @@ class FutureLogTableViewController: UITableViewController {
         }
         //sort months
         events = events.sorted(by: { $0.startDate.compare($1.startDate) == .orderedAscending })
+
+        updateView()
+        
         tableView.reloadData()
-
-
     }
     
     
+    func updateView(){
+        if(events.count == 0){
+            messageLabel.isHidden = false
+            emptyView.isHidden = false
+        }else{
+            messageLabel.isHidden = true
+            emptyView.isHidden = true
+        }
+    }
  
 
 
@@ -124,6 +131,7 @@ class FutureLogTableViewController: UITableViewController {
             events.remove(at: indexPath.row)
             saveFutureLogEvents()
             tableView.deleteRows(at: [indexPath], with: .fade)
+            updateView()
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
@@ -178,25 +186,7 @@ class FutureLogTableViewController: UITableViewController {
     }
     
     //MARK: - Private Methods
-    
-    private func loadSampleEvents(){
-        
-        guard let event1 = FutureLogEvent(title:"Graduation",  startDate: Date.init(), endDate: Date.init(), notes:"It can't come soon enough") else {
-            fatalError("Unable to instantiate event1")
-        }
-        
-        guard let event2 = FutureLogEvent(title:"Job Starts",  startDate: Date.init(), endDate: Date.init(), notes:"It can't come soon enough") else {
-            fatalError("Unable to instantiate event1")
-        }
-        
-        guard let event3 = FutureLogEvent(title:"School Starts",  startDate: Date.init(), endDate: Date.init(), notes:"It can't come soon enough") else {
-            fatalError("Unable to instantiate event1")
-        }
-        
-        
-        events += [event1, event2, event3]
-        events.sorted(by: { $0.startDate.compare($1.startDate) == .orderedAscending })
-    }
+
 
     private func saveFutureLogEvents(){
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(events, toFile: FutureLogEvent.ArchiveURL.path)
