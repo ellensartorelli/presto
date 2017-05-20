@@ -48,38 +48,11 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         editButtonItem.tintColor = UIColorFromRGB(rgbValue: 2781306)
     }
     
-    /*
-     Initialize the fetched results controller
-     
-     We configure this to fetch all of the items
-     */
+    // MARK: - Core data
+
     func initializeFetchResultsController(){
         
-        ///////////////////////////////
-        //testing different date
-        let minute:TimeInterval = 60.0
-        let hour:TimeInterval = 60.0 * minute
-        let day:TimeInterval = 24 * hour
-        let month:TimeInterval = 31*day
-        var testDate = Date(timeInterval: -day, since: Date())
-        ///////////////////////////////
-        
-        
-        //Seting up predicate formatting
-        var calendar = Calendar.current
-        calendar.timeZone = NSTimeZone.local
-        
-        let dateFrom = calendar.startOfDay(for: date) // eg. 2016-10-10 00:00:00
-        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute],from: dateFrom)
-        components.day! += 1
-        let dateTo = calendar.date(from: components)! // eg. 2016-10-11 00:00:00
-        // Note: Times are printed in UTC. Depending on where you live it won't print 00:00:00 but it will work with UTC times which can be converted to local time
-        
-        // Set predicate as date being selected date
-        let datePredicate = NSPredicate(format: "(%@ <= time) AND (time < %@)", argumentArray: [dateFrom, dateTo])
-        
-        self.request.predicate = datePredicate
-        
+        self.request.predicate = generatePredicate(date: Date())
 
         self.request.sortDescriptors = [NSSortDescriptor(key: "type", ascending: true)]
         
@@ -89,6 +62,8 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         
         // Configure Fetched Results Controller
         fetchedResultsController.delegate = self
+        
+        //fetch data
         do {
             try fetchedResultsController.performFetch()
         }catch{
@@ -96,11 +71,25 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
+    func generatePredicate(date: Date) -> NSPredicate {
+        //Seting up predicate formatting
+        var calendar = Calendar.current
+        calendar.timeZone = NSTimeZone.local
+        
+        let dateFrom = calendar.startOfDay(for: date) // eg. 2016-10-10 00:00:00
+        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute],from: dateFrom)
+        components.day! += 1
+        let dateTo = calendar.date(from: components)! // eg. 2016-10-11 00:00:00
+        
+        // Set predicate as date being selected date
+        let datePredicate = NSPredicate(format: "(%@ <= time) AND (time < %@)", argumentArray: [dateFrom, dateTo])
+        
+        return datePredicate
+    }
+    
 
     
     //MARK: - MiniCalendar
-    
-    
     func setupCalendar(){
         calendarView.minimumLineSpacing=0
         calendarView.minimumInteritemSpacing=0
@@ -113,37 +102,21 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    func selectedDate(date: Date) {
+    func handleDateChange(date: Date) {
         
-        //just code for printing
-        print("A new date was selected")
-        formatter.dateFormat = "MM.dd.yyyy"
-        print(formatter.string(from: date))
+        //Send predicate to request
+        self.request.predicate = generatePredicate(date: date)
         
-        //Seting up predicate formatting
-        var calendar = Calendar.current
-        calendar.timeZone = NSTimeZone.local
-        
-        let dateFrom = calendar.startOfDay(for: date) // eg. 2016-10-10 00:00:00
-        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute],from: dateFrom)
-        components.day! += 1
-        let dateTo = calendar.date(from: components)! // eg. 2016-10-11 00:00:00
-        // Note: Times are printed in UTC. Depending on where you live it won't print 00:00:00 but it will work with UTC times which can be converted to local time
-        
-        // Set predicate as date being selected date
-        let datePredicate = NSPredicate(format: "(%@ <= time) AND (time < %@)", argumentArray: [dateFrom, dateTo])
-        
-        self.request.predicate = datePredicate
+        //Fetch data
         do {
             try fetchedResultsController.performFetch()
         }catch{
             fatalError("Failed to fetch data")
         }
+        //Reload view with new data
         tableView.reloadData()
     }
-    
 
-    
     
     //MARK: - Actions
     @IBAction func cancel(_ sender: UIBarButtonItem) {
@@ -191,34 +164,12 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     
     //MARK: - disable past dates in future log
     func dateInPast() -> Bool{
-        
-        let selectedDate = date
-        let today = Date.init()
-        
-        let calendar = Calendar.current
-        
-        let selectedDay = calendar.component(.day, from: selectedDate)
-        let selectedMonth = calendar.component(.month, from: selectedDate)
-        let selectedYear = calendar.component(.year, from: selectedDate)
-        
-        let calendar2 = Calendar.current
-        
-        let todayDay = calendar2.component(.day, from: today)
-        let todayMonth = calendar2.component(.month, from: today)
-        let todayYear = calendar2.component(.year, from: today)
-        
-        if(selectedDay == todayDay && selectedMonth == todayMonth && selectedYear == todayYear){
-            return false
-        }else{
-            return date < Date.init()
-        }
-        
+        return date < Date()
     }
 
     
     // MARK: - Table view data source functions
     
-    /* Report the number of sections (managed by fetched results controller) */
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -268,11 +219,8 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     
-    /* Get a table cell loaded with the right data for the entry at indexPath (section/row)*/
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // get one of our custom cells, building or reusing as needed
-        
-        
         guard let item = self.fetchedResultsController.object(at: indexPath) as? Item else{
             fatalError("Cannot find item")
         }
@@ -541,9 +489,8 @@ extension DailyLogViewController: JTAppleCalendarViewDataSource{
         //update Daily log property date
         self.date = date
         
-        
-        //predicate stuff
-        selectedDate(date: date)
+        //reload data
+        handleDateChange(date: date)
 
         
     }
