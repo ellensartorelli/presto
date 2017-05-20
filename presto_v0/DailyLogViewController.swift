@@ -301,8 +301,8 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
             guard let item = fetchedResultsController?.object(at: indexPath) as? Item else{
                 fatalError("fetched object was not an Item")
             }
-            
-            destination.type = .updating(item.text!, item.time! as Date, item.completed, item.alert)
+
+            destination.type = .updating(item.text!, item.time as Date? ?? Date.init(), item.completed, item.alert)
             destination.callback = { (text, type, time, completed, alert) in
                 self.items.updateTask(oldItem: item, text: text, time: time, completed: completed, alert: alert)
             }
