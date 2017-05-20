@@ -14,6 +14,8 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     
     private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
     
+    var request = NSFetchRequest<NSFetchRequestResult>(entityName:"Item")
+    
     private let items = ItemCollection(){
         print("Core Data connected")
     }
@@ -35,7 +37,6 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCalendar()
-//        updateView()
         tableView.delegate = self
         tableView.dataSource = self
         self.view.addSubview(self.tableView)
@@ -53,15 +54,37 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
      */
     func initializeFetchResultsController(){
         
-        // Create Fetch Request
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName:"Item")
+        ///////////////////////////////
+        //testing different date
+        let minute:TimeInterval = 60.0
+        let hour:TimeInterval = 60.0 * minute
+        let day:TimeInterval = 24 * hour
+        let month:TimeInterval = 31*day
+        var testDate = Date(timeInterval: -day, since: Date())
+        ///////////////////////////////
         
-        // Configure Fetch Request
-        request.sortDescriptors = [NSSortDescriptor(key: "type", ascending: true)]
+        
+        //Seting up predicate formatting
+        var calendar = Calendar.current
+        calendar.timeZone = NSTimeZone.local
+        
+        let dateFrom = calendar.startOfDay(for: date) // eg. 2016-10-10 00:00:00
+        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute],from: dateFrom)
+        components.day! += 1
+        let dateTo = calendar.date(from: components)! // eg. 2016-10-11 00:00:00
+        // Note: Times are printed in UTC. Depending on where you live it won't print 00:00:00 but it will work with UTC times which can be converted to local time
+        
+        // Set predicate as date being selected date
+        let datePredicate = NSPredicate(format: "(%@ <= time) AND (time < %@)", argumentArray: [dateFrom, dateTo])
+        
+        self.request.predicate = datePredicate
+        
+
+        self.request.sortDescriptors = [NSSortDescriptor(key: "type", ascending: true)]
         
         let moc = items.managedObjectContext
         // Create Fetched Results Controller
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: self.request, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
         
         // Configure Fetched Results Controller
         fetchedResultsController.delegate = self
@@ -72,22 +95,6 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-
-    
-    // MARK: - Private Functions
-/*
-    fileprivate func updateView() {
-        var hasItems = false
-        
-        if let items = fetchedResultsController.fetchedObjects {
-            hasItems = items.count > 0
-        }
-        
-        tableView.isHidden = !hasItems
-        messageLabel.isHidden = hasItems
-    }
- */
-
 
     
     //MARK: - MiniCalendar
@@ -105,7 +112,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    func selectedDate(date: Date){
+    func selectedDate(date: Date) {
         
         //just code for printing
         print("A new date was selected")
@@ -123,8 +130,15 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         // Note: Times are printed in UTC. Depending on where you live it won't print 00:00:00 but it will work with UTC times which can be converted to local time
         
         // Set predicate as date being selected date
-        let datePredicate = NSPredicate(format: "(%@ <= date) AND (date < %@)", argumentArray: [dateFrom, dateTo])
+        let datePredicate = NSPredicate(format: "(%@ <= time) AND (time < %@)", argumentArray: [dateFrom, dateTo])
         
+        self.request.predicate = datePredicate
+        do {
+            try fetchedResultsController.performFetch()
+        }catch{
+            fatalError("Failed to fetch data")
+        }
+        tableView.reloadData()
     }
     
 
@@ -289,12 +303,13 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
 
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        
         tableView.beginUpdates()
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
-//        updateView()
+        
     }
     
 
