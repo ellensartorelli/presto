@@ -34,7 +34,7 @@ class ItemCollection{
     }
     
     
-    /* Add a new book to the collection */
+    /* Add a new item to the collection */
     func add(text:String, type:String, time:Date, completed:Bool, alert:Bool){
         var item:Item!
         managedObjectContext.performAndWait {
@@ -48,10 +48,9 @@ class ItemCollection{
         }
     }
     
-    /* Update the fields on an item
-     
-     We make this a seperate function rather than setting the values directly so that we can use findAuthor and save changes.
-     */
+    /* 
+        Update the fields on an item
+    */
     func updateTask(oldItem: Item, text:String, time: Date, completed:Bool, alert:Bool){
         oldItem.text = text
         oldItem.time = time as NSDate?

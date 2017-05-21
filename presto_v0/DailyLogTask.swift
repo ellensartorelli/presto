@@ -67,10 +67,6 @@ class DailyLogTask: NSObject, NSCoding{
             os_log("Unable to decode the alert time for a Daily Log Task object.", log: OSLog.default, type: .debug)
             return nil
         }
-//        guard let completed = aDecoder.decodeObject(forKey: PropertyKey.completed) as? Bool else {
-//            os_log("Unable to decode the completed for a Daily Log Task object.", log: OSLog.default, type: .debug)
-//            return nil
-//        }
         
         // Must call designated initializer.
         self.init(title: title, alert: alert, alertTime: alertTime, completed: false)

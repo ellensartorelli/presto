@@ -27,7 +27,6 @@ class Habit: NSObject, NSCoding{
             return nil
         }
         
-        //not hundo p sure this is the best way to do this. Experimental
         let minute:TimeInterval = 60.0
         let hour:TimeInterval = 60.0 * minute
         let day:TimeInterval = 24 * hour
@@ -35,7 +34,7 @@ class Habit: NSObject, NSCoding{
         
         self.name = name
         self.startDate = startDate
-        self.endDate = Date(timeInterval: month, since: startDate)
+        self.endDate = Date(timeInterval: month, since: Date())
         self.selectedDates = [Date]()
     }
     
@@ -44,12 +43,17 @@ class Habit: NSObject, NSCoding{
             return nil
         }
         
+        let minute:TimeInterval = 60.0
+        let hour:TimeInterval = 60.0 * minute
+        let day:TimeInterval = 24 * hour
+        let month:TimeInterval = 31*day
+        
+
         self.name = name
         self.startDate = startDate
-        self.endDate = endDate
+        self.endDate = Date(timeInterval: month, since: Date())
         self.selectedDates = [Date]()
         self.selectedDates.append(contentsOf: selectedDates)
-       
         
         
     }

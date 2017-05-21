@@ -24,17 +24,10 @@ class HabitTrackerTableViewController: UITableViewController {
         navigationItem.leftBarButtonItem = editButtonItem
         editButtonItem.tintColor = UIColorFromRGB(rgbValue: 2781306)
         
-        // Load any saved meals, otherwise load sample data.
         if let savedHabits = loadHabits() {
-//            if(savedHabits == []){
-//                loadSampleHabits()
-//            }
             habits += savedHabits
             updateView()
         }
-       
-
-
     }
     
     override func didReceiveMemoryWarning() {
@@ -43,6 +36,9 @@ class HabitTrackerTableViewController: UITableViewController {
     
     //MARK: Private Methods
     func updateView(){
+        /*
+         Show empty set instruction if no events in Future Log
+         */
         if(habits.count == 0){
             messageLabel.isHidden = false
             emptyView.isHidden = false
@@ -52,18 +48,8 @@ class HabitTrackerTableViewController: UITableViewController {
         }
     }
     
-//    private func loadSampleHabits() {
-//     
-//        guard let habit1 = Habit(name: "Running", startDate: Date()) else {
-//            fatalError("Unable to instantiate habit1")
-//        }
-//        
-//        guard let habit2 = Habit(name: "Drinking", startDate: Date()) else {
-//            fatalError("Unable to instantiate habit2")
-//        }
-//        
-//        habits += [habit1, habit2]
-//    }
+    
+    //MARK - NSCoding
     
     private func loadHabits() -> [Habit]?  {
         return NSKeyedUnarchiver.unarchiveObject(withFile: Habit.ArchiveURL.path) as? [Habit]
@@ -99,7 +85,7 @@ class HabitTrackerTableViewController: UITableViewController {
             fatalError("The dequeued cell is not an instance of HabitTrackerHabitTableViewCell.")
         }
         
-        // Fetches the appropriate meal for the data source layout.
+        // Fetches the appropriate habit for the data source layout.
         let habit = habits[indexPath.row]
         
         cell.HabitLabel.text = habit.name
@@ -114,9 +100,7 @@ class HabitTrackerTableViewController: UITableViewController {
      return true
      }
      
-    
-    
-    
+
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -130,22 +114,6 @@ class HabitTrackerTableViewController: UITableViewController {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
-    
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
     
     
     // MARK: - Navigation

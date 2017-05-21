@@ -21,7 +21,6 @@ class FutureLogEvent: NSObject, NSCoding{
     init?(title:String, startDate:Date, endDate:Date, notes:String){
         
         if title.isEmpty {
-            print("title is empty)")
             return nil
         }
         self.title = title
@@ -30,12 +29,9 @@ class FutureLogEvent: NSObject, NSCoding{
         self.notes = notes
     }
     
-    //MARK: - Archiving Paths
-    
-    
+    //MARK: - Archiving Paths for NSCoding
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
     static let ArchiveURL = DocumentsDirectory.appendingPathComponent("FutureLogEvents")
-    
     
     
     //MARK: - TYPES
