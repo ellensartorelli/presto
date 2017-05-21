@@ -18,7 +18,6 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     var request = NSFetchRequest<NSFetchRequestResult>(entityName:"Item")
     
     private let items = ItemCollection(){
-        //print("Core Data connected")
     }
     
     // MARK: - Properties
@@ -49,14 +48,12 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         // Use the edit button item provided by the table view controller.
         navigationItem.leftBarButtonItem = editButtonItem
         editButtonItem.tintColor = UIColorFromRGB(rgbValue: 2781306)
-        print(launch)
         if (launch == "first time launch") {
             let alertController = UIAlertController(title: "Welcome to your Daily Log!", message: "Tap ‘+’ to add items and swipe left to delete them. Won’t get to a task today? Swipe left to migrate the task to tomorrow.", preferredStyle: UIAlertControllerStyle.alert)
             
             let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default)
             {
                 (result : UIAlertAction) -> Void in
-                print("You pressed OK")
             }
             alertController.addAction(okAction)
             self.present(alertController, animated: true, completion: nil)
@@ -298,7 +295,6 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
             
             return cell
         default:
-            print("Cannot read cell type")
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "reflectionCell", for: indexPath) as? DailyLogReflectionTableViewCell else{
                 fatalError("Can't get cell of the right kind")
             }

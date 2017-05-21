@@ -21,7 +21,6 @@ class FutureLogEvent: NSObject, NSCoding{
     init?(title:String, startDate:Date, endDate:Date, notes:String){
         
         if title.isEmpty {
-            print("title is empty)")
             return nil
         }
         self.title = title

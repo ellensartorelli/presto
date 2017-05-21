@@ -93,7 +93,6 @@ class DailyLogReflectionViewController: UIViewController, UITextViewDelegate {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let button = sender as? UIBarButtonItem, button === saveButton else{
-            print("The save button was not pressed")
             return
         }
         let text = reflectionText.text ?? ""
