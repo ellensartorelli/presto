@@ -42,6 +42,8 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.dataSource = self
         self.view.addSubview(self.tableView)
         self.initializeFetchResultsController()
+        calendarView.scrollToDate(Date())
+
 
         // Use the edit button item provided by the table view controller.
         navigationItem.leftBarButtonItem = editButtonItem
@@ -528,6 +530,7 @@ extension DailyLogViewController: JTAppleCalendarViewDataSource{
     func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
         let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "MiniCalendarCustomCell", for: indexPath) as! MiniCalendarCustomCell
         cell.dateLabel.text = cellState.text
+
         if cellState.isSelected{
             cell.selectedView.isHidden = false
             cell.dateLabel.textColor = UIColor.white
