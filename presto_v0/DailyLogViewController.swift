@@ -346,8 +346,11 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
                 dateComponent.day = 1
                 
                 let futureDate = Calendar.current.date(byAdding: dateComponent, to: item.time as! Date)
+                
                 item.time = futureDate as NSDate?
                 
+                self.items.add(text: item.text!, type: item.type!, time: futureDate!, completed: item.completed, alert: item.alert)
+                self.items.delete(item)
                 if(item.alert == true){
                     //delete notification
                     UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers:[item.text!])
