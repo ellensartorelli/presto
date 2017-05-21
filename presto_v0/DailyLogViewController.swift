@@ -164,7 +164,26 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     
     //MARK: - disable past dates in future log
     func dateInPast() -> Bool{
-        return date < Date()
+        let selectedDate = date
+        let today = Date.init()
+        
+        let calendar = Calendar.current
+        
+        let selectedDay = calendar.component(.day, from: selectedDate)
+        let selectedMonth = calendar.component(.month, from: selectedDate)
+        let selectedYear = calendar.component(.year, from: selectedDate)
+        
+        let calendar2 = Calendar.current
+        
+        let todayDay = calendar2.component(.day, from: today)
+        let todayMonth = calendar2.component(.month, from: today)
+        let todayYear = calendar2.component(.year, from: today)
+        
+        if(selectedDay == todayDay && selectedMonth == todayMonth && selectedYear == todayYear){
+            return false
+        }else{
+            return date < Date.init()
+        }
     }
 
     
