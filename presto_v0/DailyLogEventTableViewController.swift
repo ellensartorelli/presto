@@ -87,7 +87,10 @@ class DailyLogEventTableViewController: UITableViewController, UITextFieldDelega
     func setTime() {
         let calendar = Calendar.current
 
-        let hour = calendar.component(.hour, from: timePicker.date) % 12
+
+  
+        let hour = (calendar.component(.hour, from: timePicker.date)-1) % 12 + 1
+
         let minutes = calendar.component(.minute, from: timePicker.date)
         
         timeLabel.text = "\(hour):" + String(format: "%02d", minutes)

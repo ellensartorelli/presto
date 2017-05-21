@@ -17,7 +17,10 @@ class DailyLogEventTableViewCell: UITableViewCell {
     @IBOutlet weak var eventButtonComplete: UIButton!
     
     func configureCell(item: Item){
-        eventLabel.text = item.text
+        let calendar = Calendar.current
+        let hour = (calendar.component(.hour, from: item.time as! Date)-1) % 12 + 1
+        let minutes = calendar.component(.minute, from: item.time as! Date)
+        eventLabel.text = "\(item.text!), at \(hour):\(minutes)"
         eventButtonIncomplete.isHidden = item.completed
         eventButtonComplete.isHidden = !(item.completed)
     }
