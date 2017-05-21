@@ -62,7 +62,6 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let button = sender as? UIBarButtonItem, button === save else{
-            print("The save button was not pressed")
             return
         }
         
@@ -81,16 +80,15 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
     //MARK: - LOCAL NOTIFICATIONS
     
     func sendNotification() {
-        print("Sending notification")
         let content = UNMutableNotificationContent()
         content.title = "Task Reminder"
         content.body = taskTextField.text!
-        
         
         let date = timePicker.date
         let dateCompenents = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: date)
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateCompenents, repeats: false)
+
         
         let requestIdentifier = taskTextField.text!
         let request = UNNotificationRequest(identifier: requestIdentifier,
