@@ -11,13 +11,19 @@ import os.log
 
 class DailyLogReflectionViewController: UIViewController, UITextViewDelegate {
     
+    //MARK: - Core Data
+    
     var type: DetailTypeReflection = .new
     var callback: ((String, String, Date, Bool, Bool)->Void)?
+    
+    //MARK: - Properties
 
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var reflectionText: UITextView!
     
       var reflection: DailyLogReflection?
+    
+    //MARK: - View
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,15 +49,19 @@ class DailyLogReflectionViewController: UIViewController, UITextViewDelegate {
         reloadInputViews()
         
     }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    //MARK - Gesture
 
     func tap(gesture: UITapGestureRecognizer) {
         reflectionText.resignFirstResponder()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+
     
 //MARK: - Actions
     

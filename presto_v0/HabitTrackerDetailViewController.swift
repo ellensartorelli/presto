@@ -11,7 +11,8 @@ import os.log
 
 
 class HabitTrackerDetailViewController: UIViewController, UITextFieldDelegate {
-    //MARK: Properties
+    
+    //MARK: - Properties
     
     @IBOutlet weak var habitTitleTextField: UITextField!
     @IBOutlet weak var habitStartDatePicker: UIDatePicker!
@@ -19,6 +20,7 @@ class HabitTrackerDetailViewController: UIViewController, UITextFieldDelegate {
     
     var habit: Habit?
     
+    //MARK: - View
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +34,9 @@ class HabitTrackerDetailViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    
     //MARK: UITextFieldDelegate
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // Hide the keyboard.
         textField.resignFirstResponder()
@@ -69,6 +73,7 @@ class HabitTrackerDetailViewController: UIViewController, UITextFieldDelegate {
         // Set the meal to be passed to MealTableViewController after the unwind segue.
         habit = Habit(name: name, startDate: startDate)
     }
+    
     @IBAction func cancel(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
         

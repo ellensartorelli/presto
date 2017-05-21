@@ -12,6 +12,8 @@ import os.log
 
 class HabitViewController: UIViewController {
     
+    //MARK: - Properties
+    
     @IBOutlet weak var calendarView: JTAppleCalendarView!
     @IBOutlet weak var year: UILabel!
     @IBOutlet weak var month: UILabel!
@@ -19,10 +21,10 @@ class HabitViewController: UIViewController {
     @IBOutlet weak var doneButton: UIBarButtonItem!
     
     var habit: Habit?
-    
     var selected = [Date]()
-    
     let formatter = DateFormatter()
+    
+    //MARK: - View
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +58,7 @@ class HabitViewController: UIViewController {
     }
     
     
-    
+    //MARK: - JTAppleCalendar
     
     func setupCalendarView(){
         calendarView.minimumLineSpacing=0

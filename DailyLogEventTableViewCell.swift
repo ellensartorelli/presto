@@ -9,11 +9,11 @@
 import UIKit
 
 class DailyLogEventTableViewCell: UITableViewCell {
+    
+    //MARK: - Properties
 
     @IBOutlet weak var eventLabel: UILabel!
-    
     @IBOutlet weak var eventButtonIncomplete: UIButton!
-    
     @IBOutlet weak var eventButtonComplete: UIButton!
     
     func configureCell(item: Item){
@@ -28,19 +28,17 @@ class DailyLogEventTableViewCell: UITableViewCell {
     
     @IBAction func IncompleteTapped(sender: AnyObject)
     {
+        //this button is tapped when the event has just been completed
         eventButtonIncomplete.isHidden = true
         eventButtonComplete.isHidden = false
-        
     }
     
     @IBAction func CompletedTapped(sender: AnyObject)
     {
+        //this button is tapped to uncomplete an event
         eventButtonIncomplete.isHidden = false
         eventButtonComplete.isHidden = true
-    
     }
-    
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()

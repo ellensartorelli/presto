@@ -30,12 +30,9 @@ class FutureLogEvent: NSObject, NSCoding{
         self.notes = notes
     }
     
-    //MARK: - Archiving Paths
-    
-    
+    //MARK: - Archiving Paths for NSCoding
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
     static let ArchiveURL = DocumentsDirectory.appendingPathComponent("FutureLogEvents")
-    
     
     
     //MARK: - TYPES

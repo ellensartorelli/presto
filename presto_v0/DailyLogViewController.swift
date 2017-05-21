@@ -11,12 +11,13 @@ import JTAppleCalendar
 
 class DailyLogViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
     
-    private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
+    //MARK: - Core Data
     
+    private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
     var request = NSFetchRequest<NSFetchRequestResult>(entityName:"Item")
     
     private let items = ItemCollection(){
-        print("Core Data connected")
+        //print("Core Data connected")
     }
     
     // MARK: - Properties
@@ -25,6 +26,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var messageLabel: UILabel!
+    
     //miniCalendar properties
     let formatter = DateFormatter()
     @IBOutlet weak var currentDateLabel: UILabel!
@@ -43,10 +45,21 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         self.initializeFetchResultsController()
         calendarView.scrollToDate(Date())
 
-
         // Use the edit button item provided by the table view controller.
         navigationItem.leftBarButtonItem = editButtonItem
         editButtonItem.tintColor = UIColorFromRGB(rgbValue: 2781306)
+        print(launch)
+        if (launch == "first time launch") {
+            let alertController = UIAlertController(title: "Welcome to your Daily Log!", message: "Tap ‘+’ to add items and swipe left to delete them. Won’t get to a task today? Swipe left to migrate the task to tomorrow.", preferredStyle: UIAlertControllerStyle.alert)
+            
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default)
+            {
+                (result : UIAlertAction) -> Void in
+                print("You pressed OK")
+            }
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
     
     // MARK: - Core data
@@ -73,6 +86,9 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func generatePredicate(date: Date) -> NSPredicate {
+        /*
+            Make predicate to fetch items for correct date
+        */
         //Seting up predicate formatting
         var calendar = Calendar.current
         calendar.timeZone = NSTimeZone.local
@@ -131,8 +147,9 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     
-    
+    //MARK: - Alerts
     @IBAction func showAlert() {
+        //alert sheet to allow user to pick between task, event and reflection
         let alertController = UIAlertController(title: "Select an item to add to your Daily Log", message: nil, preferredStyle: .actionSheet)
         
         
@@ -163,8 +180,10 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     
-    //MARK: - disable past dates in future log
+    //MARK: Private Functions
+    
     func dateInPast() -> Bool{
+        //disables '+' button for dates in past -- can't add items to a day that's past
         let selectedDate = date
         let today = Date.init()
         
@@ -178,6 +197,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func isDate(date1: Date, date2: Date) -> Bool{
+        //function for comparing 2 dates, complicated between Date includes time
         let calendar = Calendar.current
         let Day1 = calendar.component(.day, from: date1)
         let Month1 = calendar.component(.month, from: date1)
@@ -209,18 +229,15 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
 
         let sectionInfo = sections[section]
     
-        print("date in past is \(dateInPast())")
         if(dateInPast() == true){
             //if past date
             if(sectionInfo.numberOfObjects == 0){
                 //if empty
-                print("hiding table, showing label")
                 tableView.isHidden = true
                 messageLabel.text = "You had no items on your Daily Log this day."
                 addButton.isEnabled = false
                 messageLabel.isHidden = false
             }else{
-                print("hiding label, showing table")
                 tableView.isHidden = false
                 addButton.isEnabled = false
                 messageLabel.isHidden = true
@@ -253,15 +270,12 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
             fatalError("Cannot find item")
         }
         
-        
-        
+        //select cell type depending on item "type"
         switch item.type! {
         case "task":
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as? DailyLogTaskTableViewCell else{
                 fatalError("Can't get cell of the right kind")
             }
-            
-//            self.items.updateTask(oldItem: item, text: item.text!, time: item.time as! Date, completed: cell.taskButtonDone.isHidden, alert: item.alert)
             
             cell.configureCell(item: item)
             
@@ -271,7 +285,6 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
                 fatalError("Can't get cell of the right kind")
             }
             
-            
             cell.configureCell(item: item)
             
             return cell
@@ -279,8 +292,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "reflectionCell", for: indexPath) as? DailyLogReflectionTableViewCell else{
                 fatalError("Can't get cell of the right kind")
             }
-            
-            
+
             cell.configureCell(item: item)
             
             return cell
@@ -297,8 +309,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
  
     }
     
-    
-    
+
     /* Provides the edit functionality (deleting rows) */
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -306,7 +317,6 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
             guard let item = self.fetchedResultsController?.object(at: indexPath) as? Item else{
                 fatalError("Cannot find item")
             }
-            
             items.delete(item)
         }
     }
@@ -318,8 +328,6 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         }
         
         let delete = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
-            //self.isEditing = false
-            print("delete button tapped")
             self.items.delete(item)
             
         }
@@ -330,16 +338,13 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
             
             
             let migrate = UITableViewRowAction(style: .normal, title: "Migrate") { action, index in
-                //self.isEditing = false
-                print("migrate button tapped")
-                
+
                 var dateComponent = DateComponents()
                 
                 dateComponent.day = 1
                 
                 let futureDate = Calendar.current.date(byAdding: dateComponent, to: item.time as! Date)
                 item.time = futureDate as NSDate?
-                print(item.time)
             }
             migrate.backgroundColor = UIColor.lightGray
             
@@ -349,8 +354,6 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         default:
             return [delete]
         }
-
-        
     }
     
     
@@ -425,7 +428,6 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
             destination.callback = { (text, type, time, completed, alert) in
                 self.items.updateTask(oldItem: item, text: text, time: time, completed: cell.taskButtonDo.isHidden, alert: alert)
             }
-            print("task \(item.completed)")
         case "eventSegue":
             guard let navController = segue.destination as? UINavigationController else{
                 fatalError("Unexpected destination: \(segue.destination)")
@@ -502,8 +504,9 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     
     }
     
-    /* This is here so that we have something to return to. It doesn't actually provide much functionality since the tableView is already tied to the fetched results controller. */
+
     @IBAction func unwindFromEdit(sender: UIStoryboardSegue){
+        //unwindFromTask^
         tableView.reloadData()
     }
     
@@ -518,13 +521,21 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
 }
 
 
+//MARK: - Mini Calendar
+
 extension DailyLogViewController: JTAppleCalendarViewDelegate{
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
         formatter.dateFormat = "yyyy MM dd"
         formatter.timeZone = Calendar.current.timeZone
         formatter.locale = Calendar.current.locale
         let startDate = Date()
-        let endDate = formatter.date(from: "2017 12 31")!
+        
+        let minute:TimeInterval = 60.0
+        let hour:TimeInterval = 60.0 * minute
+        let day:TimeInterval = 24 * hour
+        let month:TimeInterval = 31*day
+        let year:TimeInterval = 12*month
+        let endDate =  Date(timeInterval: year, since: Date())
         
         let parameters = ConfigurationParameters(startDate: startDate, endDate: endDate, numberOfRows: 1)
         return parameters
@@ -540,6 +551,7 @@ extension DailyLogViewController: JTAppleCalendarViewDataSource{
 
         if cellState.isSelected{
             cell.dateLabel.font = UIFont.systemFont(ofSize: 17.0)
+            cell.selectedView.backgroundColor = UIColor(red:0.84, green:0.71, blue:0.32, alpha:1.0)
             cell.selectedView.isHidden = false
             cell.dateLabel.textColor = UIColor.white
             
@@ -559,6 +571,7 @@ extension DailyLogViewController: JTAppleCalendarViewDataSource{
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
         guard let validCell = cell as? MiniCalendarCustomCell else {return}
         validCell.selectedView.isHidden = false
+        validCell.selectedView.backgroundColor = UIColor(red:0.84, green:0.71, blue:0.32, alpha:1.0)
         validCell.dateLabel.textColor = UIColor.white
         if (isDate(date1: date, date2: Date())){
             validCell.selectedView.backgroundColor = UIColorFromRGB(rgbValue: 2781306)

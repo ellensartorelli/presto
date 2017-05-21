@@ -12,10 +12,14 @@ import os.log
 
 class FutureLogTableViewController: UITableViewController {
     
+    //MARK: - Properties
+    
     var events = [FutureLogEvent]()
 
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var emptyView: UIView!
+    
+    //MARK: - View
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,8 +83,12 @@ class FutureLogTableViewController: UITableViewController {
         return cell
     }
     
+    //MARK: - Private Functions
+    
     func dateInPast(date: Date) -> Bool{
-        
+        /*
+         Determine if a date is less than another date. *complicated due to time aspect in Date type*
+         */
         let selectedDate = date
         let today = Date.init()
         
@@ -101,13 +109,25 @@ class FutureLogTableViewController: UITableViewController {
         }else{
             return date < Date.init()
         }
-        
     }
+    
+    func updateView(){
+        /*
+        Show empty set instruction if no events in Future Log
+        */
+        if(events.count == 0){
+            messageLabel.isHidden = false
+            emptyView.isHidden = false
+        }else{
+            messageLabel.isHidden = true
+            emptyView.isHidden = true
+        }
+    }
+    
     
     
     //MARK: Actions
     @IBAction func unwindToEventList(sender: UIStoryboardSegue){
-        
         
         if let sourceViewController = sender.source as?
             FutureLogEventViewController, let event = sourceViewController.event{
@@ -130,21 +150,9 @@ class FutureLogTableViewController: UITableViewController {
         events = events.sorted(by: { $0.startDate.compare($1.startDate) == .orderedAscending })
 
         updateView()
-        
         tableView.reloadData()
     }
     
-    
-    func updateView(){
-        if(events.count == 0){
-            messageLabel.isHidden = false
-            emptyView.isHidden = false
-        }else{
-            messageLabel.isHidden = true
-            emptyView.isHidden = true
-        }
-    }
- 
 
 
     // Override to support conditional editing of the table view.
@@ -152,8 +160,6 @@ class FutureLogTableViewController: UITableViewController {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-
-
 
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -168,21 +174,6 @@ class FutureLogTableViewController: UITableViewController {
         }    
     }
  
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     // MARK: - Navigation
 
