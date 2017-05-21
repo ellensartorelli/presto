@@ -14,6 +14,8 @@ class HabitTrackerTableViewController: UITableViewController {
     //MARK: Properties
     var habits = [Habit]()
 
+    @IBOutlet weak var emptyView: UIView!
+    @IBOutlet weak var messageLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,15 +26,13 @@ class HabitTrackerTableViewController: UITableViewController {
         
         // Load any saved meals, otherwise load sample data.
         if let savedHabits = loadHabits() {
-            if(savedHabits == []){
-                loadSampleHabits()
-            }
+//            if(savedHabits == []){
+//                loadSampleHabits()
+//            }
             habits += savedHabits
+            updateView()
         }
-        else {
-            // Load the sample data.
-            loadSampleHabits()
-        }
+       
 
 
     }
@@ -42,19 +42,28 @@ class HabitTrackerTableViewController: UITableViewController {
     }
     
     //MARK: Private Methods
-    
-    private func loadSampleHabits() {
-     
-        guard let habit1 = Habit(name: "Running", startDate: Date()) else {
-            fatalError("Unable to instantiate habit1")
+    func updateView(){
+        if(habits.count == 0){
+            messageLabel.isHidden = false
+            emptyView.isHidden = false
+        }else{
+            messageLabel.isHidden = true
+            emptyView.isHidden = true
         }
-        
-        guard let habit2 = Habit(name: "Drinking", startDate: Date()) else {
-            fatalError("Unable to instantiate habit2")
-        }
-        
-        habits += [habit1, habit2]
     }
+    
+//    private func loadSampleHabits() {
+//     
+//        guard let habit1 = Habit(name: "Running", startDate: Date()) else {
+//            fatalError("Unable to instantiate habit1")
+//        }
+//        
+//        guard let habit2 = Habit(name: "Drinking", startDate: Date()) else {
+//            fatalError("Unable to instantiate habit2")
+//        }
+//        
+//        habits += [habit1, habit2]
+//    }
     
     private func loadHabits() -> [Habit]?  {
         return NSKeyedUnarchiver.unarchiveObject(withFile: Habit.ArchiveURL.path) as? [Habit]
@@ -116,6 +125,7 @@ class HabitTrackerTableViewController: UITableViewController {
             // Save the habits.
             saveHabits()
             tableView.deleteRows(at: [indexPath], with: .fade)
+            updateView()
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
@@ -192,8 +202,9 @@ class HabitTrackerTableViewController: UITableViewController {
         }
         // Save the habits.
         saveHabits()
-        
+        updateView()
     }
+    
     @IBAction func unwindToHabitListFromEdit(sender: UIStoryboardSegue) {
         
         if let sourceViewController = sender.source as? HabitViewController, let habit = sourceViewController.habit {
