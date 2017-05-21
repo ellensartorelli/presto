@@ -344,6 +344,8 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         let delete = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
             //self.isEditing = false
             print("delete button tapped")
+            self.items.delete(item)
+            
         }
         delete.backgroundColor = UIColor.red
         
