@@ -540,6 +540,7 @@ extension DailyLogViewController: JTAppleCalendarViewDataSource{
 
         if cellState.isSelected{
             cell.dateLabel.font = UIFont.systemFont(ofSize: 17.0)
+            cell.selectedView.backgroundColor = UIColor(red:0.84, green:0.71, blue:0.32, alpha:1.0)
             cell.selectedView.isHidden = false
             cell.dateLabel.textColor = UIColor.white
             
@@ -559,6 +560,7 @@ extension DailyLogViewController: JTAppleCalendarViewDataSource{
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
         guard let validCell = cell as? MiniCalendarCustomCell else {return}
         validCell.selectedView.isHidden = false
+        validCell.selectedView.backgroundColor = UIColor(red:0.84, green:0.71, blue:0.32, alpha:1.0)
         validCell.dateLabel.textColor = UIColor.white
         if (isDate(date1: date, date2: Date())){
             validCell.selectedView.backgroundColor = UIColorFromRGB(rgbValue: 2781306)
