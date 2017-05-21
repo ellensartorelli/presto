@@ -1,4 +1,3 @@
-//
 //  DailyLogViewController.swift
 //  presto_v0
 //
@@ -169,22 +168,30 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         let selectedDate = date
         let today = Date.init()
         
-        let calendar = Calendar.current
-        
-        let selectedDay = calendar.component(.day, from: selectedDate)
-        let selectedMonth = calendar.component(.month, from: selectedDate)
-        let selectedYear = calendar.component(.year, from: selectedDate)
-        
-        let calendar2 = Calendar.current
-        
-        let todayDay = calendar2.component(.day, from: today)
-        let todayMonth = calendar2.component(.month, from: today)
-        let todayYear = calendar2.component(.year, from: today)
-        
-        if(selectedDay == todayDay && selectedMonth == todayMonth && selectedYear == todayYear){
+     
+        if(isDate(date1: selectedDate, date2: today)){
             return false
         }else{
             return date < Date.init()
+        }
+
+    }
+    
+    func isDate(date1: Date, date2: Date) -> Bool{
+        let calendar = Calendar.current
+        let Day1 = calendar.component(.day, from: date1)
+        let Month1 = calendar.component(.month, from: date1)
+        let Year1 = calendar.component(.year, from: date1)
+        
+        let Day2 = calendar.component(.day, from: date2)
+        let Month2 = calendar.component(.month, from: date2)
+        let Year2 = calendar.component(.year, from: date2)
+        
+        if (Day1 == Day2 && Month1 == Month2 && Year1 == Year2){
+            return true
+        }
+        else{
+            return false
         }
     }
 
@@ -224,7 +231,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
                 //if empty
                 addButton.isEnabled = true
                 tableView.isHidden = true
-                messageLabel.text = "Tap '+' to add an item!"
+                messageLabel.text = "Tap '+' to add an item"
                 messageLabel.isHidden = false
             }else{
                 addButton.isEnabled = true
@@ -540,13 +547,22 @@ extension DailyLogViewController: JTAppleCalendarViewDataSource{
             cell.dateLabel.textColor = UIColor.black
             
         }
+        
+        if (isDate(date1: date, date2: Date())){
+            cell.dateLabel.textColor = UIColorFromRGB(rgbValue: 2781306)
+            cell.dateLabel.font = UIFont.boldSystemFont(ofSize: 17.0)
+        }
         return cell
     }
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
         guard let validCell = cell as? MiniCalendarCustomCell else {return}
         validCell.selectedView.isHidden = false
         validCell.dateLabel.textColor = UIColor.white
-        
+        if (isDate(date1: date, date2: Date())){
+            validCell.selectedView.backgroundColor = UIColorFromRGB(rgbValue: 2781306)
+            validCell.dateLabel.font = UIFont.boldSystemFont(ofSize: 17.0)
+
+        }
         //setup labels
         formatter.dateStyle = .long
         currentDateLabel.text = formatter.string(from:date)
@@ -563,6 +579,11 @@ extension DailyLogViewController: JTAppleCalendarViewDataSource{
         guard let validCell = cell as? MiniCalendarCustomCell else {return}
         validCell.selectedView.isHidden = true
         validCell.dateLabel.textColor = UIColor.black
+        if (isDate(date1: date, date2: Date())){
+            validCell.dateLabel.textColor = UIColorFromRGB(rgbValue: 2781306)
+            validCell.dateLabel.font = UIFont.boldSystemFont(ofSize: 17.0)
+
+        }
     }
     
     
