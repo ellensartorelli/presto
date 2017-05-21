@@ -18,7 +18,6 @@ class DailyLogEventTableViewController: UITableViewController, UITextFieldDelega
     
     //MARK: - Properties
 
-    var event: DailyLogEvent?
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var timePicker: UIDatePicker!

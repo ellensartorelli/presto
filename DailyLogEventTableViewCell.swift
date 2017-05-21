@@ -20,7 +20,7 @@ class DailyLogEventTableViewCell: UITableViewCell {
         let calendar = Calendar.current
         let hour = (calendar.component(.hour, from: item.time as! Date)-1) % 12 + 1
         let minutes = calendar.component(.minute, from: item.time as! Date)
-        eventLabel.text = "\(item.text!), at \(hour):\(minutes)"
+        eventLabel.text = "\(item.text!), at \(hour):" + String(format: "%02d", minutes)
         eventButtonIncomplete.isHidden = item.completed
         eventButtonComplete.isHidden = !(item.completed)
     }

@@ -21,7 +21,6 @@ class DailyLogReflectionViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var reflectionText: UITextView!
     
-      var reflection: DailyLogReflection?
     
     //MARK: - View
 
