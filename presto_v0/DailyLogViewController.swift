@@ -382,6 +382,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
             destination.callback = { (text, type, time, completed, alert) in
                 self.items.add(text:text, type:type, time: time, completed:completed, alert:alert)
             }
+            
         case "ShowDetailTask":
             
             guard let destination = segue.destination as? DailyTaskTableViewController else{
@@ -400,12 +401,13 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
             guard let item = fetchedResultsController?.object(at: indexPath) as? Item else{
                 fatalError("fetched object was not an Item")
             }
+            item.completed = cell.taskButtonDo.isHidden
 
             destination.type = .updating(item.text!, item.time as Date? ?? Date.init(), item.completed, item.alert)
             destination.callback = { (text, type, time, completed, alert) in
-                self.items.updateTask(oldItem: item, text: text, time: time, completed: completed, alert: alert)
+                self.items.updateTask(oldItem: item, text: text, time: time, completed: cell.taskButtonDo.isHidden, alert: alert)
             }
-            
+            print("task \(item.completed)")
         case "eventSegue":
             guard let navController = segue.destination as? UINavigationController else{
                 fatalError("Unexpected destination: \(segue.destination)")
@@ -435,12 +437,11 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
             guard let item = fetchedResultsController?.object(at: indexPath) as? Item else{
                 fatalError("fetched object was not an Item")
             }
-            
+            item.completed = cell.eventButtonIncomplete.isHidden
             destination.type = .updatingEvent(item.text! as String, (item.time! as NSDate) as Date)
             destination.callback = { (text, type, time, completed, alert) in
-                self.items.updateTask(oldItem: item, text: text, time: time, completed: completed, alert: alert)
+                self.items.updateTask(oldItem: item, text: text, time: time, completed: cell.eventButtonIncomplete.isHidden, alert: alert)
             }
-            
         case "reflectionSegue":
             guard let navController = segue.destination as? UINavigationController else{
                 fatalError("Unexpected destination: \(segue.destination)")
@@ -478,7 +479,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
             
      
         default:
-            fatalError("Unexpeced segue identifier: \(segue.identifier)")
+            fatalError("Unexpected segue identifier: \(segue.identifier)")
         }
     
     }

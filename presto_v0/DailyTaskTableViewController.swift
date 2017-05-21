@@ -49,13 +49,8 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
     }
     
     @IBAction func cancel(_ sender: UIBarButtonItem) {
-        if presentingViewController is UINavigationController{
-            dismiss(animated: true, completion: nil)
-        }else if let owningNavController = navigationController{
-            owningNavController.popViewController(animated: true)
-        }else{
-            fatalError("View is not contained by a navigation controller")
-        }
+        dismiss(animated: true, completion: nil)
+        
     }
     
     // MARK: - Navigation
