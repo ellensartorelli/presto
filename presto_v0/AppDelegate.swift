@@ -27,14 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             launch = "first time launch"
             UserDefaults.standard.set(true, forKey: "launchedBefore")
-            self.window = UIWindow(frame: UIScreen.main.bounds)
-            
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            
-            let initialViewController = storyboard.instantiateViewController(withIdentifier: "tutorial") as UIViewController
-            
-            self.window?.rootViewController = initialViewController
-            self.window?.makeKeyAndVisible()
             
         }
         print(launch)
