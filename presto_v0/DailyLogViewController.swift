@@ -539,10 +539,12 @@ extension DailyLogViewController: JTAppleCalendarViewDataSource{
         cell.dateLabel.text = cellState.text
 
         if cellState.isSelected{
+            cell.dateLabel.font = UIFont.systemFont(ofSize: 17.0)
             cell.selectedView.isHidden = false
             cell.dateLabel.textColor = UIColor.white
             
         }else{
+            cell.dateLabel.font = UIFont.systemFont(ofSize: 17.0)
             cell.selectedView.isHidden = true
             cell.dateLabel.textColor = UIColor.black
             
