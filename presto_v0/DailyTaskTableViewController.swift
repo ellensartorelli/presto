@@ -11,39 +11,88 @@ import UserNotifications
 
 class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, UINavigationControllerDelegate, UIPickerViewDelegate, UNUserNotificationCenterDelegate {
     
+    //MARK: - Core Data
+    
     var type: DetailType = .new
     var callback: ((String, String, Date, Bool, Bool)->Void)?
     
-    var messageSubtitle = "Staff Meeting in 20 minutes"
-
-    
-    
     //MARK: - PROPERTIES
     
-//    var managedObjectContext: NSManagedObjectContext?
     var pickerVisible = false
-    
     @IBOutlet weak var toggle: UISwitch!
     @IBOutlet weak var taskTextField: UITextField!
     @IBOutlet weak var timePicker: UIDatePicker!
     @IBOutlet weak var save: UIBarButtonItem!
     
-    @IBAction func datePickerChanged(_ sender: Any) {
+    // MARK: - VIEW 
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setMinDate()
+        taskTextField.delegate = self
+    
+        switch(type){
+        case .new:
+            break
+        case let .updating(text, startDate, _, alert):
+            navigationItem.title = text
+            taskTextField.text = text
+            timePicker.date = startDate
+            
+            toggle.isOn = alert
+        }
+        if(taskTextField.text?.isEmpty)!{
+            save.isEnabled = false
+        }else{
+            save.isEnabled = true
+        }
+        UNUserNotificationCenter.current().requestAuthorization(options: [[.alert, .sound]], completionHandler: { (granted, error) in
+            // Handle Error
+        })
+        UNUserNotificationCenter.current().delegate = self
+        
+    }
+    
+    @IBAction func cancel(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+        
+    }
+    
+    // MARK: - NAVIGATION
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let button = sender as? UIBarButtonItem, button === save else{
+            print("The save button was not pressed")
+            return
+        }
+        
+        let text = taskTextField.text ?? ""
+        let type = "task"
+        let startDate = timePicker.date
+        let completed = false
+        let alert = toggle.isOn
+        
+        if callback != nil{
+            callback!(text, type, startDate, completed, alert)
+        }
         sendNotification()
     }
-
+    
+    //MARK: - LOCAL NOTIFICATIONS
+    
     func sendNotification() {
-        print("in send notification")
+        print("Sending notification")
         let content = UNMutableNotificationContent()
-        content.title = "Meeting Reminder"
-        content.subtitle = messageSubtitle
-        content.body = "Don't forget to bring coffee."
-        content.badge = 1
-        
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5,repeats: false)
+        content.title = "Task Reminder"
+        content.body = taskTextField.text!
         
         
-        let requestIdentifier = "demoNotification"
+        let date = timePicker.date
+        let dateCompenents = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: date)
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateCompenents, repeats: false)
+        
+        let requestIdentifier = taskTextField.text!
         let request = UNNotificationRequest(identifier: requestIdentifier,
                                             content: content, trigger: trigger)
         
@@ -57,59 +106,6 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
         
         completionHandler([.alert, .sound])
     }
-    
-    // MARK: - VIEW 
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setMinDate()
-        taskTextField.delegate = self
-        
-        
-        // Do any additional setup after loading the view.
-        switch(type){
-        case .new:
-            break
-        case let .updating(text, startDate, _, alert):
-            navigationItem.title = text
-            taskTextField.text = text
-            timePicker.date = startDate
-            
-            toggle.isOn = alert
-        }
-        
-        UNUserNotificationCenter.current().requestAuthorization(options: [[.alert, .sound, .badge]], completionHandler: { (granted, error) in
-            // Handle Error
-        })
-        UNUserNotificationCenter.current().delegate = self
-        
-    }
-    
-    @IBAction func cancel(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
-        
-    }
-    
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let button = sender as? UIBarButtonItem, button === save else{
-            print("The save button was not pressed")
-            return
-        }
-        
-        let text = taskTextField.text ?? ""
-        let type = "task"
-        let startDate = timePicker.date
-        let completed = false //change change change change
-        let alert = toggle.isOn
-        
-        if callback != nil{
-            callback!(text, type, startDate, completed, alert)
-        }
-    }
-    
 
     // MARK: - ACTIONS
     
@@ -178,52 +174,6 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
     }
    
 
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-    
-    
     //MARK: - TEXT FIELD DELEGATE
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

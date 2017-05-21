@@ -860,7 +860,6 @@
                                                         <!--2017-04-25 20:56:33 +0000-->
                                                     </date>
                                                     <connections>
-                                                        <action selector="datePickerChanged:" destination="Hqc-0y-wGS" eventType="valueChanged" id="dRM-eK-New"/>
                                                         <action selector="pickAlertTime:" destination="Hqc-0y-wGS" eventType="valueChanged" id="7rp-f4-LKw"/>
                                                         <action selector="timeChanged:" destination="Hqc-0y-wGS" eventType="valueChanged" id="Nh5-Di-NEh"/>
                                                     </connections>
