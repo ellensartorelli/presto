@@ -922,16 +922,28 @@
                                     <segue destination="DsB-oA-a8T" kind="show" id="Meb-Wd-5K7"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="FINAL_presto_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Udr-1n-Jl9">
+                                <rect key="frame" x="78" y="20" width="259" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pth-EY-ivg">
+                                <rect key="frame" x="20" y="90" width="374" height="565"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="doneButton" destination="QD4-h5-4HS" id="OXO-Pg-tHw"/>
+                        <outlet property="instructions" destination="pth-EY-ivg" id="Dg8-NT-mHz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hhP-gH-7nG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-391" y="-735"/>
+            <point key="canvasLocation" x="-391.304347826087" y="-735.32608695652175"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="fuK-3I-qEK">
@@ -1610,6 +1622,7 @@
         <image name="Calendar-50" width="25" height="25"/>
         <image name="Checked Checkbox 2 Filled_28" width="28" height="28"/>
         <image name="Checked Filled_28" width="28" height="28"/>
+        <image name="FINAL_presto_logo" width="2922" height="510"/>
         <image name="Future-50 (1)" width="25" height="25"/>
         <image name="Paper-50" width="25" height="25"/>
         <image name="To Do-50" width="25" height="25"/>

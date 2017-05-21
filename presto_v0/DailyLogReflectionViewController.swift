@@ -39,6 +39,8 @@ class DailyLogReflectionViewController: UIViewController, UITextViewDelegate {
             navigationItem.title = text
             reflectionText.text = text
         }
+        saveButton.isEnabled = false
+        reloadInputViews()
         
     }
 
@@ -58,12 +60,21 @@ class DailyLogReflectionViewController: UIViewController, UITextViewDelegate {
     }
     
     
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if (text == "\n") {
-            reflectionText.resignFirstResponder()
-            return false
+//    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+//        if (text == "\n") {
+//            reflectionText.resignFirstResponder()
+//            if (!reflectionText.text.isEmpty) {
+//                saveButton.isEnabled = true
+//            }
+//            return false
+//        }
+//        return true
+//    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        if textView == self.reflectionText {
+            self.saveButton.isEnabled = !reflectionText.text.isEmpty
         }
-        return true
     }
     
     
@@ -71,7 +82,10 @@ class DailyLogReflectionViewController: UIViewController, UITextViewDelegate {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
+        guard let button = sender as? UIBarButtonItem, button === saveButton else{
+            print("The save button was not pressed")
+            return
+        }
         let text = reflectionText.text ?? ""
         let type = "reflection"
         let startDate = Date.init()

@@ -11,9 +11,13 @@ import UIKit
 class TutorialViewController: UIViewController {
 
     @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var instructions: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        instructions.numberOfLines = 0
+        instructions.text = "Thanks for using our app! This is the mobile version of a bullet journal. In here, you can keep your daily tasks, events, reflections, and all the events you have planned in the future. You can also track all your habits to ensure your healthy lifestyle."
         // Do any additional setup after loading the view.
     }
 
