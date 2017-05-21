@@ -336,6 +336,46 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        guard let item = self.fetchedResultsController.object(at: indexPath) as? Item else{
+            fatalError("Cannot find item")
+        }
+        
+        let delete = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
+            //self.isEditing = false
+            print("delete button tapped")
+        }
+        delete.backgroundColor = UIColor.red
+        
+        switch item.type! {
+        case "task":
+            
+            
+            let migrate = UITableViewRowAction(style: .normal, title: "Migrate") { action, index in
+                //self.isEditing = false
+                print("migrate button tapped")
+                
+                var dateComponent = DateComponents()
+                
+                dateComponent.day = 1
+                
+                let futureDate = Calendar.current.date(byAdding: dateComponent, to: item.time as! Date)
+                item.time = futureDate as NSDate?
+                print(item.time)
+            }
+            migrate.backgroundColor = UIColor.lightGray
+            
+            
+            return [delete, migrate]
+       
+        default:
+            return [delete]
+        }
+
+        
+    }
+    
+    
     // MARK: Connect tableview to fetched results controller
 
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
