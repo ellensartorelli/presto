@@ -18,7 +18,6 @@
 		073F6ABF1EB1828F00116DC5 /* DailyLogTaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F6ABE1EB1828F00116DC5 /* DailyLogTaskTableViewCell.swift */; };
 		073F6AC21EB1891800116DC5 /* DailyLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073F6AC01EB184EF00116DC5 /* DailyLogViewController.swift */; };
 		0754F22F1EB017D900A291C9 /* DailyTaskTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0754F22E1EB017D800A291C9 /* DailyTaskTableViewController.swift */; };
-		075CAF7A1EBAA6FF0057E2A4 /* ReflectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075CAF791EBAA6FF0057E2A4 /* ReflectionTableViewController.swift */; };
 		07801AEB1EAE7F87007FEB0B /* FutureLogTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07801AEA1EAE7F87007FEB0B /* FutureLogTableViewCell.swift */; };
 		07801AED1EAE8189007FEB0B /* FutureLogEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07801AEC1EAE8189007FEB0B /* FutureLogEvent.swift */; };
 		07801AEF1EAE855D007FEB0B /* FutureLogTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07801AEE1EAE855D007FEB0B /* FutureLogTableViewController.swift */; };
@@ -50,7 +49,6 @@
 		073F6ABE1EB1828F00116DC5 /* DailyLogTaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DailyLogTaskTableViewCell.swift; path = ../DailyLogTaskTableViewCell.swift; sourceTree = "<group>"; };
 		073F6AC01EB184EF00116DC5 /* DailyLogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyLogViewController.swift; sourceTree = "<group>"; };
 		0754F22E1EB017D800A291C9 /* DailyTaskTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyTaskTableViewController.swift; sourceTree = "<group>"; };
-		075CAF791EBAA6FF0057E2A4 /* ReflectionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReflectionTableViewController.swift; sourceTree = "<group>"; };
 		07801AEA1EAE7F87007FEB0B /* FutureLogTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureLogTableViewCell.swift; sourceTree = "<group>"; };
 		07801AEC1EAE8189007FEB0B /* FutureLogEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureLogEvent.swift; sourceTree = "<group>"; };
 		07801AEE1EAE855D007FEB0B /* FutureLogTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureLogTableViewController.swift; sourceTree = "<group>"; };
@@ -156,7 +154,6 @@
 				07A395B61EAE74ED003C6E64 /* AppDelegate.swift */,
 				07A395BA1EAE74ED003C6E64 /* Main.storyboard */,
 				0739B5791EBC1FD500DE6328 /* LaunchScreen.storyboard */,
-				A8486C9B1EC0D3E400B1DF6B /* Reflection Log */,
 				073F6AB11EB1716700116DC5 /* Future Log */,
 				A839C7031EBE53ED004A71B1 /* Habit Tracker */,
 				073F6AB01EB1715D00116DC5 /* Daily Log */,
@@ -202,14 +199,6 @@
 				A842F1A81EBF9D5100D228FB /* MiniCalendarCustomCell.swift */,
 			);
 			name = "Mini Calendar";
-			sourceTree = "<group>";
-		};
-		A8486C9B1EC0D3E400B1DF6B /* Reflection Log */ = {
-			isa = PBXGroup;
-			children = (
-				075CAF791EBAA6FF0057E2A4 /* ReflectionTableViewController.swift */,
-			);
-			name = "Reflection Log";
 			sourceTree = "<group>";
 		};
 		FD6D677C9BE7E995D1CBF15B /* Pods */ = {
@@ -367,7 +356,6 @@
 				07801AEB1EAE7F87007FEB0B /* FutureLogTableViewCell.swift in Sources */,
 				073F6AB31EB1733000116DC5 /* DailyLogReflection.swift in Sources */,
 				A8E463F71EB1C72A00B45B10 /* CustomCell.swift in Sources */,
-				075CAF7A1EBAA6FF0057E2A4 /* ReflectionTableViewController.swift in Sources */,
 				073F6AB71EB173DF00116DC5 /* DailyLogTask.swift in Sources */,
 				A839C7051EBE65DB004A71B1 /* HabitTrackerDetailViewController.swift in Sources */,
 			);

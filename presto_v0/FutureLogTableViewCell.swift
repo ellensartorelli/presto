@@ -9,6 +9,7 @@
 import UIKit
 
 class FutureLogTableViewCell: UITableViewCell {
+    
     @IBOutlet weak var dayLabel: UILabel!
 
     @IBOutlet weak var eventLabel: UILabel!

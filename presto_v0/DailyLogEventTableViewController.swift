@@ -10,9 +10,13 @@ import UIKit
 import os.log
 
 class DailyLogEventTableViewController: UITableViewController, UITextFieldDelegate {
+    
+    //MARK: - Core Data
 
     var type: DetailTypeEvent = .new
     var callback: ((String, String, Date, Bool, Bool)->Void)?
+    
+    //MARK: - Properties
 
     var event: DailyLogEvent?
     @IBOutlet weak var titleTextField: UITextField!
@@ -24,7 +28,7 @@ class DailyLogEventTableViewController: UITableViewController, UITextFieldDelega
     
     var pickerVisible = false
 
-    
+    //MARK: - View
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,8 +58,6 @@ class DailyLogEventTableViewController: UITableViewController, UITextFieldDelega
             timePicker.date = startDate
         }
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         //start with save button false if new event
         if(titleTextField.text?.isEmpty)!{
             saveButton.isEnabled = false
@@ -80,21 +82,15 @@ class DailyLogEventTableViewController: UITableViewController, UITextFieldDelega
     }
     
     
-    
     //MARK:- Date and time
-    
     
     func setTime() {
         let calendar = Calendar.current
 
-  
         let hour = calendar.component(.hour, from: timePicker.date) % 12
         let minutes = calendar.component(.minute, from: timePicker.date)
         
-        
         timeLabel.text = "\(hour):" + String(format: "%02d", minutes)
-        
-        
     }
     
     // MARK: - Table view data source
@@ -113,7 +109,6 @@ class DailyLogEventTableViewController: UITableViewController, UITextFieldDelega
     @objc(tableView:heightForRowAtIndexPath:)
     override func tableView(_ tableView: UITableView,
                             heightForRowAt indexPath: IndexPath) -> CGFloat {
-        print(pickerVisible)
         if indexPath.row == 2 && pickerVisible == false {
             return 165.0
         }
@@ -127,36 +122,6 @@ class DailyLogEventTableViewController: UITableViewController, UITextFieldDelega
         textField.resignFirstResponder()
         return true
     }
-
-
-
-
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let button = sender as? UIBarButtonItem, button === saveButton else{
-            print("The save button was not pressed")
-            return
-        }
-        
-        let text = titleTextField.text ?? ""
-        let type = "event"
-        let startDate = timePicker.date
-        let completed = true //CHANGE CHANGE CHANGE CHANGE CHANGE
-        let alert = false
-        
-        if callback != nil{
-            callback!(text, type, startDate, completed, alert)
-        }
-        
-    }
-    //TextField delegate functions
-    
-//    func textFieldShouldReturn(textField: UITextField) -> Bool {
-//        textField.resignFirstResponder()
-//        return true
-//    }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         saveButton.isEnabled = false
@@ -169,10 +134,30 @@ class DailyLogEventTableViewController: UITableViewController, UITextFieldDelega
     
     private func updateSaveButtonState(){
         let text = titleTextField.text ?? ""
-        print("button shoould be disabled if ", String(!text.isEmpty))
         saveButton.isEnabled = !text.isEmpty
     }
- 
+
+
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let button = sender as? UIBarButtonItem, button === saveButton else{
+            return
+        }
+        
+        let text = titleTextField.text ?? ""
+        let type = "event"
+        let startDate = timePicker.date
+        let completed = true
+        let alert = false
+        
+        if callback != nil{
+            callback!(text, type, startDate, completed, alert)
+        }
+        
+    }
+
 
 }
 

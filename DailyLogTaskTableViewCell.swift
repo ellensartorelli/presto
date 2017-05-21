@@ -19,7 +19,7 @@ class DailyLogTaskTableViewCell: UITableViewCell {
     
     func configureCell(item: Item){
         taskLabel.text = item.text
-        //check
+
         taskButtonDo.isHidden = item.completed
         taskButtonDone.isHidden = !(item.completed)
     }
@@ -27,18 +27,16 @@ class DailyLogTaskTableViewCell: UITableViewCell {
  
     @IBAction func DoTapped(sender: AnyObject)
     {
+        //this button is tapped when the task is not completed, is on a "to DO" list
         taskButtonDo.isHidden = true
         taskButtonDone.isHidden = false
-        
-        //do other stuff
     }
     
     @IBAction func DoneTapped(sender: AnyObject)
     {
+        //this button is tapped when the task is completed, is DONE
         taskButtonDo.isHidden = false
         taskButtonDone.isHidden = true
-        
-        //do other stuff 
     }
     
     
@@ -49,7 +47,6 @@ class DailyLogTaskTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
 

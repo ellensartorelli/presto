@@ -11,12 +11,13 @@ import JTAppleCalendar
 
 class DailyLogViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
     
-    private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
+    //MARK: - Core Data
     
+    private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
     var request = NSFetchRequest<NSFetchRequestResult>(entityName:"Item")
     
     private let items = ItemCollection(){
-        print("Core Data connected")
+        //print("Core Data connected")
     }
     
     // MARK: - Properties
@@ -25,6 +26,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var messageLabel: UILabel!
+    
     //miniCalendar properties
     let formatter = DateFormatter()
     @IBOutlet weak var currentDateLabel: UILabel!
@@ -42,7 +44,6 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         self.view.addSubview(self.tableView)
         self.initializeFetchResultsController()
         calendarView.scrollToDate(Date())
-
 
         // Use the edit button item provided by the table view controller.
         navigationItem.leftBarButtonItem = editButtonItem
@@ -73,6 +74,9 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func generatePredicate(date: Date) -> NSPredicate {
+        /*
+            Make predicate to fetch items for correct date
+        */
         //Seting up predicate formatting
         var calendar = Calendar.current
         calendar.timeZone = NSTimeZone.local
@@ -131,8 +135,9 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     
-    
+    //MARK: - Alerts
     @IBAction func showAlert() {
+        //alert sheet to allow user to pick between task, event and reflection
         let alertController = UIAlertController(title: "Select an item to add to your Daily Log", message: nil, preferredStyle: .actionSheet)
         
         
@@ -163,8 +168,10 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     
-    //MARK: - disable past dates in future log
+    //MARK: Private Functions
+    
     func dateInPast() -> Bool{
+        //disables '+' button for dates in past -- can't add items to a day that's past
         let selectedDate = date
         let today = Date.init()
         
@@ -178,6 +185,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func isDate(date1: Date, date2: Date) -> Bool{
+        //function for comparing 2 dates, complicated between Date includes time
         let calendar = Calendar.current
         let Day1 = calendar.component(.day, from: date1)
         let Month1 = calendar.component(.month, from: date1)
@@ -209,18 +217,15 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
 
         let sectionInfo = sections[section]
     
-        print("date in past is \(dateInPast())")
         if(dateInPast() == true){
             //if past date
             if(sectionInfo.numberOfObjects == 0){
                 //if empty
-                print("hiding table, showing label")
                 tableView.isHidden = true
                 messageLabel.text = "You had no items on your Daily Log this day."
                 addButton.isEnabled = false
                 messageLabel.isHidden = false
             }else{
-                print("hiding label, showing table")
                 tableView.isHidden = false
                 addButton.isEnabled = false
                 messageLabel.isHidden = true
@@ -253,15 +258,12 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
             fatalError("Cannot find item")
         }
         
-        
-        
+        //select cell type depending on item "type"
         switch item.type! {
         case "task":
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as? DailyLogTaskTableViewCell else{
                 fatalError("Can't get cell of the right kind")
             }
-            
-//            self.items.updateTask(oldItem: item, text: item.text!, time: item.time as! Date, completed: cell.taskButtonDone.isHidden, alert: item.alert)
             
             cell.configureCell(item: item)
             
@@ -271,7 +273,6 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
                 fatalError("Can't get cell of the right kind")
             }
             
-            
             cell.configureCell(item: item)
             
             return cell
@@ -279,8 +280,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "reflectionCell", for: indexPath) as? DailyLogReflectionTableViewCell else{
                 fatalError("Can't get cell of the right kind")
             }
-            
-            
+
             cell.configureCell(item: item)
             
             return cell
@@ -297,8 +297,7 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
  
     }
     
-    
-    
+
     /* Provides the edit functionality (deleting rows) */
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -306,7 +305,6 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
             guard let item = self.fetchedResultsController?.object(at: indexPath) as? Item else{
                 fatalError("Cannot find item")
             }
-            
             items.delete(item)
         }
     }
@@ -318,8 +316,6 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         }
         
         let delete = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
-            //self.isEditing = false
-            print("delete button tapped")
             self.items.delete(item)
             
         }
@@ -330,16 +326,13 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
             
             
             let migrate = UITableViewRowAction(style: .normal, title: "Migrate") { action, index in
-                //self.isEditing = false
-                print("migrate button tapped")
-                
+
                 var dateComponent = DateComponents()
                 
                 dateComponent.day = 1
                 
                 let futureDate = Calendar.current.date(byAdding: dateComponent, to: item.time as! Date)
                 item.time = futureDate as NSDate?
-                print(item.time)
             }
             migrate.backgroundColor = UIColor.lightGray
             
@@ -349,8 +342,6 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         default:
             return [delete]
         }
-
-        
     }
     
     
@@ -425,7 +416,6 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
             destination.callback = { (text, type, time, completed, alert) in
                 self.items.updateTask(oldItem: item, text: text, time: time, completed: cell.taskButtonDo.isHidden, alert: alert)
             }
-            print("task \(item.completed)")
         case "eventSegue":
             guard let navController = segue.destination as? UINavigationController else{
                 fatalError("Unexpected destination: \(segue.destination)")
@@ -502,8 +492,9 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     
     }
     
-    /* This is here so that we have something to return to. It doesn't actually provide much functionality since the tableView is already tied to the fetched results controller. */
+
     @IBAction func unwindFromEdit(sender: UIStoryboardSegue){
+        //unwindFromTask^
         tableView.reloadData()
     }
     
@@ -517,6 +508,8 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
     
 }
 
+
+//MARK: - Mini Calendar
 
 extension DailyLogViewController: JTAppleCalendarViewDelegate{
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {

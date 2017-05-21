@@ -24,6 +24,7 @@ class FutureLogEventViewController: UIViewController, UITextFieldDelegate, UINav
 
     
 
+    //MARK: - View
     override func viewDidLoad() {
         
 
@@ -49,7 +50,7 @@ class FutureLogEventViewController: UIViewController, UITextFieldDelegate, UINav
 
     
     
-    //MARK: Navigation
+    //MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
         super.prepare(for: segue, sender: sender)
@@ -68,6 +69,8 @@ class FutureLogEventViewController: UIViewController, UITextFieldDelegate, UINav
         
     }
     
+    //MARK: - Actions
+    
     
     @IBAction func cancel(_ sender: UIBarButtonItem) {
         let isPresentingInAddEventMode = presentingViewController is
@@ -84,16 +87,11 @@ class FutureLogEventViewController: UIViewController, UITextFieldDelegate, UINav
         }
 
     }
-    
-    
-    
-    //MARK: Actions
+
 
     @IBAction func pickStartDate(_ sender: UIDatePicker) {
         endDatePicker.minimumDate = startDatePicker.date
     }
-    
-
     
     @IBAction func pickEndDate(_ sender: UIDatePicker) {
         
@@ -125,8 +123,6 @@ class FutureLogEventViewController: UIViewController, UITextFieldDelegate, UINav
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         eventLabelTF.resignFirstResponder()
     }
-    
-
     
     
 }
