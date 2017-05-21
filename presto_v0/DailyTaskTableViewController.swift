@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import UserNotifications
 
-class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, UINavigationControllerDelegate, UIPickerViewDelegate {
+class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, UINavigationControllerDelegate, UIPickerViewDelegate, UNUserNotificationCenterDelegate {
     
     var type: DetailType = .new
     var callback: ((String, String, Date, Bool, Bool)->Void)?
+    
+    var messageSubtitle = "Staff Meeting in 20 minutes"
+
     
     
     //MARK: - PROPERTIES
@@ -24,7 +28,35 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
     @IBOutlet weak var timePicker: UIDatePicker!
     @IBOutlet weak var save: UIBarButtonItem!
     
+    @IBAction func datePickerChanged(_ sender: Any) {
+        sendNotification()
+    }
 
+    func sendNotification() {
+        print("in send notification")
+        let content = UNMutableNotificationContent()
+        content.title = "Meeting Reminder"
+        content.subtitle = messageSubtitle
+        content.body = "Don't forget to bring coffee."
+        content.badge = 1
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5,repeats: false)
+        
+        
+        let requestIdentifier = "demoNotification"
+        let request = UNNotificationRequest(identifier: requestIdentifier,
+                                            content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request,
+                                               withCompletionHandler: { (error) in
+                                                // Handle error
+        })
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        completionHandler([.alert, .sound])
+    }
     
     // MARK: - VIEW 
     
@@ -45,6 +77,11 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
             
             toggle.isOn = alert
         }
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [[.alert, .sound, .badge]], completionHandler: { (granted, error) in
+            // Handle Error
+        })
+        UNUserNotificationCenter.current().delegate = self
         
     }
     
