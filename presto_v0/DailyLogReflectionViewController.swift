@@ -70,17 +70,6 @@ class DailyLogReflectionViewController: UIViewController, UITextViewDelegate {
     }
     
     
-//    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-//        if (text == "\n") {
-//            reflectionText.resignFirstResponder()
-//            if (!reflectionText.text.isEmpty) {
-//                saveButton.isEnabled = true
-//            }
-//            return false
-//        }
-//        return true
-//    }
-    
     func textViewDidChange(_ textView: UITextView) {
         if textView == self.reflectionText {
             self.saveButton.isEnabled = !reflectionText.text.isEmpty

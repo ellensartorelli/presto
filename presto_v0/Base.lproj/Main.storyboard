@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DsB-oA-a8T">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DsB-oA-a8T">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -902,49 +902,6 @@
             </objects>
             <point key="canvasLocation" x="8871" y="2790"/>
         </scene>
-        <!--tutorial-->
-        <scene sceneID="g3K-Am-hZC">
-            <objects>
-                <viewController storyboardIdentifier="tutorial" title="tutorial" id="Gu0-CB-hhC" customClass="TutorialViewController" customModule="presto_v0" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="HDJ-xG-jBs"/>
-                        <viewControllerLayoutGuide type="bottom" id="13b-L5-xjG"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Hi6-56-ffB">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QD4-h5-4HS">
-                                <rect key="frame" x="348" y="686" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Done!"/>
-                                <connections>
-                                    <segue destination="DsB-oA-a8T" kind="show" id="Meb-Wd-5K7"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="FINAL_presto_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Udr-1n-Jl9">
-                                <rect key="frame" x="78" y="20" width="259" height="51"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pth-EY-ivg">
-                                <rect key="frame" x="20" y="90" width="374" height="565"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <outlet property="doneButton" destination="QD4-h5-4HS" id="OXO-Pg-tHw"/>
-                        <outlet property="instructions" destination="pth-EY-ivg" id="Dg8-NT-mHz"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hhP-gH-7nG" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-391.304347826087" y="-735.32608695652175"/>
-        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="fuK-3I-qEK">
             <objects>
@@ -1444,7 +1401,6 @@
         <image name="Calendar-50" width="25" height="25"/>
         <image name="Checked Checkbox 2 Filled_28" width="28" height="28"/>
         <image name="Checked Filled_28" width="28" height="28"/>
-        <image name="FINAL_presto_logo" width="2922" height="510"/>
         <image name="Future-50 (1)" width="25" height="25"/>
         <image name="To Do-50" width="25" height="25"/>
         <image name="Unchecked Checkbox_28" width="28" height="28"/>
