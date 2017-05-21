@@ -84,11 +84,11 @@ class DailyTaskTableViewController: UITableViewController, UITextFieldDelegate, 
         content.title = "Task Reminder"
         content.body = taskTextField.text!
         
-        
         let date = timePicker.date
         let dateCompenents = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: date)
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateCompenents, repeats: false)
+
         
         let requestIdentifier = taskTextField.text!
         let request = UNNotificationRequest(identifier: requestIdentifier,

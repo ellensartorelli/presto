@@ -43,7 +43,7 @@ class ItemCollection{
             item.type = type
             item.time = time as NSDate?
             item.completed = false //initialize completed as false
-            item.alert = false
+            item.alert = true
             self.saveChanges()
         }
     }

@@ -8,8 +8,9 @@
 import UIKit
 import CoreData
 import JTAppleCalendar
+import UserNotifications
 
-class DailyLogViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
+class DailyLogViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, UNUserNotificationCenterDelegate {
     
     //MARK: - Core Data
     
@@ -326,13 +327,18 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
         let delete = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
             self.items.delete(item)
             
+            if(item.type == "task" && item.alert == true){
+                //delete notification
+                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers:[item.text!])
+            }
+
+            
         }
         delete.backgroundColor = UIColor.red
         
         switch item.type! {
         case "task":
-            
-            
+        
             let migrate = UITableViewRowAction(style: .normal, title: "Migrate") { action, index in
 
                 var dateComponent = DateComponents()
@@ -341,6 +347,11 @@ class DailyLogViewController: UIViewController, UITableViewDelegate, UITableView
                 
                 let futureDate = Calendar.current.date(byAdding: dateComponent, to: item.time as! Date)
                 item.time = futureDate as NSDate?
+                
+                if(item.alert == true){
+                    //delete notification
+                    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers:[item.text!])
+                }
             }
             migrate.backgroundColor = UIColor.lightGray
             
