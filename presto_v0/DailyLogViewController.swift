@@ -524,7 +524,13 @@ extension DailyLogViewController: JTAppleCalendarViewDelegate{
         formatter.timeZone = Calendar.current.timeZone
         formatter.locale = Calendar.current.locale
         let startDate = Date()
-        let endDate = formatter.date(from: "2017 12 31")!
+        
+        let minute:TimeInterval = 60.0
+        let hour:TimeInterval = 60.0 * minute
+        let day:TimeInterval = 24 * hour
+        let month:TimeInterval = 31*day
+        let year:TimeInterval = 12*month
+        let endDate =  Date(timeInterval: year, since: Date())
         
         let parameters = ConfigurationParameters(startDate: startDate, endDate: endDate, numberOfRows: 1)
         return parameters
