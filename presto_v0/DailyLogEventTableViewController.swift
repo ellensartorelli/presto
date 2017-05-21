@@ -88,7 +88,7 @@ class DailyLogEventTableViewController: UITableViewController, UITextFieldDelega
         let calendar = Calendar.current
 
   
-        let hour = calendar.component(.hour, from: timePicker.date) % 12
+        let hour = (calendar.component(.hour, from: timePicker.date)-1) % 12 + 1
         let minutes = calendar.component(.minute, from: timePicker.date)
         
         
